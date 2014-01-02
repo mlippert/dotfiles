@@ -1,0 +1,11 @@
+# ~/.inputrc - user overrides of global /etc/inputrc for libreadline
+# See readline(3readline) and `info rluserman' for more information.
+
+# mappings for "page up" and "page down" to step to the beginning/end
+# of the history
+# "\e[5~": beginning-of-history
+# "\e[6~": end-of-history
+
+# alternate mappings for "page up" and "page down" to search the history
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward

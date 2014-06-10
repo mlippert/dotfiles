@@ -1,0 +1,241 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+snippet get "Get Elements"
+getElement${1/(T)|.*/(?1:s)/}By${1:T}${1/(T)|(I)|.*/(?1:agName)(?2:d)/}('$2')
+endsnippet
+
+snippet '':f "object method string"
+'${1:${2:#thing}:${3:click}}': function(element) {
+    ${VISUAL}$0
+}${10:,}
+endsnippet
+
+snippet :f "Object Method"
+${1:method_name}: function(${3:attribute}) {
+    ${VISUAL}$0
+}${10:,}
+endsnippet
+
+snippet :, "Object Value JS"
+${1:value_name}: ${0:value},
+endsnippet
+
+snippet : "Object key key: 'value'"
+${1:key}: ${2:"${3:value}"}${4:, }
+endsnippet
+
+snippet typedef "type definition" b
+/* **************************************************************************
+ * ${1/(?:\w+\.)*(.*)/$1/}.$2                                                         $3*/ /**
+ *
+ * The ${1/(?:\w+\.)*(.*)/$1/}.$2 is the object that [...description of type]
+ *
+ * @typedef {{
+ *      ${4:property1_name}: (${5:string | undefined}),
+ *      ${6:property2_name}: (${7:string | undefined})
+ *
+ * }} ${1:class_name}.${2:type_name}
+ *
+ * @property {$5} $4
+ *      [description of $4]
+ *
+ * @property {$7} $6
+ *      [description of $6]
+ */
+${VISUAL}$1;
+
+endsnippet
+
+snippet filecmt "File comment" b
+/* **************************************************************************
+ * \$Workfile:: `!v expand("%:t")`                                              $1\$
+ * *********************************************************************/ /**
+ *
+ * @fileoverview [summary of file contents]
+ *
+ * [More detail about the file's contents]
+ *
+ * Created on       `date +"%B %-d, %Y"`
+ * @author          Michael Jay Lippert
+ *
+ * @copyright (c) `date +"%Y"` Pearson, All rights reserved.
+ *
+ * **************************************************************************/
+
+goog.provide('pearson.$2');
+
+goog.require('$0');
+
+endsnippet
+
+snippet classcmt "Class comment" b
+/* **************************************************************************
+ * ${1/(?:\w+\.)*(.*)/$1/}                                                          $2*/ /**
+ *
+ * Constructor function for ${1/(?:\w+\.)*(.*)/$1/} instances.
+ *
+ * @constructor
+ * @extends \{${1/((?:\w+\.)*)(?:.*)/$1/}${3:baseclass}}
+ * @export
+ *
+ * @param \{Object}     config          -The settings to configure this ${1/(?:\w+\.)*(.*)/$1/}
+ * @param \{string|undefined}
+ *                      config.id       -String to uniquely identify this ${1/(?:\w+\.)*(.*)/$1/}.
+ *                                       if undefined a unique id will be assigned.
+ * @param \{!pearson.utils.IEventManager=}
+ *                      eventManager    -The event manager to use for publishing events
+ *                                       and subscribing to them.
+ *
+ * @classdesc
+ * [Description of the $1 class]
+ *
+ ****************************************************************************/
+${1:class_name} = function (config, eventManager)
+\{
+    // call the base class constructor
+    goog.base(this);
+
+    $0
+};
+goog.inherits($1, ${1/((?:\w+\.)*)(?:.*)/$1/}$3);
+
+endsnippet
+
+snippet proto "Prototype (proto)" b
+/* **************************************************************************
+ * ${1/(?:\w+\.)*(.*)/$1/}.$2                                                         $3*/ /**
+ *
+ * [Description of $2]
+ *
+ * @param \{Object} ${4/(\w+),.*/$1/}       -[Description of ${4/(\w+),.*/$1/}]
+ *
+ ****************************************************************************/
+${1:class_name}.prototype.${2:method_name} = function (${4:first_argument})
+\{
+    $0
+};
+
+endsnippet
+
+snippet varcmt "Comment header for a variable" b
+/**
+ * ${1:Description}
+ * @type {${2:type}}
+ */
+endsnippet
+
+snippet for "for (...) {...} (faster)"
+for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; --$2)
+{
+    ${3:$1[$2]}${VISUAL}$0
+}
+endsnippet
+
+snippet for "for (...) {...}"
+for (var ${2:i} = 0; $2 < ${1:Things}.length; ++$2)
+{
+    ${3:$1[$2]}${VISUAL}$0
+}
+endsnippet
+
+snippet fun "function (fun)"
+function ${1:function_name}(${2:argument})
+{
+    ${VISUAL}$0
+}
+endsnippet
+
+snippet iife "Immediately-Invoked Function Expression (iife)"
+(function (${1:argument}) {
+    ${VISUAL}$0
+}(${2:$1}));
+endsnippet
+
+snippet ife "if ___ else"
+if (${1:condition})
+{
+  ${2://code}
+}
+else
+{
+  ${3://code}
+}
+endsnippet
+
+snippet if "if"
+if (${1:condition})
+{
+  ${VISUAL}$0
+}
+endsnippet
+
+snippet timeout "setTimeout function"
+setTimeout(function() {
+  ${VISUAL}$0
+}${2:.bind(${3:this})}, ${1:10});
+endsnippet
+
+# Snippets for Console Debug Output
+
+snippet cl "console.log"
+console.log(${1:"${2:value}"});
+endsnippet
+
+snippet cw "console.warn"
+console.warn(${1:"${2:value}"});
+endsnippet
+
+snippet ce "console.error"
+console.error(${1:"${2:value}"});
+endsnippet
+
+snippet ca "console.assert"
+console.assert(${1:assertion}, ${2:"${3:message}"});
+endsnippet
+
+snippet cgroup "console.group"
+console.group("${1:label}");
+${VISUAL}$0
+console.groupEnd();
+endsnippet
+
+snippet ctime "console.time"
+console.time("${1:label}");
+${VISUAL}$0
+console.timeEnd("$1");
+endsnippet
+
+snippet ctimestamp "console.timestamp"
+console.timeStamp("${1:label}")
+endsnippet
+
+snippet ctrace "console.trace"
+console.trace();
+endsnippet
+
+# AMD (Asynchronous Module Definition) snippets
+
+snippet def "define an AMD module"
+define(${1:optional_name, }[${2:'jquery'}], ${3:callback});
+endsnippet
+
+snippet req "require an AMD module"
+require([${1:'dependencies'}], ${2:callback});
+endsnippet
+
+# Snippets for unit tests w/ mocha and chai
+
+snippet it "it should"
+it('should ${1:do_something}', function () {
+${VISUAL}$0
+});
+endsnippet
+
+snippet describe "describe"
+describe('${1:description}', function () {
+${VISUAL}$0
+});
+endsnippet
+
+# vim:ft=snippets:

@@ -111,7 +111,8 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# function to format your PATH variable for easy viewing
+# Function to format your PATH variable for easy viewing
+# from http://www.cyberciti.biz/faq/howto-print-path-variable/
 function path()
 {
 	old=$IFS

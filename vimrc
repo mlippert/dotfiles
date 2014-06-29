@@ -80,6 +80,12 @@ let g:tagbar_type_javascript = {
     \ ],
 \ }
 
+" Set the zoom width to the width of the longest currently visible tag
+let g:tagbar_zoomwidth = 0
+
+" tagbar sorts by order in file by default
+let g:tagbar_sort = 0
+
 " disable the vim-session autoload of the default session
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'

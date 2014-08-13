@@ -46,6 +46,7 @@ that are also used for the main KDE application launcher. I found a very helpful
 * Use ```*``` to search forward for word under cursor (or visual selection) and ```#```
   to search backwards.
 * [How to paste text into vim command line and elsewhere](http://stackoverflow.com/questions/3997078/how-to-paste-text-into-vim-command-line)
+* Use `ctrl-R ctrl-W` to paste the word under the cursor into the command line. [How do I specify “the word under the cursor” on VIM's commandline?](http://stackoverflow.com/questions/48642/how-do-i-specify-the-word-under-the-cursor-on-vims-commandline)
 * folding lines [help 1](http://www.linux.com/learn/tutorials/442438-vim-tips-folding-fun) [help 2](http://vim.wikia.com/wiki/Folding)
 
 ### plugins ###

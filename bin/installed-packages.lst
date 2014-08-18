@@ -1,0 +1,53 @@
+# meta package that includes kuser for a user & group management gui which is missing from Mint
+kdeadmin
+
+kde-config-gtk-style
+qtcurve 
+retext
+# recommended for retext
+python3-markdown
+python3-enchant
+docutils-common
+
+fonts-inconsolata
+exuberant-ctags
+vim-gtk
+quassel
+dia
+kdf
+git
+mercurial
+
+# needed for Brix development
+chromium-browser
+tomcat7-user
+
+# see notes for adding repo for nodejs
+
+# for building git (see INSTALL file in Projects/public/git)
+libcurl4-gnutls-dev
+libexpat1-dev
+# when I tried to get libz-dev it apt-get gave me a note about getting zlib1g-dev instead
+libz-dev
+libssl-dev
+gettext
+asciidoc
+xmlto
+docbook2x
+
+# for building keepassx v2
+cmake
+qt4-dev-tools
+libqt4-dev
+libgcrypt11-dev
+zlib1g-dev
+libxtst-dev
+
+# recommended by something above
+python3-docutils
+python3-pygments
+
+# for intstalling other python packages (until python 3.4 when it should be pre-installed)
+# such as: requests
+python3-pip
+

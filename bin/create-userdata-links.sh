@@ -54,3 +54,7 @@ ln -s /userdata/${USER}/dotfiles/hgrc ~/.hgrc
 ln -s /userdata/${USER}/dotfiles/inputrc ~/.inputrc
 ln -s /userdata/${USER}/dotfiles/vim ~/.vim
 ln -s /userdata/${USER}/dotfiles/vimrc ~/.vimrc
+ln -s /userdata/${USER}/dotfiles/dircolors.ansi-dark ~/.dir_colors
+ln -s /userdata/${USER}/dotfiles/kde/share/apps/konsole/Solarized\ Dark.colorscheme ~/.kde/share/apps/konsole/Solarized\ Dark.colorscheme
+ln -s /userdata/${USER}/dotfiles/kde/share/apps/konsole/Solarized\ Light.colorscheme ~/.kde/share/apps/konsole/Solarized\ Light.colorscheme
+ln -s /userdata/${USER}/dotfiles/kde/share/apps/konsole/Solarized\ MJL.colorscheme ~/.kde/share/apps/konsole/Solarized\ MJL.colorscheme

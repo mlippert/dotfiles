@@ -53,10 +53,10 @@ Color=238,232,213
 Color=253,246,227
 
 [Foreground]
-Color=16,160,16
+Color=24,180,24
 
 [ForegroundIntense]
-Color=64,192,64
+Color=64,200,64
 
 [General]
 Description=Solarized MJL

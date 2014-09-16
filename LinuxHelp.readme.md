@@ -76,10 +76,16 @@ info on things like users, groups, fstab, samba, nfs.
   how to add the repo where that package is now maintained. I found the post mentioned above
   from [this one][medibuntu-gone2].
 
+- There's an issue w/ gnutls which is used by git that is causing an error accessing remote repos using https:
+  [GnuTLS recv error (-9)][]
+    - the solution seems to be to uninstall `libcurl4-gnutls-dev` and install `libcurl4-openssl-dev`
+	  and then rebuild git
+
 [medibuntu-gone]: <http://gauvain.pocentek.net/node/61>
 [medibuntu-gone2]: <http://www.rfc3092.net/2013/10/r-i-p-medibuntu/>
 [videolan-repo]: <ftp://ftp.videolan.org/pub/debian>
 [videolan-host]: <http://blogs.kde.org/2013/09/11/medibuntu-disappear-libdvdcss-now-direct-videolan>
+[GnuTLS recv error (-9)]: <http://stackoverflow.com/questions/13524242/error-gnutls-handshake-failed-git-repository>
 
 ### Potentially useful articles on the web ###
 [Using Git and Github to Manage Your Dotfiles](http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/)
@@ -87,6 +93,10 @@ info on things like users, groups, fstab, samba, nfs.
 ## [npm][] ([node][] package manager) ##
 The version of nodejs in the ubuntu repositories is dated. Use these instructions
 for [Installing Node.js via package manager][install-nodejs].
+
+The Ubuntu repositories as of 14.04 have the latest nodejs. However because of a potential
+conflict it is installed as `nodejs` instead of `node`. Since we have no use for the conflicting
+node application add a symlink: `sudo ln -s /usr/bin/nodejs /usr/bin/node`
 
 Installing npm (```apt-get install npm```) will install node.js as a dependency.
 

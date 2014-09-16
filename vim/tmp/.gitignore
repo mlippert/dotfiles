@@ -1,0 +1,9 @@
+# This file is in the .vim/tmp directory, It is the destination specified for
+# vim backup and swap files. We never want anything in here in the repository,
+# but we want this directory to exist, therefore this .gitignore is commited
+# in this directory.
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore

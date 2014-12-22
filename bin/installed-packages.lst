@@ -1,28 +1,61 @@
 # meta package that includes kuser for a user & group management gui which is missing from Mint
 kdeadmin
 
+# Login Manager that supports setting which users are displayed in the list
+kdm
+kdm-theme-mint-kde
+
+# KDiskFree graphical display of space used on mounted partitions
+kdf
+
+# Support making gnome packages match kde visual settings
 kde-config-gtk-style
-qtcurve 
+qtcurve
+
+# VIM text editor
+vim-gtk
+exuberant-ctags
+fonts-inconsolata
+
+# markdown editing support
 retext
 # recommended for retext
 python3-markdown
 python3-enchant
+python3-markups
 docutils-common
 
-fonts-inconsolata
-exuberant-ctags
-vim-gtk
+# IRC client
 quassel
+
+# IM client
+pidgin
+pidgin-libnotify
+pidgin-extprefs
+pidgin-plugin-pack
+
+# Diagramming and vector graphics application (like Visio)
 dia
-kdf
+
+# Version Control Systems that are good to have available
 git
 mercurial
 
 # needed for Brix development
 chromium-browser
-tomcat7-user
+# see notes for adding repo for nodejs (latest nodejs is back in std repos so no need)
+nodejs
 
-# see notes for adding repo for nodejs
+# for building the Brix Nemo plugin
+default-jdk
+#mongodb
+
+# tomcat is needed if we want to run an AMS locally
+# but there are now enough other parts needed that we
+# don't do this.
+#tomcat7-user
+#tomcat7-docs
+#tomcat7-admin
 
 # for building git (see INSTALL file in Projects/public/git)
 libcurl4-gnutls-dev
@@ -36,6 +69,7 @@ xmlto
 docbook2x
 
 # for building keepassx v2
+build-essential
 cmake
 qt4-dev-tools
 libqt4-dev
@@ -46,8 +80,4 @@ libxtst-dev
 # recommended by something above
 python3-docutils
 python3-pygments
-
-# for intstalling other python packages (until python 3.4 when it should be pre-installed)
-# such as: requests
-python3-pip
 

@@ -48,6 +48,7 @@ set listchars=tab:>-,trail:-
 " Filetype specific settings
 autocmd FileType javascript set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType xhtml set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType html set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
 " This keymap uses the blackhole register to paste what is in the default

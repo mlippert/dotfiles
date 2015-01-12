@@ -79,13 +79,15 @@ snippet classcmt "Class comment" b
  * @extends \{${1/((?:\w+\.)*)(?:.*)/$1/}${3:baseclass}}
  * @export
  *
- * @param \{Object}     config          -The settings to configure this ${1/(?:\w+\.)*(.*)/$1/}
- * @param \{string|undefined}
- *                      config.id       -String to uniquely identify this ${1/(?:\w+\.)*(.*)/$1/}.
- *                                       if undefined a unique id will be assigned.
- * @param \{!pearson.utils.IEventManager=}
- *                      eventManager    -The event manager to use for publishing events
- *                                       and subscribing to them.
+ * @param \{!$1.Config} config
+ *      The settings to configure this ${1/(?:\w+\.)*(.*)/$1/}
+
+ * @param \{!pearson.utils.IEventManager=} eventManager
+ *      The event manager to use for publishing events and subscribing to them.
+ *
+ * @param {!pearson.brix.utils.BricWorks=} bricWorks
+ *      The BricWorks to use to create other brix used internally by this
+ *      JournalQuestion bric.
  *
  * @classdesc
  * [Description of the $1 class]
@@ -94,7 +96,7 @@ snippet classcmt "Class comment" b
 ${1:class_name} = function (config, eventManager)
 \{
     // call the base class constructor
-    goog.base(this);
+    $1.base(this, 'constructor');
 
     $0
 };
@@ -108,7 +110,8 @@ snippet proto "Prototype (proto)" b
  *
  * [Description of $2]
  *
- * @param \{Object} ${4/(\w+),.*/$1/}       -[Description of ${4/(\w+),.*/$1/}]
+ * @param \{Object} ${4/(\w+),.*/$1/}
+ *      [Description of ${4/(\w+),.*/$1/}]
  *
  ****************************************************************************/
 ${1:class_name}.prototype.${2:method_name} = function (${4:first_argument})

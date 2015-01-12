@@ -11,6 +11,16 @@ that are also used for the main KDE application launcher. I found a very helpful
 
 [menuTutorial]: <http://techbase.kde.org/Development/Tutorials/Creating_Konqueror_Service_Menus>
 
+### wifi networking ###
+Setting the wifi password for all users requires superuser privileges which the KDE plasma applet doesn't have (at least not in Linux Mint). I suspect that is why the checkbox option _all users may connect to this network_ isn't present.
+This archlinux page on [NetworkManager][] is helpful, and I was able to accomplish setting the password for all users using the commandline.
+
+```
+sudo nmcli dev wifi connect <SSID> password <WIFI-PSWD>
+```
+
+[NetworkManager]: <https://wiki.archlinux.org/index.php/NetworkManager>
+
 ## bash ##
 * bash scripts normally start w/ a [shebang][] (```#!```), in fact just use ```#!/bin/sh``` to indicate
   that the default shell (bash on linux) should be used to execute the script. Or you could specify

@@ -87,13 +87,13 @@ snippet classcmt "Class comment" b
  *
  * @param {!pearson.brix.utils.BricWorks=} bricWorks
  *      The BricWorks to use to create other brix used internally by this
- *      JournalQuestion bric.
+ *      ${1/(?:\w+\.)*(.*)/$1/} bric.
  *
  * @classdesc
  * [Description of the $1 class]
  *
  ****************************************************************************/
-${1:class_name} = function (config, eventManager)
+${1:class_name} = function (config, eventManager, bricWorks)
 \{
     // call the base class constructor
     $1.base(this, 'constructor');

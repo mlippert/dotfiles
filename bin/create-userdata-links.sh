@@ -19,7 +19,7 @@ mv --verbose --backup=numbered --t ~/userdata_backup ~/bin ~/Documents ~/Downloa
 mkdir ~/userdata_backup/config
 mv --verbose --backup=numbered --t ~/userdata_backup/config ~/.config/Atlassian ~/.config/bcompare ~/.config/chromium ~/.config/keepassx ~/.config/libreoffice ~/.config/quassel-irc.org "~/.config/ReText project"
 mv --verbose --backup=numbered --t ~/userdata_backup ~/.dia ~/.mozilla ~/.purple ~/.smartgit ~/.ssh
-mv --verbose --backup=numbered --t ~/userdata_backup ~/.bash_aliases ~/.bashrc ~/.ctags ~/.gitconfig ~/.gvimrc ~/.hgrc ~/.inputrc ~/.vim ~/.vimrc
+mv --verbose --backup=numbered --t ~/userdata_backup ~/.bash_aliases ~/.bashrc ~/.ctags ~/.gitconfig ~/.gvimrc ~/.hgrc ~/.inputrc ~/.profile ~/.vim ~/.vimrc
 
 
 # link to the directories in userdata
@@ -52,6 +52,7 @@ ln -s /userdata/${USER}/dotfiles/gitconfig ~/.gitconfig
 ln -s /userdata/${USER}/dotfiles/gvimrc ~/.gvimrc
 ln -s /userdata/${USER}/dotfiles/hgrc ~/.hgrc
 ln -s /userdata/${USER}/dotfiles/inputrc ~/.inputrc
+ln -s /userdata/${USER}/dotfiles/profile ~/.profile
 ln -s /userdata/${USER}/dotfiles/vim ~/.vim
 ln -s /userdata/${USER}/dotfiles/vimrc ~/.vimrc
 ln -s /userdata/${USER}/dotfiles/dircolors.ansi-dark ~/.dir_colors

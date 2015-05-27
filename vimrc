@@ -46,7 +46,7 @@ set autoindent smartindent
 set listchars=tab:>-,trail:-
 
 " Filetype specific settings
-autocmd FileType javascript set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType javascript set tabstop=4 shiftwidth=4 expandtab formatoptions+=j formatoptions-=c textwidth=85
 autocmd FileType xhtml set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType html set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab

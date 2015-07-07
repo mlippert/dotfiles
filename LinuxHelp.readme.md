@@ -14,12 +14,16 @@ that are also used for the main KDE application launcher. I found a very helpful
 ### wifi networking ###
 Setting the wifi password for all users requires superuser privileges which the KDE plasma applet doesn't have (at least not in Linux Mint). I suspect that is why the checkbox option _all users may connect to this network_ isn't present.
 This archlinux page on [NetworkManager][] is helpful, and I was able to accomplish setting the password for all users using the commandline.
+I also found [additional documentation][nm-config-settings-doc] on the syntax of files in `etc/NetworkManager/system-connections`.
+That was a link from the [Gnome NetworkManager doc][NetworkManagerGnomeDoc].
 
 ```
 sudo nmcli dev wifi connect <SSID> password <WIFI-PSWD>
 ```
 
 [NetworkManager]: <https://wiki.archlinux.org/index.php/NetworkManager>
+[nm-config-settings-doc]: <https://developer.gnome.org/NetworkManager/unstable/ref-settings.html>
+[NetworkManagerGnomeDoc]: <https://wiki.gnome.org/Projects/NetworkManager>
 
 ## bash ##
 * bash scripts normally start w/ a [shebang][] (```#!```), in fact just use ```#!/bin/sh``` to indicate

@@ -79,6 +79,10 @@ esac
 # seems the path configuration file should go in ~/.local/lib/python2.7/site-packages
 # export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
+# This variable is used by the BrixClient's makefile to determine whether to use the
+# jsdoc java or node code to build its doc.
+export BRIX_JSDOC_BUILD=node
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.

@@ -3,3 +3,5 @@
 	email = michael.lippert@pearson.com
 [branch]
 	autosetuprebase = always
+[push]
+	default = matching

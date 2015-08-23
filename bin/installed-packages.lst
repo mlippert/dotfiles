@@ -26,7 +26,9 @@ gparted
 
 # VIM text editor
 vim-gtk
+# utility needed by vim-taglist plugin
 exuberant-ctags
+# fixed width fonts for text editing
 fonts-inconsolata
 
 # markdown editing support
@@ -40,8 +42,63 @@ docutils-common
 # IRC client
 quassel
 
+# Instant messaging
+pidgin
+pidgin-data
+pidgin-extprefs
+pidgin-plugin-pack
+
 # Diagramming and vector graphics application (like Visio)
 dia
+
+# Game pack
+kdegames
+
+# KDE4 Plasma widgets (playwolf is for amarok)
+kdeplasma-addons
+#plasma-widget-playwolf
+
+# Windows emulator
+wine
+q4wine
+winetricks
+playonlinux
+
+# Geneology application
+gramps
+
+# Convert audio files (ie flac -> ogg) There's also a SoundConverter which is gnome based
+soundkonverter
+
+# documentation of various packages
+samba-doc
+python-doc
+python-qt4-doc
+
+# utilities for mounting and unmounting cifs network file systems
+cifs-utils
+# utility to mount samba share when you browse to it in dolphin to make it more accessible
+#smb4k
+
+# nfs
+nfs-kernel-server
+
+# utility needed to be able to create a System Rescue disk on a flash drive
+syslinux
+
+# utility needed to make a bootable flash drive from a linux distro ISO
+# unetbootin (download the linux installer instead to get very latest)
+# utility needed by unetbootin installer
+p7zip-full
+
+# utility to help locate package to install when builds encounter missing files
+#apt-file
+
+# utility to build a package for an app compiled from source so it can be uninstalled
+#checkinstall
+
+# diff/merge tool for use w/ source control (may also want Beyond Compare)
+#kdiff3
 
 # Version Control Systems that are good to have available
 git

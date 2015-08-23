@@ -26,10 +26,12 @@ declare -A USERCONFIGFILES=(\
 		[.config/libreoffice]=${USERDATADIR}.config/libreoffice\
 		[.config/ReText\ project]=${USERDATADIR}.config/ReText\ project\
 		[.dia]=${USERDATADIR}.dia\
+		[.gramps]=${USERDATADIR}.gramps\
 		[.mozilla]=${USERDATADIR}.mozilla\
 		[.purple]=${USERDATADIR}.purple\
 		[.smartgit]=${USERDATADIR}.smartgit\
 		[.ssh]=${USERDATADIR}.ssh\
+		[.wine]=${USERDATADIR}.wine\
 	)
 
 # link to the configuration files and directories in the dotfiles repository

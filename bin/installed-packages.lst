@@ -8,6 +8,15 @@ kdm-theme-mint-kde
 # KDiskFree graphical display of space used on mounted partitions
 kdf
 
+# manage running processes from the commandline
+htop
+
+# find what's talking up diskspace from the commandline
+ncdu
+
+# virtual terminal that can be attached and detached, good for starting things like a minecraft server via ssh
+screen
+
 # Support making gnome packages match kde visual settings
 kde-config-gtk-style
 qtcurve

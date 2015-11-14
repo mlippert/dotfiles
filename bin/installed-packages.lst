@@ -150,6 +150,9 @@ wine
 q4wine
 winetricks
 playonlinux
+wine-mono0.0.8
+wine-gecko2.21
+fonts-liberation
 
 # Geneology application
 gramps
@@ -169,6 +172,10 @@ cifs-utils
 
 # nfs
 nfs-kernel-server
+
+# ssh client and server (be sure to make changes to /etc/ssh/sshd_config to enhance security
+# see http://www.linuxjournal.com/content/more-secure-ssh-connections?page=0,0)
+ssh
 
 # utility needed to be able to create a System Rescue disk on a flash drive
 syslinux

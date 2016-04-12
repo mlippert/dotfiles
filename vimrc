@@ -5,7 +5,8 @@
 execute pathogen#infect()
 execute pathogen#helptags()
 
-let mapleader = ","
+" let mapleader = ","
+let mapleader = "\\"
 
 " put all backup and swap files in the tmp directory and include the path
 " (trailing double slash) so duplicate names don't clash
@@ -51,6 +52,9 @@ autocmd FileType xhtml set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType html set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
+" For these filetypes, strip trailing whitespace on save
+autocmd FileType c,cpp,css,html,java,javascript,python,sh,xhtml autocmd BufWritePre <buffer> :%s/\s\+$//e
+
 " This keymap uses the blackhole register to paste what is in the default
 " register on top of a change target. Described and copied from:
 " http://stackoverflow.com/questions/2471175/vim-replace-word-with-contents-of-paste-buffer/2471282#2471282
@@ -67,6 +71,11 @@ nmap <F8> :TagbarToggle<CR>
 nnoremap <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 "noremap <silent> <F12> :LustyJuggler<CR>
 noremap <silent> <F12> :Bufferlistsw<CR>
+
+" do a / search then ,z will fold all non-matching lines
+" zA - toggle fold, zR unfold everything, zM refold everything
+" from http://vim.wikia.com/wiki/Folding_with_Regular_Expression
+nnoremap <leader>z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
 
 " recognize the javascript typedef type I've added to ctags and don't show the
 " property type.

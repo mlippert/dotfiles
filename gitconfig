@@ -5,3 +5,5 @@
 	autosetuprebase = always
 [push]
 	default = matching
+[core]
+	autocrlf = input

@@ -13,7 +13,7 @@ export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:exit:l[sl]"
 
 # append to the history file, don't overwrite it
-shopt -s histappend 
+shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 
@@ -82,6 +82,10 @@ esac
 # This variable is used by the BrixClient's makefile to determine whether to use the
 # jsdoc java or node code to build its doc.
 export BRIX_JSDOC_BUILD=node
+
+# Because phantomjs version 2 has to be built locally, karma needs to know where to
+# find it (for running the unit tests in the brixclient)
+export PHANTOMJS_BIN=$HOME/Projects/public/phantomjs-2.1.1-linux-x86_64/bin/phantomjs
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

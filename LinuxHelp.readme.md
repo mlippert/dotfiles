@@ -203,9 +203,21 @@ pidgin repo?
 scootersoftware repo?
 
 #### Oracle Java 8 (JDK 8) ####
-See the [TecAdmin.net Java 8 instructions][java8repo] for installing the webupd8team's PPA repository and installing Java 8 from there.
+See the [TecAdmin.net Java 8 instructions][java8repo] for installing the webupd8team's PPA repository and installing Java 8 from there. You may also need to fix the binfmts (see stackexchange [update-binfmts warning question][update-binfmts])
 
 [java8repo]: <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/#>
+[update-binfmts]: <http://askubuntu.com/questions/259096/update-binfmts-warning>
+
+#### Docker ####
+See the docker blog entry from July 2015 about [New Apt and Yum repositories][docker-repos]
+
+[docker-repos]: <https://blog.docker.com/2015/07/new-apt-and-yum-repos/>
+
+#### Node ####
+To install the latest version of node see the [NodeSource github repository][NodeSource] readme.
+Don't forget to add users to the docker group.
+
+[NodeSource]: <https://github.com/nodesource/distributions>
 
 ### packages ###
 These are the packages that were not installed in the last release of Linux Mint KDE that I always want installed. I keep the list in the file ```installed-packages.lst```.

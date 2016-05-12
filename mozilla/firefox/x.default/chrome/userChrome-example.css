@@ -14,19 +14,6 @@
  */
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
 
-/*
- * The following 2 rules are supposed to swap OK/Cancel buttons on KDE
- */
-.dialog-button-box
-{
-  -moz-box-direction:	reverse;
-  -moz-box-pack:	right;
-}
-
-.dialog-button-box spacer
-{
-  -display:	none !important;
-}
 
 /*
  * Some possible accessibility enhancements:
@@ -65,8 +52,3 @@
  * For more examples see http://www.mozilla.org/unix/customizing.html
  */
  
-/* The following four lines were added by KDE */
-scrollbarbutton[sbattr="scrollbar-up-top"] { display: -moz-box !important; }
-scrollbarbutton[sbattr="scrollbar-down-top"] { display: none !important; }
-scrollbarbutton[sbattr="scrollbar-up-bottom"] { display: -moz-box !important; }
-scrollbarbutton[sbattr="scrollbar-down-bottom"] { display: -moz-box !important; }

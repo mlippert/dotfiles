@@ -1,0 +1,5 @@
+/* The following four lines were added by KDE */
+scrollbarbutton[sbattr="scrollbar-up-top"] { display: -moz-box !important; }
+scrollbarbutton[sbattr="scrollbar-down-top"] { display: none !important; }
+scrollbarbutton[sbattr="scrollbar-up-bottom"] { display: -moz-box !important; }
+scrollbarbutton[sbattr="scrollbar-down-bottom"] { display: -moz-box !important; }

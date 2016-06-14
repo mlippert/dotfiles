@@ -72,7 +72,7 @@ nnoremap <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 "noremap <silent> <F12> :LustyJuggler<CR>
 noremap <silent> <F12> :Bufferlistsw<CR>
 
-" do a / search then ,z will fold all non-matching lines
+" do a / search then \z will fold all non-matching lines
 " zA - toggle fold, zR unfold everything, zM refold everything
 " from http://vim.wikia.com/wiki/Folding_with_Regular_Expression
 nnoremap <leader>z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>

@@ -48,9 +48,9 @@ ${VISUAL}$1.$2;
 endsnippet
 
 snippet filecmt "File comment" b
-/* **************************************************************************
- * \$Workfile:: `!v expand("%:t")`                                              $1\$
- * *********************************************************************/ /**
+/* ******************************************************************************
+ * `!v expand("%:t")`                                                               $1*
+ * *************************************************************************/ /**
  *
  * @fileoverview [summary of file contents]
  *
@@ -59,49 +59,67 @@ snippet filecmt "File comment" b
  * Created on       `date +"%B %-d, %Y"`
  * @author          Michael Jay Lippert
  *
- * @copyright (c) `date +"%Y"` Pearson, All rights reserved.
+ * @copyright (c) `date +"%Y"` Michael Jay Lippert,
+ *            MIT License (see https://opensource.org/licenses/MIT)
  *
- * **************************************************************************/
-
-goog.provide('pearson.$2');
-
-goog.require('$0');
+ * ******************************************************************************/
 
 endsnippet
 
 snippet classcmt "Class comment" b
+/* ******************************************************************************
+ * ${1/(?:\w+\.)*(.*)/$1/}                                                                     $2*/ /**
+ *
+ * [Description of the ${1/(?:\w+\.)*(.*)/$1/} class]
+ *
+ ********************************************************************************/
+class ${1:class_name}
+{
+    /* **************************************************************************
+     * constructor                                                         */ /**
+     *
+     * ${1/(?:\w+\.)*(.*)/$1/} class constructor.
+	 *
+	 * @param \{!$1.Config=} config
+	 *      The settings to configure this ${1/(?:\w+\.)*(.*)/$1/}
+     *
+     */
+    constructor(config = {})
+    {
+		// instance properties
+		$0
+	}
+}
+
+/* ******************************************************************************
+ * ${1/(?:\w+\.)*(.*)/$1/}.Config                                                              $3*/ /**
+ *
+ * The ${1/(?:\w+\.)*(.*)/$1/}.Config defines the object passed to the constructor that
+ * contains options/values used to initialize an instance of a $1.
+ *
+ * @typedef {!Object} $1.Config
+ *
+ * @property {string | undefined} property1_name
+ *      [description of property1_name]
+ */
+
+endsnippet
+
+snippet methodcmt "class method with comment" b
 /* **************************************************************************
- * ${1/(?:\w+\.)*(.*)/$1/}                                                          $2*/ /**
+ * $1                                                                    $3*/ /**
  *
- * Constructor function for ${1/(?:\w+\.)*(.*)/$1/} instances.
+ * [Description of $1]
  *
- * @constructor
- * @extends \{${1/((?:\w+\.)*)(?:.*)/$1/}${3:baseclass}}
- * @export
+ * @param \{string} $2
+ *      [Description of the $2 parameter]
  *
- * @param \{!$1.Config} config
- *      The settings to configure this ${1/(?:\w+\.)*(.*)/$1/}
-
- * @param \{!pearson.utils.IEventManager=} eventManager
- *      The event manager to use for publishing events and subscribing to them.
- *
- * @param {!pearson.brix.utils.BricWorks=} bricWorks
- *      The BricWorks to use to create other brix used internally by this
- *      ${1/(?:\w+\.)*(.*)/$1/} bric.
- *
- * @classdesc
- * [Description of the $1 class]
- *
- ****************************************************************************/
-${1:class_name} = function (config, eventManager, bricWorks)
-\{
-    // call the base class constructor
-    $1.base(this, 'constructor');
-
-    $0
-};
-goog.inherits($1, ${1/((?:\w+\.)*)(?:.*)/$1/}$3);
-
+ * @returns {string}
+ */
+${1:method_name}(${2:param1})
+{
+	$0
+}
 endsnippet
 
 snippet proto "Prototype (proto)" b

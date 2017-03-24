@@ -18,7 +18,8 @@ htop
 ncdu
 
 # virtual terminal that can be attached and detached, good for starting things like a minecraft server via ssh
-screen
+#screen
+tmux
 
 # Support making gnome packages match kde visual settings
 kde-config-gtk-style
@@ -28,7 +29,7 @@ qtcurve
 gparted
 
 # VIM text editor
-vim-gtk
+vim-gtk3
 # utility needed by vim-taglist plugin
 exuberant-ctags
 # fixed width fonts for text editing
@@ -146,13 +147,13 @@ plasma-widgets-addons
 #plasma-widget-playwolf
 
 # Windows emulator
-wine
-q4wine
-winetricks
-playonlinux
-wine-mono0.0.8
-wine-gecko2.21
-fonts-liberation
+#wine
+#q4wine
+#winetricks
+#playonlinux
+#wine-mono0.0.8
+#wine-gecko2.21
+#fonts-liberation
 
 # Geneology application
 gramps
@@ -206,7 +207,7 @@ chromium-browser
 #nodejs
 
 # for building the Brix Nemo plugin
-default-jdk
+#default-jdk
 #mongodb
 
 # tomcat is needed if we want to run an AMS locally

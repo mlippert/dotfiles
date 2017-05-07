@@ -1,9 +1,12 @@
 # meta package that includes kuser for a user & group management gui which is missing from Mint
-kdeadmin
+#kdeadmin is no longer available
+#kdeadmin
+kuser
 
 # Login Manager that supports setting which users are displayed in the list
-kdm
-kdm-theme-mint-kde
+# sadly kdm is no longer maintained or available
+#kdm
+#kdm-theme-mint-kde
 
 # KDiskFree graphical display of space used on mounted partitions
 kdf
@@ -52,10 +55,94 @@ pidgin-plugin-pack
 dia
 
 # Game pack
-kdegames
+# kdegames package no longer exists, but it was composed of the following
+# (http://askubuntu.com/questions/614491/is-there-a-kdegames-package-alternative-in-15-04):
+
+# arcade spaceship game
+bomber
+# gomoku (five in line) board game
+bovo
+# Bomberman clone
+granatier
+# Pac-Man clone
+kapman
+# atomix puzzle game
+katomic
+# Black Box puzzle game
+kblackbox
+# falling blocks game
+kblocks
+# Jezzball arcade game
+kbounce
+# ball and paddle game
+kbreakout
+# three-in-a-row game
+kdiamond
+# Connect Four game
+kfourinline
+# Lode Runner arcade game
+kgoldrunner
+# go game
+kigo
+# port of the classic BSD console game robots
+killbots
+# Yahtzee dice game
+kiriki
+# simple tactical game
+kjumpingcube
+# SameGame puzzle game
+klickety
+# color lines game
+klines
+# mahjongg solitaire game
+kmahjongg
+# minesweeper game
+kmines
+# battleship board game
+knavalbattle
+# wire puzzle game
+knetwalk
+# miniature golf game
+kolf
+# simple ball dodging game
+kollision
+# simple turn-based strategy game
+konquest
+# solitaire card games
+kpat
+# reversi board game
+kreversi
+# Shisen-Sho solitaire game
+kshisen
+# Risk strategy game
+ksirk
+# Tron-like snakerace game
+ksnakeduel
+# SpaceWar! arcade game
+kspaceduel
+# Dots and Boxes game
+ksquares
+# Sudoku puzzle game and solver
+ksudoku
+# stamp drawing toy
+ktuberling
+# game based on Rubik's Cube
+kubrick
+# Lieutnant Skat card game
+lskat
+# jigsaw puzzle game
+palapeli
+# Number logic game
+picmi
+# classical Mah Jongg game
+kajongg
+
+
+
+
 
 # KDE4 Plasma widgets (playwolf is for amarok)
-kdeplasma-addons
+plasma-widgets-addons
 #plasma-widget-playwolf
 
 # Windows emulator
@@ -71,9 +158,9 @@ gramps
 soundkonverter
 
 # documentation of various packages
-samba-doc
-python-doc
-python-qt4-doc
+#samba-doc
+#python-doc
+#python-qt4-doc
 
 # utilities for mounting and unmounting cifs network file systems
 cifs-utils
@@ -108,7 +195,8 @@ mercurial
 # needed for Brix development
 chromium-browser
 # see notes for adding repo for nodejs (latest nodejs is back in std repos so no need)
-nodejs
+
+#nodejs
 
 # for building the Brix Nemo plugin
 default-jdk

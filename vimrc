@@ -42,15 +42,13 @@ else
 endif
 
 set tabstop=4 shiftwidth=4 smarttab
-set autoindent smartindent
 
 set listchars=tab:>-,trail:-
 
 " Filetype specific settings
 autocmd FileType javascript set tabstop=4 shiftwidth=4 expandtab formatoptions+=j formatoptions-=c textwidth=85
 autocmd FileType typescript set tabstop=4 shiftwidth=4 expandtab formatoptions+=j formatoptions-=c textwidth=85
-autocmd FileType xhtml set tabstop=4 shiftwidth=4 expandtab
-autocmd FileType html set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType html,xhtml set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
 " For these filetypes, strip trailing whitespace on save

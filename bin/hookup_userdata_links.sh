@@ -47,9 +47,9 @@ declare -A USERDOTFILES=(\
 		[.vim]=${USERDOTFILESDIR}vim
 		[.vimrc]=${USERDOTFILESDIR}vimrc
 		[.dir_colors]=${USERDOTFILESDIR}dircolors.ansi-dark
-		[.kde/share/apps/konsole/Solarized\ Dark.colorscheme]=${USERDOTFILESDIR}kde/share/apps/konsole/Solarized\ Dark.colorscheme\
-		[.kde/share/apps/konsole/Solarized\ Light.colorscheme]=${USERDOTFILESDIR}kde/share/apps/konsole/Solarized\ Light.colorscheme\
-		[.kde/share/apps/konsole/Solarized\ MJL.colorscheme]=${USERDOTFILESDIR}kde/share/apps/konsole/Solarized\ MJL.colorscheme\
+		[.local/share/konsole/Solarized\ Dark.colorscheme]=${USERDOTFILESDIR}local/share/konsole/Solarized\ Dark.colorscheme\
+		[.local/share/konsole/Solarized\ Light.colorscheme]=${USERDOTFILESDIR}local/share/konsole/Solarized\ Light.colorscheme\
+		[.local/share/konsole/Solarized\ MJL.colorscheme]=${USERDOTFILESDIR}local/share/konsole/Solarized\ MJL.colorscheme\
 	)
 
 pushd ~

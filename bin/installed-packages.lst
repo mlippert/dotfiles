@@ -231,8 +231,10 @@ docbook2x
 # for building keepassx v2
 build-essential
 cmake
-qt4-dev-tools
-libqt4-dev
+# kde5 needs qt5
+#qt4-dev-tools
+#libqt4-dev
+qtbase5-dev
 libgcrypt11-dev
 zlib1g-dev
 libxtst-dev

@@ -9,6 +9,9 @@ alias l='ls -CF'
 alias e='gvim --remote-silent'
 alias md='mkdir'
 
+# run npm scripts w/o the long npm ERR: msgs
+alias npmrs='npm run --silent $*'
+
 # From the LinuxMint 16 .bashrc
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

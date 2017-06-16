@@ -46,13 +46,17 @@ set tabstop=4 shiftwidth=4 smarttab
 set listchars=tab:>-,trail:-
 
 " Filetype specific settings
-autocmd FileType javascript set tabstop=4 shiftwidth=4 expandtab formatoptions+=j formatoptions-=c textwidth=85
-autocmd FileType typescript set tabstop=4 shiftwidth=4 expandtab formatoptions+=rolqj formatoptions-=tc textwidth=85
-autocmd FileType html,xhtml set tabstop=4 shiftwidth=4 expandtab
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
+"   see http://learnvimscriptthehardway.stevelosh.com/chapters/14.html for info on augroup
+augroup for_ftypes
+    autocmd!
+    autocmd FileType javascript set tabstop=4 shiftwidth=4 expandtab formatoptions+=j formatoptions-=c textwidth=85
+    autocmd FileType typescript set tabstop=4 shiftwidth=4 expandtab formatoptions+=rolqj formatoptions-=tc textwidth=85
+    autocmd FileType html,xhtml set tabstop=4 shiftwidth=4 expandtab
+    autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
-" For these filetypes, strip trailing whitespace on save
-autocmd FileType c,cpp,css,html,java,javascript,python,sh,typescript,xhtml autocmd BufWritePre <buffer> :%s/\s\+$//e
+    " For these filetypes, strip trailing whitespace on save
+    autocmd FileType c,cpp,css,html,java,javascript,python,sh,typescript,xhtml autocmd BufWritePre <buffer> :%s/\s\+$//e
+augroup END
 
 " This keymap uses the blackhole register to paste what is in the default
 " register on top of a change target. Described and copied from:

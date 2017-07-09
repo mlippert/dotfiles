@@ -12,11 +12,11 @@ let &showbreak = '╪╡ '
 " for other possible fonts see:
 " http://www.codinghorror.com/blog/2004/12/progamming-fonts.html
 if has("gui_running")
-  if has("gui_gtk2")
+  if has("gui_gtk2") || has("gui_gtk3")
     if has("win32unix")
       set guifont=Consolas\ 8
     else
-      set guifont=Inconsolata\ 10
+      set guifont=Inconsolata\ 11
     endif
   elseif has("gui_win32")
     set guifont=Consolas:h8:cDEFAULT
@@ -29,7 +29,7 @@ let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
 let s:minfontsize = 6
 let s:maxfontsize = 16
 function! AdjustFontSize(amount)
-  if has("gui_gtk2") && has("gui_running")
+  if has("gui_running") && (has("gui_gtk2") || has("gui_gtk3"))
     let fontname = substitute(&guifont, s:pattern, '\1', '')
     let cursize = substitute(&guifont, s:pattern, '\2', '')
     let newsize = cursize + a:amount

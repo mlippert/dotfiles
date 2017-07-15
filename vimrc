@@ -54,6 +54,9 @@ augroup for_ftypes
     autocmd FileType html,xhtml set tabstop=4 shiftwidth=4 expandtab
     autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
+    " set the = (format) command to use an external cmd ie pretty print xml
+    autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
     " For these filetypes, strip trailing whitespace on save
     autocmd FileType c,cpp,css,html,java,javascript,python,sh,typescript,xhtml autocmd BufWritePre <buffer> :%s/\s\+$//e
 augroup END

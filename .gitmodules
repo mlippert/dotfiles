@@ -1,0 +1,39 @@
+[submodule "vim/pack/mjl-plugins/start/buffet"]
+	path = vim/pack/mjl-plugins/start/buffet
+	url = https://github.com/sandeepcr529/Buffet.vim.git
+[submodule "vim/pack/mjl-plugins/start/mru"]
+	path = vim/pack/mjl-plugins/start/mru
+	url = https://github.com/yegappan/mru.git
+[submodule "vim/pack/mjl-plugins/start/nerdtree"]
+	path = vim/pack/mjl-plugins/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/pack/mjl-plugins/start/supertab"]
+	path = vim/pack/mjl-plugins/start/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "vim/pack/mjl-plugins/start/vim-surround"]
+	path = vim/pack/mjl-plugins/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/pack/mjl-plugins/start/tagbar"]
+	path = vim/pack/mjl-plugins/start/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "vim/pack/mjl-plugins/start/ultisnips"]
+	path = vim/pack/mjl-plugins/start/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "vim/pack/mjl-plugins/start/vim-colors-solarized"]
+	path = vim/pack/mjl-plugins/start/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "vim/pack/mjl-plugins/start/vim-jsbeautify"]
+	path = vim/pack/mjl-plugins/start/vim-jsbeautify
+	url = https://github.com/maksimr/vim-jsbeautify.git
+[submodule "vim/pack/mjl-plugins/start/vim-markdown"]
+	path = vim/pack/mjl-plugins/start/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown.git
+[submodule "vim/pack/mjl-plugins/start/vim-session"]
+	path = vim/pack/mjl-plugins/start/vim-session
+	url = https://github.com/xolox/vim-session.git
+[submodule "vim/pack/mjl-plugins/start/xolox-misc"]
+	path = vim/pack/mjl-plugins/start/xolox-misc
+	url = https://github.com/xolox/vim-misc.git
+[submodule "vim/pack/mjl-plugins/start/vim-snippets"]
+	path = vim/pack/mjl-plugins/start/vim-snippets
+	url = https://github.com/honza/vim-snippets.git

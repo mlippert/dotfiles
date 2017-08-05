@@ -1,10 +1,6 @@
 " Some interesting settings I'm using were found in:
 "  - https://github.com/rzhw/dotfiles/blob/master/vim/vimrc
 
-" pathogen is maintained by Tim Pope at https://github.com/tpope/vim-pathogen
-execute pathogen#infect()
-execute pathogen#helptags()
-
 " let mapleader = ","
 let mapleader = "\\"
 

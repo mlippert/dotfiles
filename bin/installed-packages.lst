@@ -13,6 +13,7 @@ kdf
 
 # manage running processes from the commandline
 htop
+atop
 
 # find what's talking up diskspace from the commandline
 ncdu
@@ -20,6 +21,11 @@ ncdu
 # virtual terminal that can be attached and detached, good for starting things like a minecraft server via ssh
 #screen
 tmux
+
+# commandline tool to calculate a 2FA (2-factor authentication) code if you know the secret key
+# found from https://thirld.com/blog/2016/01/16/generating-two-factor-authentication-codes-on-linux/
+# oathtool --base32 --totp "<SECRET>" 
+oathtool
 
 # Support making gnome packages match kde visual settings
 kde-config-gtk-style

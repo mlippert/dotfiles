@@ -41,6 +41,36 @@ set tabstop=4 shiftwidth=4 smarttab
 
 set listchars=tab:>-,trail:-
 
+" Use ripgrep if it's available as the grep program
+"  see http://www.wezm.net/technical/2016/09/ripgrep-with-vim/
+"  use w/ quickfix (:copen to open quickfix window :ccl to close see help for more)
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+" It's desirable to set the vim working directory to enable better use of cmds like
+" :grep and :make...
+"   see http://inlehmansterms.net/2014/09/04/sane-vim-working-directories/
+"
+" set working directory to git project root
+" or directory of current file if not git project
+function! SetProjectRoot()
+  " default to the current file's directory
+  lcd %:p:h
+  let git_dir = system("git rev-parse --show-toplevel")
+  " See if the command output starts with 'fatal' (if it does, not in a git repo)
+  let is_not_git_dir = matchstr(git_dir, '^fatal:.*')
+  " if git project, change local directory to git project root
+  if empty(is_not_git_dir)
+    lcd `=git_dir`
+  endif
+endfunction
+
+" follow symlink and set working directory
+autocmd BufEnter *
+  \ call SetProjectRoot()
+
 " Filetype specific settings
 "   see http://learnvimscriptthehardway.stevelosh.com/chapters/14.html for info on augroup
 augroup for_ftypes

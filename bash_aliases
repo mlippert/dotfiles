@@ -1,4 +1,4 @@
-# ~/.bashi_aliases: executed by .bashrc
+# ~/.bash_aliases: executed by .bashrc
 
 # some more ls aliases
 alias ll='ls -l'
@@ -16,3 +16,18 @@ alias npmrs='npm run --silent $*'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# From Scott McCammon's comment on https://www.eriwen.com/bash/pushd-and-popd
+function mypushd {
+	pushd "${@}" >/dev/null;
+	dirs -v;
+}
+
+function mypopd {
+	popd "${@}" >/dev/null;
+	dirs -v;
+}
+
+alias d='dirs -v'
+alias p='mypushd'
+alias o='mypopd'

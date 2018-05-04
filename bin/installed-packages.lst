@@ -61,6 +61,9 @@ pidgin-plugin-pack
 # Diagramming and vector graphics application (like Visio)
 dia
 
+# Time Tracker
+hamster-applet
+
 # Game pack
 # kdegames package no longer exists, but it was composed of the following
 # (http://askubuntu.com/questions/614491/is-there-a-kdegames-package-alternative-in-15-04):

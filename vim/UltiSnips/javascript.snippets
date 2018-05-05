@@ -131,7 +131,7 @@ snippet proto "Prototype (proto)" b
  * @param \{Object} ${4/(\w+),.*/$1/}
  *      [Description of ${4/(\w+),.*/$1/}]
  *
- ****************************************************************************/
+ * **************************************************************************/
 ${1:class_name}.prototype.${2:method_name} = function (${4:first_argument})
 \{
     $0
@@ -147,14 +147,14 @@ snippet varcmt "Comment header for a variable" b
 endsnippet
 
 snippet for "for (...) {...} (faster)"
-for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; --$2)
+for (let ${2:i} = ${1:Things}.length - 1; $2 >= 0; --$2)
 {
     ${3:$1[$2]}${VISUAL}$0
 }
 endsnippet
 
 snippet for "for (...) {...}"
-for (var ${2:i} = 0; $2 < ${1:Things}.length; ++$2)
+for (let ${2:i} = 0; $2 < ${1:Things}.length; ++$2)
 {
     ${3:$1[$2]}${VISUAL}$0
 }
@@ -176,24 +176,24 @@ endsnippet
 snippet ife "if ___ else"
 if (${1:condition})
 {
-  ${2://code}
+	${2://code}
 }
 else
 {
-  ${3://code}
+	${3://code}
 }
 endsnippet
 
 snippet if "if"
 if (${1:condition})
 {
-  ${VISUAL}$0
+	${VISUAL}$0
 }
 endsnippet
 
 snippet timeout "setTimeout function"
 setTimeout(function() {
-  ${VISUAL}$0
+	${VISUAL}$0
 }${2:.bind(${3:this})}, ${1:10});
 endsnippet
 

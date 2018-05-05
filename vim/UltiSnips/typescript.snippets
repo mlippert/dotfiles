@@ -1,0 +1,95 @@
+###########################################################################
+#                        mjl Typescript Snippets                          #
+###########################################################################
+
+# Give these typescript snippets priority over the priority 0 javascript snippets
+# that the base typescript snippet file extends.
+priority 1
+
+snippet classcmt "Class with comment" b
+/* ******************************************************************************
+ * $1                                                                       $2*/ /**
+ *
+ * [Description of the ${1/(?:\w+\.)*(.*)/$1/} class]
+ *
+ ********************************************************************************/
+export default class ${1:class_name}
+{
+	/** [Description of myvar1] */
+	myvar1: string;
+
+	/** [Description of myvar2] */
+	myvar2: number;
+
+	/* **************************************************************************
+	 * constructor                                                         */ /**
+	 *
+	 * $1 class constructor.
+	 *
+	 */
+	constructor({ myvar1 = 'foo',
+	              myvar2 = 42 }: I$1_Config = {})
+	{
+		// instance properties
+		this.myvar1 = myvar1;
+		this.myvar2 = myvar2;
+		$0
+	}
+}
+
+/* ******************************************************************************
+ * I$1_Config                                                               $3*/ /**
+ *
+ * The I$1_Config defines the object passed to the constructor that
+ * contains options/values used to initialize an instance of a $1.
+ *
+ * @property myvar1
+ *      [Description of myvar1]
+ *
+ * @property myvar2
+ *      [Description of myvar2]
+ */
+interface I$1_Config
+{
+	myvar1?: string;
+	myvar2?: number;
+}
+
+endsnippet
+
+snippet methodcmt "class method with comment" b
+/* **************************************************************************
+ * $1                                                                   $5*/ /**
+ *
+ * [Description of $1]
+ *
+ * @param $2
+ *      [Description of the $2 parameter]
+ */
+${1:method_name}(${2:param1}: ${3:type}): $4
+{
+	$0
+}
+endsnippet
+
+snippet fncmt "function with comment" b
+/* ******************************************************************************
+ * $1                                                                       $5*/ /**
+ *
+ * [Description of $1]
+ *
+ * @param $2
+ *      [Description of the $2 parameter]
+ */
+function ${1:fn_name}(${2:param1}: ${3:type}): $4
+{
+	$0
+}
+
+endsnippet
+
+snippet varcmt "Comment header for a variable" b
+/** ${1:Description} */
+endsnippet
+
+# vim:ft=snippets:

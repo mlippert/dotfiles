@@ -1,6 +1,11 @@
 " Some interesting settings I'm using were found in:
 "  - https://github.com/rzhw/dotfiles/blob/master/vim/vimrc
 
+" Get the defaults that most users want.
+source $VIMRUNTIME/defaults.vim
+" defaults sets up an autocmd to restore last position, which I don't like so revert it
+augroup vimStartup | au! | augroup END
+
 " let mapleader = ","
 let mapleader = "\\"
 

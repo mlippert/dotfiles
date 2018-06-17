@@ -37,3 +37,6 @@
 [submodule "vim/pack/mjl-plugins/start/vim-snippets"]
 	path = vim/pack/mjl-plugins/start/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
+[submodule "vim/pack/mjl-plugins/start/editorconfig-vim"]
+	path = vim/pack/mjl-plugins/start/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim.git

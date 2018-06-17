@@ -13,7 +13,7 @@ export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:exit:l[sl]"
 
 # append to the history file, don't overwrite it
-shopt -s histappend 
+shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 
@@ -78,6 +78,10 @@ esac
 # add a path configuration file (see http://docs.python.org/install/index.html)
 # seems the path configuration file should go in ~/.local/lib/python2.7/site-packages
 # export PYTHONPATH=/usr/local/lib/python2.7/site-packages
+
+# This variable is used by the ripgrep (rg) utility identifying a configuration
+# file to use. This points at the file I created for node projects.
+export RIPGREP_CONFIG_PATH=~/Projects/node.rgrc
 
 # This variable is used by the BrixClient's makefile to determine whether to use the
 # jsdoc java or node code to build its doc.

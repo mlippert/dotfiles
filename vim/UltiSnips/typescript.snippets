@@ -88,8 +88,36 @@ function ${1:fn_name}(${2:param1}: ${3:type}): $4
 
 endsnippet
 
+snippet Icmt "interface with comment" b
+/* ******************************************************************************
+ * I$1                                                                      $2*/ /**
+ *
+ * [Description of I$1]
+ *
+ * @property $3
+ *      [Description of $3]
+ */
+interface I${1:interface_name}
+{
+	${3:prop_name}: ${4:type};
+	$0
+}
+
+endsnippet
+
 snippet varcmt "Comment header for a variable" b
 /** ${1:Description} */
+endsnippet
+
+snippet exportscmt "Module exports with comment header" b
+/* **************************************************************************** *
+ * Module exports                                                               *
+ * **************************************************************************** */
+export default $1;
+export
+{
+	$1,
+};
 endsnippet
 
 # vim:ft=snippets:

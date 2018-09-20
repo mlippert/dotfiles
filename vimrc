@@ -46,6 +46,9 @@ set tabstop=4 shiftwidth=4 smarttab
 
 set listchars=tab:>-,trail:-
 
+" add an errorformat for msbuild (used by tslint)
+set errorformat+=%f(%l\\,%c):\ %t%*[^\ ]\ %m
+
 " Use ripgrep if it's available as the grep program
 "  see http://www.wezm.net/technical/2016/09/ripgrep-with-vim/
 "  use w/ quickfix (:copen to open quickfix window :ccl to close see help for more)

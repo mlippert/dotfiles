@@ -1,7 +1,7 @@
 # ~/.bash_aliases: executed by .bashrc
 
 # some more ls aliases
-alias ll='ls -l'
+alias ll='ls -lF'
 alias lla='ll -a'
 alias la='ls -A'
 alias l='ls -CF'

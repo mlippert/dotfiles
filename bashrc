@@ -87,6 +87,11 @@ export RIPGREP_CONFIG_PATH=~/Projects/node.rgrc
 # jsdoc java or node code to build its doc.
 export BRIX_JSDOC_BUILD=node
 
+# This variable is useful on a remote machine (ie ssh'd in) when using gpg to encrypt/decrypt
+# and you get the error: "gpg: public key decryption failed: Inappropriate ioctl for device"
+# https://stackoverflow.com/questions/51504367/gpg-agent-forwarding-inappropriate-ioctl-for-device
+# export GPG_TTY=$(tty)
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.

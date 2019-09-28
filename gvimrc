@@ -1,6 +1,7 @@
-" Turn off wrap and turn on the bottom scrollbar
+" Turn off wrap, turn on the bottom scrollbar, turn off the toolbar at the top
 set nowrap
 set guioptions+=b
+set guioptions-=T
 
 " Set how special chars are shown when list is on and set the prefix for
 " wrapped lines when wrap is on.

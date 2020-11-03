@@ -7,10 +7,12 @@
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+#export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=ignoreboth
-export HISTIGNORE="&:[ ]*:exit:l[sl]"
+# don't put 1 char cmd: 2 char cmd: previous cmd: cmd w/ leading space: exit: ls or ll cmd in history
+# I know some of these are redundant or duplicate histcontrol -mjl
+export HISTIGNORE="?:??:&:[ ]*:exit:l[sl]"
 
 # append to the history file, don't overwrite it
 shopt -s histappend

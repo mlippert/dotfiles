@@ -6,7 +6,12 @@ alias lla='ll -a'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias e='gvim --remote-silent'
+# setting the NO_AT_BRIDGE is needed (for me w/ 20.04) to prevent
+#   dbind-WARNING **: Couldn't register with accessibility bus...
+# when starting gvim from the console. see:
+# - https://unix.stackexchange.com/questions/532585/getting-dbind-warnings-about-registering-with-the-accessibility-bus
+# - https://wiki.gnome.org/Accessibility/Documentation/GNOME2/Mechanics
+alias e='NO_AT_BRIDGE=1 gvim --remote-silent'
 alias md='mkdir'
 
 # run npm scripts w/o the long npm ERR: msgs

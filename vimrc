@@ -85,6 +85,8 @@ augroup for_ftypes
     autocmd!
     autocmd FileType javascript set tabstop=4 shiftwidth=4 expandtab formatoptions+=j formatoptions-=c textwidth=85
     autocmd FileType typescript set tabstop=4 shiftwidth=4 expandtab formatoptions+=rolqj formatoptions-=tc textwidth=85
+    autocmd FileType javascriptreact set tabstop=4 shiftwidth=4 expandtab formatoptions+=j formatoptions-=c textwidth=85
+    autocmd FileType typescriptreact set tabstop=4 shiftwidth=4 expandtab formatoptions+=rolqj formatoptions-=tc textwidth=85
     autocmd FileType html,xhtml set tabstop=4 shiftwidth=4 expandtab
     autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
@@ -92,7 +94,7 @@ augroup for_ftypes
     autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
     " For these filetypes, strip trailing whitespace on save
-    autocmd FileType c,cpp,css,html,java,javascript,python,sh,typescript,xhtml autocmd BufWritePre <buffer> :%s/\s\+$//e
+    autocmd FileType c,cpp,css,html,java,javascript,javascriptreact,python,sh,typescript,typescriptreact,xhtml autocmd BufWritePre <buffer> :%s/\s\+$//e
 augroup END
 
 " This keymap uses the blackhole register to paste what is in the default

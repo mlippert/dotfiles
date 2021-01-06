@@ -1,7 +1,7 @@
 # meta package that includes kuser for a user & group management gui which is missing from Mint
 #kdeadmin is no longer available
 #kdeadmin
-kuser
+#kuser
 
 # Login Manager that supports setting which users are displayed in the list
 # sadly kdm is no longer maintained or available
@@ -49,20 +49,26 @@ python3-enchant
 python3-markups
 docutils-common
 
+# Password Tracker
+keepassxc
+
+# container support
+docker.io
+
 # IRC client
 quassel
 
-# Instant messaging
-pidgin
-pidgin-data
-pidgin-extprefs
-pidgin-plugin-pack
+# Instant messaging (Commented out pidgin 2020-12-30 because I haven't been using it)
+#pidgin
+#pidgin-data
+#pidgin-extprefs
+#pidgin-plugin-pack
 
 # Diagramming and vector graphics application (like Visio)
 dia
 
-# Time Tracker
-hamster-applet
+# Time Tracker (install hamster snap in 18.04+)
+#hamster-applet
 
 # Game pack
 # kdegames package no longer exists, but it was composed of the following
@@ -209,6 +215,9 @@ git
 git-svn
 mercurial
 
+# Python virtual environment so different sources can use different python versions
+python3-venv
+
 # needed for Brix development
 chromium-browser
 # see notes for adding repo for nodejs (latest nodejs is back in std repos so no need)
@@ -244,9 +253,22 @@ cmake
 #qt4-dev-tools
 #libqt4-dev
 qtbase5-dev
-libgcrypt11-dev
+libgcrypt20-dev
 zlib1g-dev
 libxtst-dev
+
+# for building vim (this list may be missing some, and have some unneeded as
+# I only got partway towards getting vim built) -mjl 2020-06-16
+# ncurses-term
+# libgtk-3-dev
+# libncurses5-dev
+# xserver-xorg-dev
+# xorg-dev
+# libtool
+# libtool-bin
+# libgpm-dev
+# libcanberra-gtk3-dev
+
 
 # recommended by something above
 python3-docutils

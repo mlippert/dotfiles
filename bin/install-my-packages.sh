@@ -4,4 +4,4 @@
 add_pkgs=`grep "^[^#]" ~/Documents/installed-packages.lst`
 
 # add the -s option to "No-act. Perform ordering simulation"
-apt-get -u -V -q install $add_pkgs
+sudo apt-get -V -q install $add_pkgs

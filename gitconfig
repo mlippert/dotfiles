@@ -1,6 +1,7 @@
 [user]
 	name = Mike Lippert
 	email = mlippert255@gmail.com
+	signingKey = DA8D28F3
 [branch]
 	autosetuprebase = always
 [push]
@@ -13,4 +14,5 @@
 	gpgSign = false
 [alias]
 	graph = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
-
+[includeIf "gitdir:~/Projects/riff/"]
+    path = ~/Projects/riff/.gitconfig-riff

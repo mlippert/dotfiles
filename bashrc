@@ -72,6 +72,10 @@ esac
 
 # Environment variables.
 
+# Sort in "codepoint" order. otherwise ls, sort, others will use the language and sort in "natural" order
+# possibly ignoring non alphabetic characters and sorting upper and lowercase together...
+export LC_COLLATE=C
+
 # Setting the PYTHONPATH is required by the mercurial install.
 # (see http://mercurial.selenic.com/wiki/UnixInstall)
 # shouldn't be needed anymore, python packages should install

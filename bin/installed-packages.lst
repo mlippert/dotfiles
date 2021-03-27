@@ -27,6 +27,9 @@ tmux
 # oathtool --base32 --totp "<SECRET>" 
 oathtool
 
+# QR code / bar code scanner and decoder (utilities)
+zbar-tools
+
 # Support making gnome packages match kde visual settings
 kde-config-gtk-style
 qtcurve

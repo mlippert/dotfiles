@@ -1,7 +1,7 @@
 # ~/.bash_aliases: executed by .bashrc
 
 # some more ls aliases
-alias ll='ls -lF'
+alias ll='ls -lF --group-directories-first'
 alias lla='ll -a'
 alias la='ls -A'
 alias l='ls -CF'

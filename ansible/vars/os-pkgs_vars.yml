@@ -1,0 +1,266 @@
+---
+system_pkgs:
+  # KDiskFree graphical display of space used on mounted partitions
+  - kdf
+
+  # Customize KDE plasma
+  - plasma-theme-oxygen
+  - oxygen-icon-theme
+  - plasma-widgets-addons
+  
+  # Support making gnome packages match kde visual settings
+  - kde-config-gtk-style
+  - qtcurve
+
+  # A gui partition editor which supports gpt partitions
+  - gparted
+
+  # Flatpak
+  - flatpak
+  
+  # Windows emulator
+  #- wine
+  #- q4wine
+  #- winetricks
+  #- playonlinux
+  #- wine-mono0.0.8
+  #- wine-gecko2.21
+  #- fonts-liberation
+
+  # Convert audio files (ie flac -> ogg) There's also a SoundConverter which is gnome based
+  - soundkonverter
+
+  # utilities for mounting and unmounting cifs network file systems
+  - cifs-utils
+  # utility to mount samba share when you browse to it in dolphin to make it more accessible
+  #- smb4k
+
+  # nfs
+  - nfs-kernel-server
+
+  # ssh client and server (be sure to make changes to /etc/ssh/sshd_config to enhance security
+  # see http://www.linuxjournal.com/content/more-secure-ssh-connections?page=0,0)
+  - ssh
+
+  # utility needed to be able to create a System Rescue disk on a flash drive
+  - syslinux
+
+  # utility needed to make a bootable flash drive from a linux distro ISO
+  # unetbootin (download the linux installer instead to get very latest)
+  # utility needed by unetbootin installer
+  - p7zip-full
+
+
+cmd_utility_pkgs:
+  # manage running processes from the commandline
+  - htop
+  - atop
+
+  # find what's talking up diskspace from the commandline
+  - ncdu
+
+  # virtual terminal that can be attached and detached, good for starting things like a minecraft server via ssh
+  #screen
+  - tmux
+
+  # commandline tool to calculate a 2FA (2-factor authentication) code if you know the secret key
+  # found from https://thirld.com/blog/2016/01/16/generating-two-factor-authentication-codes-on-linux/
+  # oathtool --base32 --totp "<SECRET>" 
+  - oathtool
+
+  # QR code / bar code scanner and decoder (utilities)
+  - zbar-tools
+
+  # utility to help locate package to install when builds encounter missing files
+  #- apt-file
+
+
+# Applications, utilities and tools I use or found interesting (including supporting pkgs)
+app_pkgs:
+  # VIM text editor
+  - vim-gtk3
+  # utility needed by vim-taglist plugin
+  - exuberant-ctags
+  # fixed width fonts for text editing
+  - fonts-inconsolata
+
+  # markdown editing support
+  - retext
+  # recommended for retext
+  - python3-markdown
+  - python3-enchant
+  - python3-markups
+  - docutils-common
+
+  # Password Manager
+  - keepassxc
+
+  # container support
+  - docker.io
+
+  # Qt-based directory statistics (space usage visualization)
+  - qdirstat
+
+  # IRC client
+  - quassel
+
+  # Diagramming and vector graphics application (like Visio)
+  - dia
+
+  # Time Tracker (install hamster snap in 18.04+)
+  #- hamster-applet
+
+  # Geneology application
+  - gramps
+
+
+# Packages related to development work, or even just building other public packages from source
+dev_related_pkgs:
+  # utility to build a package for an app compiled from source so it can be uninstalled
+  #- checkinstall
+
+  # diff/merge tool for use w/ source control (may also want Beyond Compare)
+  #- kdiff3
+
+  # Version Control Systems that are good to have available
+  - git
+  - git-svn
+  - mercurial
+
+  # Python virtual environment so different sources can use different python versions
+  - python3-venv
+  
+  # Ansible check mode requires
+  - python3-apt
+
+  # needed for Brix development
+  #- chromium-browser
+
+  # see notes for adding repo for nodejs (latest nodejs is back in std repos so no need)
+  #- nodejs
+
+  # for building git (see INSTALL file in Projects/public/git or progit.pdf doc)
+  - dh-autoreconf
+  - libcurl4-gnutls-dev
+  - libexpat1-dev
+  - gettext
+  - libz-dev
+  - libssl-dev
+  - asciidoc
+  - xmlto
+  - docbook2x
+
+  # for building keepassx v2
+  - build-essential
+  - cmake
+  # kde5 needs qt5
+  #- qt4-dev-tools
+  #- libqt4-dev
+  - qtbase5-dev
+  - libgcrypt20-dev
+  - zlib1g-dev
+  - libxtst-dev
+
+  # for building vim (this list may be missing some, and have some unneeded as
+  # I only got partway towards getting vim built) -mjl 2020-06-16
+  # ncurses-term
+  # libgtk-3-dev
+  # libncurses5-dev
+  # xserver-xorg-dev
+  # xorg-dev
+  # libtool
+  # libtool-bin
+  # libgpm-dev
+  # libcanberra-gtk3-dev
+
+  # recommended by something above
+  - python3-docutils
+  - python3-pygments
+
+
+game_pkgs:
+  # Game pack
+  # kdegames package no longer exists, but it was composed of the following
+  # (http://askubuntu.com/questions/614491/is-there-a-kdegames-package-alternative-in-15-04):
+
+  # arcade spaceship game
+  - bomber
+  # gomoku (five in line) board game
+  - bovo
+  # Bomberman clone
+  - granatier
+  # Pac-Man clone
+  - kapman
+  # atomix puzzle game
+  - katomic
+  # Black Box puzzle game
+  - kblackbox
+  # falling blocks game
+  - kblocks
+  # Jezzball arcade game
+  - kbounce
+  # ball and paddle game
+  - kbreakout
+  # three-in-a-row game
+  - kdiamond
+  # Connect Four game
+  - kfourinline
+  # Lode Runner arcade game
+  - kgoldrunner
+  # go game
+  - kigo
+  # port of the classic BSD console game robots
+  - killbots
+  # Yahtzee dice game
+  - kiriki
+  # simple tactical game
+  - kjumpingcube
+  # SameGame puzzle game
+  - klickety
+  # color lines game
+  - klines
+  # mahjongg solitaire game
+  - kmahjongg
+  # minesweeper game
+  - kmines
+  # battleship board game
+  - knavalbattle
+  # wire puzzle game
+  - knetwalk
+  # miniature golf game
+  - kolf
+  # simple ball dodging game
+  - kollision
+  # simple turn-based strategy game
+  - konquest
+  # solitaire card games
+  - kpat
+  # reversi board game
+  - kreversi
+  # Shisen-Sho solitaire game
+  - kshisen
+  # Risk strategy game
+  - ksirk
+  # Tron-like snakerace game
+  - ksnakeduel
+  # SpaceWar! arcade game
+  - kspaceduel
+  # Dots and Boxes game
+  - ksquares
+  # Sudoku puzzle game and solver
+  - ksudoku
+  # stamp drawing toy
+  - ktuberling
+  # game based on Rubik's Cube
+  - kubrick
+  # Lieutnant Skat card game
+  - lskat
+  # jigsaw puzzle game
+  - palapeli
+  # Number logic game
+  - picmi
+  # classical Mah Jongg game
+  - kajongg
+
+
+standard_pkgs: "{{ system_pkgs|union(cmd_utility_pkgs)|union(app_pkgs)|union(dev_related_pkgs)|union(game_pkgs)|unique }}"

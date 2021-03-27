@@ -1,0 +1,93 @@
+---
+- name: Setup newly install Kubuntu 20.04 for mjl
+  hosts: localhost
+
+  vars_files:
+    - ./vars/os-pkgs_vars.yml
+
+  vars:
+    ppas:
+      # latest python
+      - ppa:deadsnakes/ppa
+
+      # latest vim
+      - ppa:jonathonf/vim
+
+      # KeePassXC
+      - ppa:phoerious/keepassxc
+
+      # latest HandBrake
+      - ppa:stebbins/handbrake-releases
+
+      # flatpak
+      - ppa:alexlarsson/flatpak
+
+    flatpaks:
+      # Signal
+      - org.signal.Signal
+
+      # Slack
+      - com.slack.Slack
+
+      # Chromium
+      - org.chromium.Chromium
+
+    software_other_install_methods:
+      debs:
+        # latest node (not a ppa, will need to move elsewhere)
+        - nodesource see https://github.com/nodesource/distributions#debinstall
+
+        # BeyondCompare (not a ppa)
+        - scootersoftware
+
+        # TeamViewer (not a ppa)
+        - teamviewer
+
+        # latest VirtualBox (not a ppa)
+        - virtualbox see https://websiteforstudents.com/how-to-install-virtualbox-on-ubuntu-20-04-18-04/
+
+        # ripgrep
+        - ripgrep see https://github.com/BurntSushi/ripgrep#installation
+
+      other:
+        # UKUU (Ubuntu Kernel Update Utility) (not a ppa)
+        - teejeetech-uuku
+
+
+  tasks:
+    - name: Update and Upgrade all current packages
+      become: yes
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: full
+      when: inventory_hostname != "localhost"
+
+    - name: Reboot to ensure all upgrades take effect
+      ansible.builtin.reboot:
+        post_reboot_delay: 30
+      when: inventory_hostname != "localhost"
+
+    - name: Add PPA repositories
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        update_cache: no
+      loop: "{{ ppas }}"
+
+    - name: Install standard packages
+      become: yes
+      ansible.builtin.apt:
+        name: "{{ standard_pkgs }}"
+        state: latest
+        update_cache: yes
+
+    - name: Add Flatpak remotes
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+
+    - name: Install Flatpak applications
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ flatpaks }}"

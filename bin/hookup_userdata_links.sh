@@ -137,12 +137,12 @@ mkdir -p userdata_backup/config
 echo Moving existing files to backup location...
 
 if [ $LINKUSERDATAFILES = true ]; then
-    mv --verbose --backup=numbered --t userdata_backup/ ${!USERDIRS[@]}
-    mv --verbose --backup=numbered --t userdata_backup/config ${!USERCONFIGFILES[@]}
+    mv --verbose --backup=numbered --t userdata_backup/ "${!USERDIRS[@]}"
+    mv --verbose --backup=numbered --t userdata_backup/config "${!USERCONFIGFILES[@]}"
 fi
 
 if [ $LINKDOTFILES = true ]; then
-    mv --verbose --backup=numbered --t userdata_backup/ ${!USERDOTFILES[@]}
+    mv --verbose --backup=numbered --t userdata_backup/ "${!USERDOTFILES[@]}"
 fi
 
 if [ $LINKUSERDATAFILES = true ]; then

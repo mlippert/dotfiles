@@ -90,7 +90,6 @@ declare -A USERDIRS=(\
 # link to the configuration directories in userdata that are not in dotfiles (too large or too sensitive for github)
 declare -A USERCONFIGFILES=(\
 		[.aws]=${USERDATADIR}.aws\
-		[.beyondcompare]=${USERDATADIR}.beyondcompare\
 		[.config/Atlassian]=${USERDATADIR}.config/Atlassian\
 		[.config/bcompare]=${USERDATADIR}.config/bcompare\
 		[.config/calibre]=${USERDATADIR}.config/calibre\
@@ -98,6 +97,7 @@ declare -A USERCONFIGFILES=(\
 		[.config/keepassx]=${USERDATADIR}.config/keepassx\
 		[.config/libreoffice]=${USERDATADIR}.config/libreoffice\
 		[.config/ReText\ project]=${USERDATADIR}.config/ReText\ project\
+		[.config/smartgit]=${USERDATADIR}.config/smartgit\
 		[.dia]=${USERDATADIR}.dia\
 		[.docker]=${USERDATADIR}.docker\
 		[.gnupg]=${USERDATADIR}.gnupg\
@@ -108,7 +108,6 @@ declare -A USERCONFIGFILES=(\
 		[.netrc]=${USERDATADIR}.netrc\
 		[.npmrc]=${USERDATADIR}.npmrc\
 		[.purple]=${USERDATADIR}.purple\
-		[.smartgit]=${USERDATADIR}.smartgit\
 		[.ssh]=${USERDATADIR}.ssh\
 		[.wine]=${USERDATADIR}.wine\
 	)

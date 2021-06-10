@@ -32,6 +32,12 @@
       # Chromium
       - org.chromium.Chromium
 
+      # Postman - development UI tool for sending http requests
+      - com.getpostman.Postman
+
+      # MediaInfo
+      - net.mediaarea.MediaInfo
+
     software_other_install_methods:
       debs:
         # latest node (not a ppa, will need to move elsewhere)

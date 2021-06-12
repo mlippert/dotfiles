@@ -42,6 +42,10 @@ system_pkgs:
   # see http://www.linuxjournal.com/content/more-secure-ssh-connections?page=0,0)
   - ssh
 
+  # curl issues http requests from the commandline, extremely common tool in intstructions to retrieve
+  # packages and files for installing apps
+  - curl
+
   # utility needed to be able to create a System Rescue disk on a flash drive
   - syslinux
 

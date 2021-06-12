@@ -59,6 +59,9 @@
         # UKUU (Ubuntu Kernel Update Utility) (not a ppa)
         - teejeetech-uuku
 
+        # Smartgit (https://syntevo.com)
+        - bin/smartgit
+
 
   tasks:
     - name: Update and Upgrade all current packages
@@ -97,3 +100,18 @@
         name: "{{ item }}"
         state: present
       loop: "{{ flatpaks }}"
+
+    - name: Add mjl user to groups
+      ansible.builtin.user:
+        name: mjl
+        groups:
+          - audio
+          - video
+          - plugdev
+          - staff
+          - games
+          - users
+          - ssh
+          - sambashare
+          - vboxusers
+          - docker

@@ -1,6 +1,6 @@
 [submodule "vim/pack/mjl-plugins/start/buffet"]
 	path = vim/pack/mjl-plugins/start/buffet
-	url = https://github.com/sandeepcr529/Buffet.vim.git
+	url = https://github.com/mlippert/Buffet.vim.git
 [submodule "vim/pack/mjl-plugins/start/mru"]
 	path = vim/pack/mjl-plugins/start/mru
 	url = https://github.com/yegappan/mru.git

@@ -11,6 +11,7 @@ Some of these may be easier to set up because they are already partially there o
 
 1. add userdata partition to `/etc/fstab`1. this dotfiles repository
     1. Install git from the standard OS repo -- `sudo apt install git`
+    1. Install make from the standard OS repo -- `sudo apt install make`
     1. clone https://github.com/mlippert/dotfiles.git in /userdata/mjl/dotfiles
 1. Latest python, currently python 3.9
 	1. From https://phoenixnap.com/kb/how-to-install-python-3-ubuntu
@@ -24,6 +25,8 @@ Some of these may be easier to set up because they are already partially there o
     cd /userdata/mjl/dotfiles/ansible
     make install VER=3.9
     ```
+1. Currently the bin/hookup_userdate_link.sh is not integrated into ansible so it should be run now.
+1. Create ~/tmp directory
 1. Run the `mjl-user.yml` ansible playbook
 
     ```
@@ -62,3 +65,22 @@ On my laptop I bumped up the System Settings Font sizes by 1 point, from 10, 9, 
         - GTK2 Theme: QtCurve
         - GTK3 Theme: Adwaita
         - Icon Theme: Oxygen
+
+From 20.04 on my Desktop
+
+- Global Theme: Kubuntu
+- Plasma Style: Oxygen
+- Application Style:
+    - Application Style: Oxygen
+        - GTK2 theme: Adwaita (`apt install adwaita-qt gnome-themes-extra adwaita-icon-theme-full`)
+        - GTK3 theme: Adwaita
+    - Window Decorations: Breeze
+        - Set window border size: Normal
+- Colors: Oxygen Cold
+- Fonts: On my laptop I bumped up the System Settings Font sizes by 1 point, from 10, 9, 8, 10, 10 10 to 11, 10, 9, 11, 11, 11
+- Icons: Oxygen
+- Cursors: Breeze
+- Startup and Shutdown:
+    - Login Screen (SDDM): Sugar Candy (1.6)
+
+

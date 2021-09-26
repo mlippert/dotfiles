@@ -55,6 +55,9 @@
         # ripgrep
         - ripgrep see https://github.com/BurntSushi/ripgrep#installation
 
+        # discord
+        - discord see https://discord.com/ and download the deb
+
       other:
         # UKUU (Ubuntu Kernel Update Utility) (not a ppa)
         - teejeetech-uuku
@@ -91,9 +94,11 @@
         update_cache: yes
 
     - name: Add Flatpak remotes
+      become: yes
       community.general.flatpak_remote:
         name: flathub
         state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Install Flatpak applications
       community.general.flatpak:
@@ -102,9 +107,17 @@
       loop: "{{ flatpaks }}"
 
     - name: Add mjl user to groups
+      become: yes
       ansible.builtin.user:
         name: mjl
         groups:
+          - adm
+          - sudo
+          - cdrom
+          - dip
+          - lpadmin
+          - lxd
+          - sambashare
           - audio
           - video
           - plugdev
@@ -115,3 +128,4 @@
           - sambashare
           - vboxusers
           - docker
+        append: yes

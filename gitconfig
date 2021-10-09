@@ -2,6 +2,8 @@
 	name = Mike Lippert
 	email = mlippert255@gmail.com
 	signingKey = DA8D28F3
+[init]
+	defaultBranch = main
 [branch]
 	autosetuprebase = always
 [push]

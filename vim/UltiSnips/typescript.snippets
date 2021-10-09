@@ -13,7 +13,7 @@ snippet classcmt "Class with comment" b
  * [Description of the ${1/(?:\w+\.)*(.*)/$1/} class]
  *
  ********************************************************************************/
-export default class ${1:class_name}
+class ${1:class_name}
 {
 	/** [Description of myvar1] */
 	myvar1: string;
@@ -35,24 +35,6 @@ export default class ${1:class_name}
 		this.myvar2 = myvar2;
 		$0
 	}
-}
-
-/* ******************************************************************************
- * I$1_Config                                                               $3*/ /**
- *
- * The I$1_Config defines the object passed to the constructor that
- * contains options/values used to initialize an instance of a $1.
- *
- * @property myvar1
- *      [Description of myvar1]
- *
- * @property myvar2
- *      [Description of myvar2]
- */
-interface I$1_Config
-{
-	myvar1?: string;
-	myvar2?: number;
 }
 
 endsnippet

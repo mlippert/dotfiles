@@ -1,5 +1,8 @@
 ---
 system_pkgs:
+  # GUI Package Manager I like better than Muon because it shows the log of what's being installed
+  - synaptic
+  
   # KDiskFree graphical display of space used on mounted partitions
   - kdf
 
@@ -107,6 +110,9 @@ app_pkgs:
 
   # IRC client
   - quassel
+
+  # Scanner tool (scan to a pdf)
+  gscan2pdf
 
   # Diagramming and vector graphics application (like Visio)
   - dia

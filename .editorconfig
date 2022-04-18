@@ -1,0 +1,41 @@
+# EditorConfig is awesome: http://editorConfig.org
+# Usage with your editor: http://editorconfig.org/#download
+
+# Top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+# Don't trim trailing whitespace in Markdown (they are used to force line breaks)
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+# Don't trim trailing whitespace in yaml files (they are used for trailing newlines in text blocks)
+trim_trailing_whitespace = false
+
+[*.{css,scss}]
+indent_style = space
+indent_size = 4
+
+
+[{.stylelintrc,.eslintrc.json}]
+indent_size = 2
+
+# The indentation in package.json will always need to be 2 spaces
+# https://github.com/npm/npm/issues/4718
+[package*.json]
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+indent_size = 4

@@ -112,7 +112,7 @@ app_pkgs:
   - quassel
 
   # Scanner tool (scan to a pdf)
-  gscan2pdf
+  - gscan2pdf
 
   # Diagramming and vector graphics application (like Visio)
   - dia

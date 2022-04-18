@@ -1,3 +1,9 @@
-# Ignore EVERYTHING, all files must be explicitly added #
-#########################################################
-*
+# Ansible python virtual environment
+ansible/venv/
+ansible/activate
+
+# Ansible log files
+ansible/*.log
+
+# ignore cached compiled (*.pyc) python files
+__pycache__/

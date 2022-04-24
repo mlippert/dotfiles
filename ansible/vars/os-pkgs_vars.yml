@@ -60,8 +60,9 @@ system_pkgs:
 
 cmd_utility_pkgs:
   # manage running processes from the commandline
-  - htop
-  - atop
+  # Commenting these both out because I haven't wanted to run ether of them in quite a while -mjl 2022-04-23
+  #- htop
+  #- atop
 
   # find what's talking up diskspace from the commandline
   - ncdu
@@ -135,9 +136,11 @@ dev_related_pkgs:
   # Version Control Systems that are good to have available
   - git
   - git-svn
-  - mercurial
+  #- mercurial
 
-  # Python virtual environment so different sources can use different python versions
+  # Latest Python and Python virtual environments so different sources can use different python versions
+  - python3.10
+  - python3.10-venv
   - python3-venv
   
   # Ansible check mode requires

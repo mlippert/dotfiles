@@ -1,0 +1,148 @@
+---
+# The VM must be running (and the only vm running, unless the hosts-virtualbox.yml inventory is adjusted.
+# Make sure that 'openssh-server' is installed in the VM
+# The ssh key must be in the ssh-agent, and configured in the VM's user (the same user running the playbook)
+# When running this playbook use --ask-become-pass to provide the sudo password in the VM
+# e.g.
+#   ansible-playbook vbox-mjl-all.yml -i hosts-virtualbox.yml --ask-become-pass
+- name: Setup new install of Kubuntu 22.04 in virtualbox VM for current user
+  hosts: vbox
+
+  vars_files:
+    - ./vars/os-pkgs_vars.yml
+
+  vars:
+    ppas:
+      # latest python
+      - ppa:deadsnakes/ppa
+
+      # latest vim not yet available for 22.04 jammy
+      #- ppa:jonathonf/vim
+
+      # KeePassXC
+      - ppa:phoerious/keepassxc
+
+      # latest HandBrake not yet available for 22.04 jammy
+      # - ppa:stebbins/handbrake-releases
+
+      # flatpak not available or needed for 22.04 jammy
+      #- ppa:alexlarsson/flatpak
+
+    flatpaks:
+      # Signal
+      - org.signal.Signal
+
+      # Slack
+      - com.slack.Slack
+
+      # Chromium
+      - org.chromium.Chromium
+
+      # Postman - development UI tool for sending http requests
+      - com.getpostman.Postman
+
+      # MediaInfo
+      - net.mediaarea.MediaInfo
+
+    software_other_install_methods:
+      debs:
+        # latest node (not a ppa, will need to move elsewhere)
+        - nodesource see https://github.com/nodesource/distributions#debinstall
+
+        # BeyondCompare (not a ppa)
+        - scootersoftware
+
+        # TeamViewer (not a ppa)
+        - teamviewer
+
+        # latest VirtualBox (not a ppa)
+        - virtualbox see https://websiteforstudents.com/how-to-install-virtualbox-on-ubuntu-20-04-18-04/
+
+        # ripgrep
+        - ripgrep see https://github.com/BurntSushi/ripgrep#installation
+
+        # discord
+        - discord see https://discord.com/ and download the deb
+
+      other:
+        # UKUU (Ubuntu Kernel Update Utility) (not a ppa)
+        - teejeetech-uuku
+
+        # Smartgit (https://syntevo.com)
+        - bin/smartgit
+
+
+  tasks:
+    - name: Update and Upgrade all current packages
+      when: inventory_hostname != "localhost"
+      become: yes
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: full
+      register: apt_upgrade
+
+    - name: Reboot to ensure all upgrades take effect
+      when:
+        - inventory_hostname != "localhost"
+        - apt_upgrade.changed
+      become: yes
+      ansible.builtin.reboot:
+        post_reboot_delay: 30
+
+    - name: Add PPA repositories
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        update_cache: no
+      loop: "{{ ppas }}"
+
+    - name: Install standard packages
+      become: yes
+      ansible.builtin.apt:
+        name: "{{ standard_pkgs }}"
+        state: latest
+        update_cache: yes
+
+    - name: Add Flatpak flathub remote for the user
+      community.general.flatpak_remote:
+        name: flathub
+        method: user
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: Add Flatpak flathub remote for the system
+      become: yes
+      community.general.flatpak_remote:
+        name: flathub
+        method: system
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: Install Flatpak applications
+      community.general.flatpak:
+        name: "{{ item }}"
+        method: user
+        state: present
+      loop: "{{ flatpaks }}"
+
+    - name: Add mjl user to groups
+      become: yes
+      ansible.builtin.user:
+        name: mjl
+        groups:
+          - adm
+          - sudo
+          - cdrom
+          - dip
+          - lpadmin
+          - lxd
+          - audio
+          - video
+          - plugdev
+          - staff
+          - games
+          - users
+          - sambashare
+          - vboxsf
+          - docker
+        append: yes

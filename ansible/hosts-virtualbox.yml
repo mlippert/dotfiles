@@ -1,0 +1,9 @@
+---
+plugin: community.general.virtualbox
+running_only: yes
+compose:
+  guest_os: vbox_Guest_OS
+groups:
+  vbox: True
+  named: '"Kubuntu" in (inventory_hostname)'
+  ubuntu: '"Ubuntu" in (vbox_Guest_OS)'

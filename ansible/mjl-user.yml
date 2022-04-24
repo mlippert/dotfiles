@@ -130,16 +130,14 @@
           - dip
           - lpadmin
           - lxd
-          - sambashare
           - audio
           - video
           - plugdev
           - staff
           - games
           - users
-          - ssh
           - sambashare
-          - vboxusers
+          #- vboxusers # This is better done after installing virtualbox which this playbook doesn't do, so it may not exist
           - docker
         append: yes
 

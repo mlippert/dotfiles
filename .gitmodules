@@ -43,3 +43,6 @@
 [submodule "vim/pack/mjl-plugins/start/vim-ripgrep"]
 	path = vim/pack/mjl-plugins/start/vim-ripgrep
 	url = https://github.com/jremmen/vim-ripgrep.git
+[submodule "vim/pack/mjl-plugins/start/vim-terraform"]
+	path = vim/pack/mjl-plugins/start/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git

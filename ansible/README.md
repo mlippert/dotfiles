@@ -163,4 +163,12 @@ very rough 1st impression notes:
 says that old keyservers have been deprecated and recommends updating `gpg.conf` to
 specify `keyserver hkp://pgp.mit.edu:11371`.
 
+### Swappiness (see below link)
 
+this should be added to the scripts because swapping is happening w/ 8GB of free RAM. (now on 20.04)
+
+Added at the bottom of `/etc/sysctl.conf`
+```
+# Added by mjl on 2022-05-13 from https://askubuntu.com/a/157809/217789
+vm.swappiness=10
+```

@@ -2,7 +2,7 @@
 
 ## mjl-user.yml
 
-This playbook is to initialize the settings for the mjl user on a new install of Kubuntu 20.04
+This playbook is to initialize the settings for the mjl user on a new install of Kubuntu 22.04 (Jammy Jellyfish)
 
 In that scenario a few pre-requisites must be installed first. Here are they are:
 

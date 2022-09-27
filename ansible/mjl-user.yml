@@ -1,11 +1,12 @@
 ---
-- name: Setup newly install Kubuntu 20.04 for mjl
+- name: Setup newly install Kubuntu 20.04 for {{ username }}
   hosts: localhost
 
   vars_files:
     - ./vars/os-pkgs_vars.yml
 
   vars:
+    username: mjl
     ppas:
       # latest python
       - ppa:deadsnakes/ppa
@@ -119,10 +120,10 @@
         state: present
       loop: '{{ flatpaks }}'
 
-    - name: Add mjl user to groups
+    - name: Add {{ username }} user to groups
       become: yes
       ansible.builtin.user:
-        name: mjl
+        name: '{{ username }}'
         groups:
           - adm
           - sudo
@@ -159,10 +160,10 @@
     - name: Disable side mouse buttons
       ansible.builtin.copy:
         src: ./files/Xmodmap
-        dest: /home/mjl/.Xmodmap
+        dest: /home/{{ username }}/.Xmodmap
         force: no
-        owner: mjl
-        group: mjl
+        owner: '{{ username }}'
+        group: '{{ username }}'
         mode: a=r,u+w,g+w
 
     - name: Disable automatic updates

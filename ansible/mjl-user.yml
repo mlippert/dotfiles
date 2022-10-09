@@ -17,12 +17,6 @@
       # KeePassXC
       - ppa:phoerious/keepassxc
 
-      # latest HandBrake
-      - ppa:stebbins/handbrake-releases
-
-      # flatpak
-      - ppa:alexlarsson/flatpak
-
     flatpaks:
       # Signal
       - org.signal.Signal
@@ -82,16 +76,20 @@
 
   tasks:
     - name: Update and Upgrade all current packages
+      when: inventory_hostname != 'localhost'
       become: yes
       ansible.builtin.apt:
         update_cache: yes
         upgrade: full
-      when: inventory_hostname != 'localhost'
+      register: apt_upgrade
 
     - name: Reboot to ensure all upgrades take effect
+      when:
+        - inventory_hostname != 'localhost'
+        - apt_upgrade.changed
+      become: yes
       ansible.builtin.reboot:
         post_reboot_delay: 30
-      when: inventory_hostname != 'localhost'
 
     - name: Add PPA repositories
       become: yes
@@ -111,14 +109,28 @@
       become: yes
       community.general.flatpak_remote:
         name: flathub
+        method: system
         state: present
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Install Flatpak applications
+      become: yes
       community.general.flatpak:
         name: '{{ item }}'
+        method: system
         state: present
       loop: '{{ flatpaks }}'
+
+    - name: Add special group {{ item }}
+      become: yes
+      ansible.builtin.group:
+        name: '{{ item }}'
+        system: yes
+        state: present
+      loop:
+        - sambashare
+        - docker
+        - vboxusers
 
     - name: Add {{ username }} user to groups
       become: yes
@@ -138,7 +150,7 @@
           - games
           - users
           - sambashare
-          #- vboxusers # This is better done after installing virtualbox which this playbook doesn't do, so it may not exist
+          - vboxusers
           - docker
         append: yes
 
@@ -177,3 +189,30 @@
           line: 'APT::Periodic::Unattended-Upgrade "0";'
         - find: 'APT::Periodic::Download-Upgradeable-Packages'
           line: 'APT::Periodic::Download-Upgradeable-Packages "0";'
+
+    - name: Konsole config settings
+      community.general.ini_file:
+        path: /home/{{ username }}/.config/konsolerc
+        no_extra_spaces: yes
+        section: TabBar
+        option: '{{ item.option }}'
+        value: '{{ item.value }}'
+      loop:
+        - option: CloseTabButton
+          value: None
+        - option: TabBarVisibility
+          value: AlwaysShowTabBar
+
+    - name: Dolphin config settings
+      community.general.ini_file:
+        path: /home/{{ username }}/.config/dolphinrc
+        no_extra_spaces: yes
+        section: '{{ item[0] }}'
+        option: '{{ item[1] }}'
+        value: '{{ item[2] }}'
+      loop:
+        - [ DetailsMode, FontWeight, 50 ]
+        - [ DetailsMode, PreviewSize, 22 ]
+        - [ FoldersPanel, LimitFoldersPanelToHome, false ]
+        - [ General, OpenExternallyCalledFolderInNewTab, false ]
+        - [ General, SortingChoice, CaseSensitiveSorting ]

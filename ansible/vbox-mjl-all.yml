@@ -12,12 +12,13 @@
     - ./vars/os-pkgs_vars.yml
 
   vars:
+    username: mjl
     ppas:
       # latest python
       - ppa:deadsnakes/ppa
 
       # latest vim not yet available for 22.04 jammy
-      #- ppa:jonathonf/vim
+      - ppa:jonathonf/vim
 
       # KeePassXC
       - ppa:phoerious/keepassxc
@@ -74,7 +75,7 @@
 
   tasks:
     - name: Update and Upgrade all current packages
-      when: inventory_hostname != "localhost"
+      when: inventory_hostname != 'localhost'
       become: yes
       ansible.builtin.apt:
         update_cache: yes
@@ -83,7 +84,7 @@
 
     - name: Reboot to ensure all upgrades take effect
       when:
-        - inventory_hostname != "localhost"
+        - inventory_hostname != 'localhost'
         - apt_upgrade.changed
       become: yes
       ansible.builtin.reboot:
@@ -92,14 +93,14 @@
     - name: Add PPA repositories
       become: yes
       ansible.builtin.apt_repository:
-        repo: "{{ item }}"
+        repo: '{{ item }}'
         update_cache: no
-      loop: "{{ ppas }}"
+      loop: '{{ ppas }}'
 
     - name: Install standard packages
       become: yes
       ansible.builtin.apt:
-        name: "{{ standard_pkgs }}"
+        name: '{{ standard_pkgs }}'
         state: latest
         update_cache: yes
 
@@ -120,15 +121,15 @@
 
     - name: Install Flatpak applications
       community.general.flatpak:
-        name: "{{ item }}"
+        name: '{{ item }}'
         method: user
         state: present
-      loop: "{{ flatpaks }}"
+      loop: '{{ flatpaks }}'
 
-    - name: Add mjl user to groups
+    - name: Add {{ username }} user to groups
       become: yes
       ansible.builtin.user:
-        name: mjl
+        name: '{{ username }}'
         groups:
           - adm
           - sudo
@@ -146,3 +147,66 @@
           - vboxsf
           - docker
         append: yes
+
+    - name: Add .local tld to hosts file 127.0.1.1 entry
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        backrefs: yes
+        regexp: '^127\.0\.1\.1\t(\S+)$'
+        line: '127.0.1.1\t\1.local \1'
+
+    - name: Add lan hosts to hosts file
+      become: yes
+      ansible.builtin.blockinfile:
+        path: /etc/hosts
+        insertafter: '^$'
+        block: '{{ lan_hosts }}'
+
+    - name: Disable side mouse buttons
+      ansible.builtin.copy:
+        src: ./files/Xmodmap
+        dest: /home/{{ username }}/.Xmodmap
+        force: no
+        owner: '{{ username }}'
+        group: '{{ username }}'
+        mode: a=r,u+w,g+w
+
+    - name: Disable automatic updates
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/apt/apt.conf.d/20auto-upgrades
+        search_string: '{{ item.find }}'
+        line: '{{ item.line }}'
+      loop:
+        - find: 'APT::Periodic::Unattended-Upgrade'
+          line: 'APT::Periodic::Unattended-Upgrade "0";'
+        - find: 'APT::Periodic::Download-Upgradeable-Packages'
+          line: 'APT::Periodic::Download-Upgradeable-Packages "0";'
+
+    - name: Konsole config settings
+      community.general.ini_file:
+        path: /home/{{ username }}/.config/konsolerc
+        no_extra_spaces: yes
+        section: TabBar
+        option: '{{ item.option }}'
+        value: '{{ item.value }}'
+      loop:
+        - option: CloseTabButton
+          value: None
+        - option: TabBarVisibility
+          value: AlwaysShowTabBar
+
+    - name: Dolphin config settings
+      community.general.ini_file:
+        path: /home/{{ username }}/.config/dolphinrc
+        no_extra_spaces: yes
+        section: '{{ item[0] }}'
+        option: '{{ item[1] }}'
+        value: '{{ item[2] }}'
+      loop:
+        - [ DetailsMode, FontWeight, 50 ]
+        - [ DetailsMode, PreviewSize, 22 ]
+        - [ FoldersPanel, LimitFoldersPanelToHome, false ]
+        - [ General, OpenExternallyCalledFolderInNewTab, false ]
+        - [ General, SortingChoice, CaseSensitiveSorting ]

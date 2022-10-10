@@ -32,10 +32,10 @@ run : ## run the main python script
 install : VER ?= 3
 install : ## create python3 virtual env, install requirements (define VER for other than python3)
 	@python$(VER) -m venv venv
-	@ln -s venv/bin/activate activate
-	@source activate                        	; \
+	-@ln -s venv/bin/activate activate
+	@source activate                            ; \
 	pip install --upgrade pip setuptools wheel  ; \
-	pip install -r requirements.txt ; \
+	pip install -r requirements.txt             ; \
 	ansible-galaxy collection install -r requirements.yml
 
 outdated : ## check for newer versions of required python packages

@@ -28,6 +28,9 @@ set ruler        " Show current line number and char
 set backspace=2  " Conventional backspace behaviour
 set scrolloff=3
 
+" activate the mouse for all uses: command line, input, and navigation
+set mouse=a
+
 set encoding=utf-8
 set laststatus=2
 
@@ -35,10 +38,11 @@ filetype plugin indent on
 
 syntax enable
 
-colorscheme solarized
 if has('gui_running')
+    colorscheme solarized
     set background=light
 else
+    colorscheme lippert_dark
     set background=dark
 endif
 
@@ -144,7 +148,8 @@ let g:session_autosave = 'no'
 
 " custom status line from
 "  http://www.wezm.net/technical/2008/09/pimping-vim-on-windows/
-"  Not sure I love it, so commenting it out -mjl
+" I sort of like this in the terminal, not so much in the gui, so commenting it out -mjl
+" (I modified it some to put the path after the name)
 "set laststatus=2
-"set statusline=%&lt;%f\ %m%a%=%([%R%H%Y]%)\ %-19(%3l\ of\ %L,%c%)%P
+"set statusline=%t\ %m%a\ (%{expand('%:~:h')})%=%([%R%H%Y]%)\ %-19(%3l\ of\ %L,%c%)%P
 "set showcmd

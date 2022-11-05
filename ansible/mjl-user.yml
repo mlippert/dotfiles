@@ -178,6 +178,13 @@
         group: '{{ username }}'
         mode: a=r,u+w,g+w
 
+    - name: Change grub menu to display distribution description (-d) instead of distributor ID (-i)
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        search_string: GRUB_DISTRIBUTOR=`lsb_release
+        line: "GRUB_DISTRIBUTOR=`lsb_release -d -s 2> /dev/null || echo Debian`'"
+
     - name: Disable automatic updates
       become: yes
       ansible.builtin.lineinfile:

@@ -14,6 +14,9 @@ system_pkgs:
   # Support making gnome packages match kde visual settings
   - kde-config-gtk-style
   - qtcurve
+  - adwaita-qt
+  - gnome-themes-extra
+  - adwaita-icon-theme-full
 
   # A gui partition editor which supports gpt partitions
   - gparted

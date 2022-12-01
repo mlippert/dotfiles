@@ -114,6 +114,7 @@ endfunction
 " keep taglist available on ctrl-F8 while putting tagbar on F8
 nmap <S-F8> :TlistToggle<CR>
 nmap <F8> :TagbarToggle<CR>
+
 nnoremap <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 "noremap <silent> <F12> :LustyJuggler<CR>
 noremap <silent> <F12> :Bufferlistsw<CR>
@@ -121,7 +122,9 @@ noremap <silent> <F12> :Bufferlistsw<CR>
 " do a / search then \z will fold all non-matching lines
 " zA - toggle fold, zR unfold everything, zM refold everything
 " from http://vim.wikia.com/wiki/Folding_with_Regular_Expression
+" \Z will remove the folds
 nnoremap <leader>z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
+nnoremap <leader>Z :setlocal foldmethod=manual foldlevel=0 foldcolumn=0<CR><Bar>zE
 
 " recognize the javascript typedef type I've added to ctags and don't show the
 " property type.

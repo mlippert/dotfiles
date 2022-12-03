@@ -18,8 +18,11 @@ system_pkgs:
   - gnome-themes-extra
   - adwaita-icon-theme-full
 
+  # Internet Browser (as of 22.04 Ubuntu installs this as a snap, The playbook installs a ppa to get it installed as a deb)
+  firefox
+
   # A gui partition editor which supports gpt partitions
-  - gparted
+  #- gparted # the kde partition manager has vastly improved so I'm commenting this out -mjl 2022-12-03
 
   # Flatpak
   - flatpak

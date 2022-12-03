@@ -17,6 +17,9 @@
       # KeePassXC
       - ppa:phoerious/keepassxc
 
+      # Firefox
+      - ppa:mozillateam/ppa
+
     flatpaks:
       # Signal
       - org.signal.Signal
@@ -97,6 +100,21 @@
         repo: '{{ item }}'
         update_cache: no
       loop: '{{ ppas }}'
+
+    - name: Lower priority of Ubuntu apt repo package for firefox, so ppa takes precedence
+      become: yes
+      ansible.builtin.copy:
+        dest: /etc/apt/preferences.d/firefox-no-snap.pref
+        content: |
+          Package: firefox*
+          Pin: release o=Ubuntu*
+          Pin-Priority: -1
+
+    - name: Remove the firefox snap (other snaps may want to be removed manually)
+      become: yes
+      community.general.snap:
+        name: firefox
+        state: absent
 
     - name: Install standard packages
       become: yes

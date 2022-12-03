@@ -154,9 +154,22 @@ very rough 1st impression notes:
 - unpin many pinned icons from taskmanager
 - !!! KRunner is getting invoked by typing on the desktop AND there is no way to disable that YET,
   supposedly a config setting has been added in a later version. I should determine which version.
-- Should block snap Firefox and install PPA instead. see https://ubuntuhandbook.org/index.php/2022/04/remove-snap-block-ubuntu-2204/
-  and https://linuxiac.com/install-firefox-from-deb-on-ubuntu-22-04-lts/
-  and https://balintreczey.hu/blog/firefox-on-ubuntu-22-04-from-deb-not-from-snap/
+- Should block snap Firefox and install PPA instead.  
+  see https://ubuntuhandbook.org/index.php/2022/04/remove-snap-block-ubuntu-2204/  
+  and https://linuxiac.com/install-firefox-from-deb-on-ubuntu-22-04-lts/  
+  and https://balintreczey.hu/blog/firefox-on-ubuntu-22-04-from-deb-not-from-snap/  
+  This is now being done (_I think_) by the playbook
+
+    ```
+    sudo snap remove --purge firefox
+    sudo add-apt-repository ppa:mozillateam/ppa
+    cat <<END | sudo tee /etc/apt/preferences.d/firefox-no-snap > /dev/null
+    Package: firefox*
+    Pin: release o=Ubuntu*
+    Pin-Priority: -1
+    END
+    ```
+
 - add 2 ppas (the 2nd updates plasma to 5.25)
   - sudo add-apt-repository ppa:kubuntu-ppa/backports
   - sudo add-apt-repository ppa:kubuntu-ppa/backports-extra && sudo apt full-upgrade -y

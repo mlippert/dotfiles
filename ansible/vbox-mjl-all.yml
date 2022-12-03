@@ -1,6 +1,7 @@
 ---
 # The VM must be running (and the only vm running, unless the hosts-virtualbox.yml inventory is adjusted.
 # Make sure that 'openssh-server' is installed in the VM
+# The VM's 1st network adapter must connect to the host, ie either host-only or bridged.
 # The ssh key must be in the ssh-agent, and configured in the VM's user (the same user running the playbook)
 # When running this playbook use --ask-become-pass to provide the sudo password in the VM
 # e.g.
@@ -17,7 +18,7 @@
       # latest python
       - ppa:deadsnakes/ppa
 
-      # latest vim not yet available for 22.04 jammy
+      # latest vim
       - ppa:jonathonf/vim
 
       # KeePassXC
@@ -34,10 +35,10 @@
       - org.signal.Signal
 
       # Slack
-      - com.slack.Slack
+      #- com.slack.Slack
 
       # Chromium
-      - org.chromium.Chromium
+      #- org.chromium.Chromium
 
       # Postman - development UI tool for sending http requests
       - com.getpostman.Postman
@@ -72,6 +73,19 @@
         # Smartgit (https://syntevo.com)
         - bin/smartgit
 
+    # Entries to add to hosts file
+    lan_hosts: |
+      192.168.111.50	marcie.local    marcie
+      192.168.111.51	patty.local     patty
+      192.168.111.52	sally.local     sally
+      192.168.111.99	snoopy.local    snoopy
+      192.168.111.98	thor.local      thor
+      192.168.111.97	minecraft.local minecraft
+      192.168.111.96	woodstock.local woodstock
+      192.168.111.95	redbaron.local  redbaron
+      192.168.111.94	pigpen.local    pigpen
+      192.168.111.93	fenris.local    fenris
+
 
   tasks:
     - name: Update and Upgrade all current packages
@@ -104,14 +118,7 @@
         state: latest
         update_cache: yes
 
-    - name: Add Flatpak flathub remote for the user
-      community.general.flatpak_remote:
-        name: flathub
-        method: user
-        state: present
-        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-
-    - name: Add Flatpak flathub remote for the system
+    - name: Add Flatpak remotes
       become: yes
       community.general.flatpak_remote:
         name: flathub
@@ -120,11 +127,23 @@
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Install Flatpak applications
+      become: yes
       community.general.flatpak:
         name: '{{ item }}'
-        method: user
+        method: system
         state: present
       loop: '{{ flatpaks }}'
+
+    - name: Add special group {{ item }}
+      become: yes
+      ansible.builtin.group:
+        name: '{{ item }}'
+        system: yes
+        state: present
+      loop:
+        - sambashare
+        - docker
+        - vboxsf
 
     - name: Add {{ username }} user to groups
       become: yes
@@ -171,6 +190,13 @@
         owner: '{{ username }}'
         group: '{{ username }}'
         mode: a=r,u+w,g+w
+
+    - name: Change grub menu to display distribution description (-d) instead of distributor ID (-i)
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        search_string: GRUB_DISTRIBUTOR=`lsb_release
+        line: "GRUB_DISTRIBUTOR=`lsb_release -d -s 2> /dev/null || echo Debian`'"
 
     - name: Disable automatic updates
       become: yes

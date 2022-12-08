@@ -25,7 +25,7 @@
       - org.signal.Signal
 
       # Slack
-      - com.slack.Slack
+      #- com.slack.Slack
 
       # Chromium
       - org.chromium.Chromium
@@ -201,7 +201,7 @@
       ansible.builtin.lineinfile:
         path: /etc/default/grub
         search_string: GRUB_DISTRIBUTOR=`lsb_release
-        line: "GRUB_DISTRIBUTOR=`lsb_release -d -s 2> /dev/null || echo Debian`'"
+        line: "GRUB_DISTRIBUTOR=`lsb_release -d -s 2> /dev/null || echo Debian`"
 
     - name: Disable automatic updates
       become: yes

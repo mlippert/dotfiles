@@ -47,6 +47,10 @@ system_pkgs:
   # nfs
   - nfs-kernel-server
 
+  # openvpn support
+  - openvpn
+  - network-manager-openvpn
+
   # ssh client and server (be sure to make changes to /etc/ssh/sshd_config to enhance security
   # see http://www.linuxjournal.com/content/more-secure-ssh-connections?page=0,0)
   - ssh

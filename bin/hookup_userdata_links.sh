@@ -123,7 +123,6 @@ declare -A USERCONFIGFILES=(\
 declare -A USERDOTFILES=(\
 		[.bash_aliases]=${DOTFILESDIR}bash_aliases\
 		[.bashrc]=${DOTFILESDIR}bashrc\
-		[.ctags]=${DOTFILESDIR}ctags\
 		[.gitconfig]=${DOTFILESDIR}gitconfig\
 		[.gvimrc]=${DOTFILESDIR}gvimrc\
 		[.hgrc]=${DOTFILESDIR}hgrc\

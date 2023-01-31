@@ -27,7 +27,8 @@ system_pkgs:
   # Flatpak
   - flatpak
   
-  # Windows emulator
+  # Windows emulator (use the latest see https://wiki.winehq.org/Wine_User%27s_Guide#Wine_from_WineHQ for instructions)
+  # also see https://wiki.winehq.org/Third_Party_Applications for which of the below may still be desireable
   #- wine
   #- q4wine
   #- winetricks
@@ -97,8 +98,8 @@ cmd_utility_pkgs:
 app_pkgs:
   # VIM text editor
   - vim-gtk3
-  # utility needed by vim-taglist plugin
-  - exuberant-ctags
+  # utility needed by vim tagbar plugin
+  - universal-ctags
   # fixed width fonts for text editing
   - fonts-inconsolata
 

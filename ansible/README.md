@@ -174,6 +174,14 @@ very rough 1st impression notes:
   - sudo add-apt-repository ppa:kubuntu-ppa/backports
   - sudo add-apt-repository ppa:kubuntu-ppa/backports-extra && sudo apt full-upgrade -y
 
+#### apt ppa keys (dealing w/ DEPRACATION message)
+
+See https://askubuntu.com/questions/1286545/what-commands-exactly-should-replace-the-deprecated-apt-key
+and see https://askubuntu.com/questions/1403556/key-is-stored-in-legacy-trusted-gpg-keyring-after-ubuntu-22-04-update
+for how to export from the apt trusted keyring rather than re-downloading the keys
+
+
+
 ### From 22.04 on my Laptop
 
 - Global Theme: Kubuntu

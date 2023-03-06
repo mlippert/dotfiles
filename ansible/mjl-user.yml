@@ -203,6 +203,20 @@
         search_string: GRUB_DISTRIBUTOR=`lsb_release
         line: "GRUB_DISTRIBUTOR=`lsb_release -d -s 2> /dev/null || echo Debian`"
 
+    - name: Change grub menu timeout style from hidden to menu
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        search_string: GRUB_TIMEOUT_STYLE=
+        line: GRUB_TIMEOUT_STYLE=menu
+
+    - name: Change grub menu default timeout from 0 to 10
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        search_string: GRUB_TIMEOUT=
+        line: GRUB_TIMEOUT=10
+
     - name: Disable automatic updates
       become: yes
       ansible.builtin.lineinfile:

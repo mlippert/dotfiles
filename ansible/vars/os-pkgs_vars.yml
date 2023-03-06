@@ -114,8 +114,8 @@ app_pkgs:
   # Password Manager
   - keepassxc
 
-  # container support
-  - docker.io
+  # container support (docker.io in ubuntu repo is old, see https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+  #- docker.io
 
   # Qt-based directory statistics (space usage visualization)
   - qdirstat
@@ -128,6 +128,9 @@ app_pkgs:
 
   # Diagramming and vector graphics application (like Visio)
   - dia
+
+  # Simple Paint/Image editor
+  - kolourpaint
 
   # Time Tracker (install hamster snap in 18.04+)
   #- hamster-applet

@@ -1,0 +1,8 @@
+Types: deb
+URIs: {{ item.uri }}
+{% if 'architectures' in item %}
+Architectures: {{ item.architectures }}
+{% endif %}
+Suites: {{ item.suite }}
+Components: {{ item.component }}
+Signed-By: /etc/apt/keyrings/{{ item.name }}.gpg

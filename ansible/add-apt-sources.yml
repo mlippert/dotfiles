@@ -1,0 +1,69 @@
+---
+- name: Add apt sources
+  hosts: localhost
+
+  vars:
+    apt_sources:
+      - descr: Deadsnakes PPA (python)
+        name: deadsnakes-ppa
+        key: F23C5A6CF475977595C89F51BA6932366A755776
+        uri: https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu
+        suite: jammy # lsb_release -cs
+        component: main
+
+      - descr: JonathonF vim PPA
+        name: jonathonf-vim-ppa
+        key: 4AB0F789CBA31744CC7DA76A8CF63AD3F06FC659
+        uri: https://ppa.launchpadcontent.net/jonathonf/vim/ubuntu
+        suite: jammy
+        component: main
+
+      - descr: Phoerious KeePassXC PPA
+        name: phoerious-keepassxc-ppa
+        key: D89C66D0E31FEA2874EBD20561922AB60068FCD6
+        uri: https://ppa.launchpadcontent.net/phoerious/keepassxc/ubuntu
+        suite: jammy
+        component: main
+
+      - descr: MozillaTeam PPA (firefox)
+        name: mozillateam-ppa
+        key: 0AB215679C571D1C8325275B9BDB3D89CE49EC21
+        uri: https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu
+        suite: jammy
+        component: main
+
+      - descr: VirtualBox
+        name: virtualbox
+        key: B9F8D658297AF3EFC18D5CDFA2F683C52980AECF
+        key_cmd: wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /etc/apt/keyrings/virtualbox.gpg
+        uri: https://download.virtualbox.org/virtualbox/debian
+        architectures: amd64
+        suite: jammy
+        component: contrib
+
+      - descr: Docker
+        name: docker
+        key: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+        key:cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+        uri: https://download.docker.com/linux/ubuntu
+        architectures: amd64 # dpkg --print-architecture
+        suite: jammy
+        component: stable
+
+
+  tasks:
+    - name: Add the new apt sources files in /etc/apt/sources.list.d/
+      #become: yes
+      ansible.builtin.template:
+        src: files/apt-item.sources.j2
+        dest: /userdata/mjl/sources.list.d/{{ item.name }}.sources
+      loop: '{{ apt_sources }}'
+
+    - name: Add the key files for the new apt sources in /etc/apt/keyrings/
+      become: yes
+      ansible.builtin.shell:
+        cmd: gpg --no-default-keyring '--keyring=./{{ item.name }}.gpg' --keyserver=hkps://keyserver.ubuntu.com --recv-keys '{{ item.key }}'
+        chdir: /userdata/mjl/keyrings/
+      loop: '{{ apt_sources }}'
+
+

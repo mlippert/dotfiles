@@ -87,54 +87,6 @@ Some of these may be easier to set up because they are already partially there o
 
 ## Notes
 
-### From 18.04 settings for now
-
-On my laptop I bumped up the System Settings Font sizes by 1 point, from 10, 9, 8, 10, 10 10 to 11, 10, 9, 11, 11, 11
-
-- Workspace Theme:
-  - Look And Feel: Kubuntu
-  - Desktop Theme: Oxygen
-  - Cursor Theme: Breeze
-  - Splash Screen Breeze
-- Colors: Oxygen Cold
-- Icons: Oxygen
-- Application Style:
-  - Widget Style: QtCurve
-  - Window Decorations: Breeze
-  - GNOME Application Style (GTK)
-    - GTK2 Theme: QtCurve
-    - GTK3 Theme: Adwaita
-    - Icon Theme: Oxygen
-
-### From 20.04 on my Desktop
-
-- Global Theme: Kubuntu
-- Plasma Style: Oxygen
-- Application Style:
-  - Application Style: Oxygen
-    - GTK2 theme: Adwaita (`apt install adwaita-qt gnome-themes-extra adwaita-icon-theme-full`)
-    - GTK3 theme: Adwaita
-  - Window Decorations: Breeze
-    - Set window border size: Normal
-- Colors: Oxygen Cold
-- Fonts: On my laptop I bumped up the System Settings Font sizes by 1 point, from 10, 9, 8, 10, 10 10 to 11, 10, 9, 11, 11, 11
-- Icons: Oxygen
-- Cursors: Breeze
-- Startup and Shutdown:
-  - Login Screen (SDDM): Sugar Candy (1.6)
-- Workspace Behavior
-  - Screen Edges
-    - turn off maximize and tile
-    - set top left corner to no action
-  - Virtual Desktops (3) 1 rows
-    - Desktop 1
-    - Desktop 2
-    - VM
-- Notifications Application Configure
-  - System Services | Plasma Workspace Configure
-    - Login enable sound
-    - Logout enable sound
-
 #### disable automatic updates
 
 Edit /etc/apt/apt.conf.d/20auto-upgrades
@@ -174,7 +126,7 @@ very rough 1st impression notes:
   - sudo add-apt-repository ppa:kubuntu-ppa/backports
   - sudo add-apt-repository ppa:kubuntu-ppa/backports-extra && sudo apt full-upgrade -y
 
-#### apt ppa keys (dealing w/ DEPRACATION message)
+#### apt ppa keys (dealing w/ DEPRECATION message)
 
 See https://askubuntu.com/questions/1286545/what-commands-exactly-should-replace-the-deprecated-apt-key
 and see https://askubuntu.com/questions/1403556/key-is-stored-in-legacy-trusted-gpg-keyring-after-ubuntu-22-04-update
@@ -225,4 +177,74 @@ Added at the bottom of `/etc/sysctl.conf`
 ```
 # Added by mjl on 2022-05-13 from https://askubuntu.com/a/157809/217789
 vm.swappiness=10
+```
+
+### From mlippert [dotfiles wiki](https://github.com/mlippert/dotfiles/wiki/New-Computer-Install)
+
+**TODO**: _Should be better integrated with the other notes here -mjl 2023-03-15_
+
+Some of this will be incorporated into ansible playbook tasks.
+
+#### Mouse wheel scroll amount
+Found [this](https://www.reddit.com/r/kde/comments/id6nzg/any_way_to_increase_mouse_scroll_speed/) which suggested adding the `WheelScrollLines` to the `[KDE]` section of `~/.config/kdeglobals`.
+I think the default value is 3, which is a little too much and 1 is too slow, I found 2 to work well for me.
+Also note you can add the same section to `~/.config/dolphinrc` if you want it to scroll differently in Dolphin.
+
+```
+[KDE]
+WheelScrollLines=2
+```
+
+#### Adding PPA repositories
+The existing tools to add Ubuntu PPA repositories, `add-apt-repository` and `apt-key` are now deprecated.
+But I have not found any good instructions on what to do instead of using those tools.
+
+The basic issue is that the repository signing key should be applied ONLY for the repository it
+is meant for, and the tools add it to the apt trusted keyring which would let it be used for ANY
+repository.
+
+My 1st pass at fixing this is to extract each key into an individual keyring file stored in `/etc/apt/keyrings/`.
+This approach still uses `add-apt-repository` to do the initial setup, creating a apt source list file in
+`/etc/apt/sources.list.d/` and usually adding the key to the `/etc/apt/trusted.gpg` keyring.
+
+My 2nd attempt is to use `gpg` directly to download the key into `/etc/apt/keyrings/`. To do this I
+got the key fingerprint from the PPA page on launchpad.net, e.g. `https://launchpad.net/~jonathonf/+archive/ubuntu/vim`.
+Under _Technical details about this PPA_ it lists the signing key fingerprint `4AB0F789CBA31744CC7DA76A8CF63AD3F06FC659`
+for the example.
+
+```
+cd /etc/apt/keyrings
+sudo gpg --no-default-keyring --keyring=./jonathonf-vim-ppa.gpg --keyserver=hkps://keyserver.ubuntu.com --recv-keys 4AB0F789CBA31744CC7DA76A8CF63AD3F06FC659
+```
+
+Then edit /etc/apt/sources.list.d/ppa_jonathonf_vim_jammy.list and add the `[signed-by=...]` section shown here
+
+```
+deb [signed-by=/etc/apt/keyrings/jonathonf-vim-ppa.gpg] http://ppa.launchpad.net/jonathonf/vim/ubuntu jammy main
+# deb-src [signed-by=/etc/apt/keyrings/jonathonf-vim-ppa.gpg] http://ppa.launchpad.net/jonathonf/vim/ubuntu jammy main
+```
+
+additionally if the PPA is using `http` and `launchpad.net` it would be worthwhile changing it to use `https` and
+`launchpadcontent.net`
+
+```
+deb [signed-by=/etc/apt/keyrings/jonathonf-vim-ppa.gpg] https://ppa.launchpadcontent.net/jonathonf/vim/ubuntu jammy main
+# deb-src [signed-by=/etc/apt/keyrings/jonathonf-vim-ppa.gpg] https://ppa.launchpadcontent.net/jonathonf/vim/ubuntu jammy main
+```
+
+Note that in order to run gpg w/ sudo, I had to create a `.gnupg` directory in /root and set its permissions to `u=rwx,g=,o=`
+
+#### New DEB822 format for apt sources
+
+see https://discourse.ubuntu.com/t/spec-apt-deb822-sources-by-default/29333
+
+so we could convert the vim PPA `sources.list.d/ppa_jonathonf_vim_jammy.list` file above to
+`sources.list.d/ppa_jonathonf_vim_jammy.source`:
+
+```
+Types: deb
+URIs: https://ppa.launchpadcontent.net/jonathonf/vim/ubuntu
+Suites: jammy
+Components: main
+Signed-By: /etc/apt/keyrings/jonathonf-vim-ppa.gpg
 ```

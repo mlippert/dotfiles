@@ -72,3 +72,10 @@
         chdir: /userdata/mjl/keyrings/
         creates: '{{ item.name }}.gpg'
       loop: '{{ apt_sources }}'
+
+    - name: Remove backup key files
+      become: yes
+      ansible.builtin.file:
+        path: /userdata/mjl/keyrings/{{ item.name }}.gpg~
+        state: absent
+      loop: '{{ apt_sources }}'

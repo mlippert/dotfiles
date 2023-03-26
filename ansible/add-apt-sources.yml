@@ -61,9 +61,14 @@
 
     - name: Add the key files for the new apt sources in /etc/apt/keyrings/
       become: yes
-      ansible.builtin.shell:
-        cmd: gpg --no-default-keyring '--keyring=./{{ item.name }}.gpg' --keyserver=hkps://keyserver.ubuntu.com --recv-keys '{{ item.key }}'
+      ansible.builtin.command:
+        argv:
+          - /usr/bin/gpg
+          - --no-default-keyring
+          - --keyring=./{{ item.name }}.gpg
+          - --keyserver=hkps://keyserver.ubuntu.com
+          - --recv-keys
+          - '{{ item.key }}'
         chdir: /userdata/mjl/keyrings/
+        creates: '{{ item.name }}.gpg'
       loop: '{{ apt_sources }}'
-
-

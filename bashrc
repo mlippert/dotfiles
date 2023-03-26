@@ -89,6 +89,10 @@ export LC_COLLATE=C
 # file to use. This points at the file I created for node projects.
 export RIPGREP_CONFIG_PATH=~/Projects/node.rgrc
 
+# This variable is used by the docker buildkit. Setting the var instead of the --progress option.
+# Setting it to plain leaves the output in the console (see https://stackoverflow.com/a/64805337/2184226)
+export BUILDKIT_PROGRESS=plain
+
 # This variable is used by the BrixClient's makefile to determine whether to use the
 # jsdoc java or node code to build its doc.
 export BRIX_JSDOC_BUILD=node

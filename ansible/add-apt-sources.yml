@@ -53,12 +53,19 @@
 
   tasks:
     - name: Add the new apt sources files in /etc/apt/sources.list.d/
-      #become: yes
+      become: yes
       ansible.builtin.template:
         src: files/apt-item.sources.j2
-        dest: /userdata/mjl/sources.list.d/{{ item.name }}.sources
+        dest: /etc/apt/sources.list.d/{{ item.name }}.sources
       loop: '{{ apt_sources }}'
 
+    - name: Create the ~/.gnupg directory for root (gpg requires it)
+      become: yes
+      ansible.builtin.file:
+        path: /root/.gnupg
+        state: directory
+        mode: u=rwx,go=
+      
     - name: Add the key files for the new apt sources in /etc/apt/keyrings/
       become: yes
       ansible.builtin.command:
@@ -69,13 +76,13 @@
           - --keyserver=hkps://keyserver.ubuntu.com
           - --recv-keys
           - '{{ item.key }}'
-        chdir: /userdata/mjl/keyrings/
+        chdir: /etc/apt/keyrings/
         creates: '{{ item.name }}.gpg'
       loop: '{{ apt_sources }}'
 
     - name: Remove backup key files
       become: yes
       ansible.builtin.file:
-        path: /userdata/mjl/keyrings/{{ item.name }}.gpg~
+        path: /etc/apt/keyrings/{{ item.name }}.gpg~
         state: absent
       loop: '{{ apt_sources }}'

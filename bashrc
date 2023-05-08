@@ -72,6 +72,11 @@ esac
 
 # Environment variables.
 
+# The CDPATH allows changing to directories as though the cwd was a path in the CDPATH no matter what
+# the cwd actually is.
+# so for example cd _edu/edu-docker from anyway with ~/Projects/riff in the CDPATH
+export CDPATH=~/Projects/riff
+
 # Sort in "codepoint" order. otherwise ls, sort, others will use the language and sort in "natural" order
 # possibly ignoring non alphabetic characters and sorting upper and lowercase together...
 export LC_COLLATE=C

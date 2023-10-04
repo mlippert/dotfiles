@@ -4,6 +4,13 @@
 
   vars:
     apt_sources:
+      - descr: Flatpak PPA
+        name: flatpak-ppa
+        key: 5C6D153A17C02C337EF6C663B8B9D41229DFA5F5
+        uri: https://ppa.launchpadcontent.net/flatpak/stable/ubuntu
+        suite: jammy
+        component: main
+
       - descr: Deadsnakes PPA (python)
         name: deadsnakes-ppa
         key: F23C5A6CF475977595C89F51BA6932366A755776

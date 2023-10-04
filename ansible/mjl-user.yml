@@ -21,6 +21,12 @@
       - ppa:mozillateam/ppa
 
     flatpaks:
+      # Flatseal is a graphical utility to review and modify permissions from your Flatpak applications
+      - com.github.tchx84.Flatseal
+
+      # LocalSend - send files and messages over the local LAN network (ie to/from LocalSend on phone)
+      - org.localsend.localsend_app
+
       # Signal
       - org.signal.Signal
 
@@ -33,8 +39,11 @@
       # Postman - development UI tool for sending http requests
       - com.getpostman.Postman
 
-      # MediaInfo
+      # MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files
       - net.mediaarea.MediaInfo
+
+      # Hamster is time tracking for individuals
+      #- org.gnome.Hamster
 
     software_other_install_methods:
       debs:
@@ -160,6 +169,7 @@
           - staff
           - games
           - users
+          - input
           - sambashare
           - vboxusers
           - docker

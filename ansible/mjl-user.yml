@@ -7,19 +7,6 @@
 
   vars:
     username: mjl
-    ppas:
-      # latest python
-      - ppa:deadsnakes/ppa
-
-      # latest vim
-      - ppa:jonathonf/vim
-
-      # KeePassXC
-      - ppa:phoerious/keepassxc
-
-      # Firefox
-      - ppa:mozillateam/ppa
-
     flatpaks:
       # Flatseal is a graphical utility to review and modify permissions from your Flatpak applications
       - com.github.tchx84.Flatseal
@@ -85,6 +72,25 @@
       192.168.111.94	pigpen.local    pigpen
       192.168.111.93	fenris.local    fenris
 
+
+  roles:
+    - role: add-apt-sources
+      vars:
+        apt_sources:
+          # latest flatpak
+          - flatpak-ppa
+          # latest python
+          - deadsnakes-ppa
+          # latest vim
+          - jonathonf-vim-ppa
+          # KeePassXC
+          - phoerious-keepassxc-ppa
+          # packaged firefox (not snap)
+          - mozillateam-ppa
+          # latest virtualbox VM
+          - virtualbox
+          # Docker
+          - docker
 
   tasks:
     - name: Update and Upgrade all current packages

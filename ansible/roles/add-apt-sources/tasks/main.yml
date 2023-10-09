@@ -1,0 +1,44 @@
+---
+### Tasks for add-apt-sources role
+
+- name: When role is invoked w/ no apt_sources, list the known sources
+  ansible.builtin.debug:
+    msg:
+      - 'No apt_sources were given to be added.'
+      - 'The known apt sources that can be added are: {{ apt_source_config|list }}'
+  when: apt_sources|length == 0
+
+- name: Add requested apt sources
+  become: yes
+  when: apt_sources|length > 0
+  block:
+    - name: Create the ~/.gnupg directory for root (gpg requires it when getting keys as root)
+      ansible.builtin.file:
+        path: /root/.gnupg
+        state: directory
+        mode: u=rwx,go=
+      
+    - name: Add the new apt sources files in /etc/apt/sources.list.d/
+      ansible.builtin.template:
+        src: apt-item.sources.j2
+        dest: /etc/apt/sources.list.d/{{ item.name }}.sources
+      loop: '{{ apt_sources | map("extract", apt_source_config) }}'
+
+    - name: Add the key files for the new apt sources in /etc/apt/keyrings/
+      ansible.builtin.command:
+        argv:
+          - /usr/bin/gpg
+          - --no-default-keyring
+          - --keyring=./{{ item.name }}.gpg
+          - --keyserver=hkps://keyserver.ubuntu.com
+          - --recv-keys
+          - '{{ item.key }}'
+        chdir: /etc/apt/keyrings/
+        creates: '{{ item.name }}.gpg'
+      loop: '{{ apt_sources | map("extract", apt_source_config) }}'
+
+    - name: Remove backup key files
+      ansible.builtin.file:
+        path: /etc/apt/keyrings/{{ item.name }}.gpg~
+        state: absent
+      loop: '{{ apt_sources | map("extract", apt_source_config) }}'

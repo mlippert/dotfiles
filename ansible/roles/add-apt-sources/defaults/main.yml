@@ -1,0 +1,103 @@
+---
+### Default vars for add-apt-sources role
+
+### variables that may be overridden, ie by host vars
+apt_sources:
+  - flatpak-ppa
+  - deadsnakes-ppa
+  - jonathonf-vim-ppa
+  - phoerious-keepassxc-ppa
+  - mozillateam-ppa
+  - libreoffice-ppa
+  - kubuntu-backports-ppa
+  - kubuntu-backports-extra-ppa
+  - virtualbox
+  - docker
+
+# known apt sources configuration values for retrieving the signing key and creating the .sources file
+# ALL entries in `apt_sources` must be found in this dictionary
+# NOTE: ALL apt sources config values are currently for suite jammy (kubuntu 22.04.x)
+apt_source_config:
+  flatpak-ppa:
+    descr: Flatpak PPA
+    name: flatpak-ppa
+    key: 5C6D153A17C02C337EF6C663B8B9D41229DFA5F5
+    uri: https://ppa.launchpadcontent.net/flatpak/stable/ubuntu
+    suite: jammy
+    component: main
+
+  deadsnakes-ppa:
+    descr: Deadsnakes PPA (python)
+    name: deadsnakes-ppa
+    key: F23C5A6CF475977595C89F51BA6932366A755776
+    uri: https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu
+    suite: jammy # lsb_release -cs
+    component: main
+
+  jonathonf-vim-ppa:
+    descr: JonathonF vim PPA
+    name: jonathonf-vim-ppa
+    key: 4AB0F789CBA31744CC7DA76A8CF63AD3F06FC659
+    uri: https://ppa.launchpadcontent.net/jonathonf/vim/ubuntu
+    suite: jammy
+    component: main
+
+  phoerious-keepassxc-ppa:
+    descr: Phoerious KeePassXC PPA
+    name: phoerious-keepassxc-ppa
+    key: D89C66D0E31FEA2874EBD20561922AB60068FCD6
+    uri: https://ppa.launchpadcontent.net/phoerious/keepassxc/ubuntu
+    suite: jammy
+    component: main
+
+  mozillateam-ppa:
+    descr: MozillaTeam PPA (firefox)
+    name: mozillateam-ppa
+    key: 0AB215679C571D1C8325275B9BDB3D89CE49EC21
+    uri: https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu
+    suite: jammy
+    component: main
+
+  libreoffice-ppa:
+    descr: LibreOffice PPA
+    name: libreoffice-ppa
+    key: 36E81C9267FD1383FCC4490983FBA1751378B444
+    uri: https://ppa.launchpadcontent.net/libreoffice/libreoffice-still/ubuntu
+    suite: jammy
+    component: main
+
+  kubuntu-backports-ppa:
+    descr: Kubuntu Backports PPA
+    name: kubuntu-backports-ppa
+    key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
+    uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu
+    suite: jammy
+    component: main
+
+  kubuntu-backports-extra-ppa:
+    descr: Kubuntu Backports Extra PPA (for Plasma 5.27 for jammy)
+    name: kubuntu-backports-extra-ppa
+    key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
+    uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu
+    suite: jammy
+    component: main
+
+  virtualbox:
+    descr: VirtualBox
+    name: virtualbox
+    key: B9F8D658297AF3EFC18D5CDFA2F683C52980AECF
+    key_cmd: wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /etc/apt/keyrings/virtualbox.gpg
+    uri: https://download.virtualbox.org/virtualbox/debian
+    architectures: amd64
+    suite: jammy
+    component: contrib
+
+  docker:
+    descr: Docker
+    name: docker
+    key: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    key_cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    uri: https://download.docker.com/linux/ubuntu
+    architectures: amd64 # dpkg --print-architecture
+    suite: jammy
+    component: stable

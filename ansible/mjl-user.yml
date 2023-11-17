@@ -34,9 +34,6 @@
 
     software_other_install_methods:
       debs:
-        # latest node (not a ppa, will need to move elsewhere)
-        - nodesource see https://github.com/nodesource/distributions#debinstall
-
         # BeyondCompare (not a ppa)
         - scootersoftware
 
@@ -87,6 +84,8 @@
           - phoerious-keepassxc-ppa
           # packaged firefox (not snap)
           - mozillateam-ppa
+          # nodejs from nodesource (see role for ver# installed)
+          - nodesource
           # latest virtualbox VM
           - virtualbox
           # Docker

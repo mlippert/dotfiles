@@ -130,6 +130,9 @@ app_pkgs:
   # Scanner tool (scan to a pdf)
   - gscan2pdf
 
+  # Todo manager (cmdline) see https://taskwarrior.org (config needs setting up)
+  - taskwarrior
+
   # Diagramming and vector graphics application (like Visio)
   - dia
 

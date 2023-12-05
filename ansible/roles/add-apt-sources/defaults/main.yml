@@ -108,5 +108,6 @@ apt_source_config:
     key: 6F71F525282841EEDAF851B42F59B5F99B1BE0B4
     key_cmd: curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
     uri: https://deb.nodesource.com/node_20.x
+    architectures: amd64
     suite: nodistro
     component: main

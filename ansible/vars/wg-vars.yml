@@ -1,0 +1,59 @@
+---
+# wireguard peers' private keys
+wg_private_keys: '{{ vault_wg_private_keys }}'
+
+# wireguard preshared keys between client and server; access as wg_servers_preshared_keys[server][client]
+wg_servers_preshared_keys: '{{ vault_wg_servers_preshared_keys }}'
+
+# Settings for wireguard peers acting as central server nodes
+# Note: if the server is not using NAT, then set the subnet bits to something other than 32
+#       so traffic to those peer addresses get to the vpnif interface and the target peer
+wg_servers:
+  may:
+    ip_prefix: '172.20.20.' # WG server's private IPv4 prefix
+    ip_suffix: 20 # WG server's private IPv4 suffix, all clients should increment from this
+    ip_subnet_bits: 28 # s/b >= 24 as the suffix is the last part of the ipv4 dotted address
+    clients: # client peers to configure to connect to this server peer
+      - mh
+      - rh
+      - gh
+      - es
+      - mt
+
+
+wg_peers:
+  may:
+    name: may
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix }}'
+    public_key: '7enfE5ZegjO5ZRdm8E0DVclA46JcWDcZGamkOpdy0iI='
+    private_key: '{{ wg_private_keys["may"] }}'
+
+  mh:
+    name: mike-home
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix + wg_servers["may"].clients.index("mh") + 1 }}'
+    public_key: 'zgHhMG9sB2fz3aHx75SMCy+UHOrYM9LLaaxNm3atOzU='
+    private_key: '{{ wg_private_keys["mh"] }}'
+
+  rh:
+    name: robin-home
+    ip: '172.20.20.22'
+    public_key: 'sBw9Zw24227aQSbd4j9GDu2XqAbiP9ApwAtAei8quWw='
+    private_key: '{{ wg_private_keys["rh"] }}'
+
+  gh:
+    name: gilli-home
+    ip: '172.20.20.23'
+    public_key: 'OUNqUIIFsoj2NnGdebSihh2+/15V0g6RCf3yN7v+9S0='
+    private_key: '{{ wg_private_keys["gh"] }}'
+
+  es:
+    name: eliza-school
+    ip: '172.20.20.24'
+    public_key: 'BiSdTkXRrJgVgu0xGMOs3E46GhSU8y1AlgpmNJr/QjY='
+    private_key: '{{ wg_private_keys["es"] }}'
+
+  mt:
+    name: mike-travel
+    ip: '172.20.20.25'
+    public_key: 'cIWApJ7O/euxPr6f9yikTjobZJkCdx42HGkLTVHfvyo='
+    private_key: '{{ wg_private_keys["mt"] }}'

@@ -1,0 +1,8 @@
+/.vault_password
+*.log
+
+# release archive files are put in the roles/.../files folders for deployment but usually should not be committed
+*.tar
+*.tgz
+*.bz2
+

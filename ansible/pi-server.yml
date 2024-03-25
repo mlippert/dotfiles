@@ -1,0 +1,167 @@
+---
+# This playbook installs/updates a Raspberry Pi 4 wireguard VPN server
+# It is set up to run only on a specified host invoked by e.g.:
+# ansible-playbook pi-server.yml -e "host=pi-275.local"
+#
+# Things to set up on the pi-server
+# - packages
+# - additional users (in addtion to mjl/uid=1000,gid=1000)
+#   - vbilski
+#   - eliza (check w/ her vs ekds)
+# - wireguard things (should any be configurable or all defined in wg config files?)
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: checking host variable arg
+      fail:
+        msg: 'You must specify a host with -e "host=<hostname>"'
+      when: host is not defined
+      run_once: true
+
+- hosts: '{{ host }}'
+  gather_facts: no
+  vars:
+    playbook_group: pi_wg_server
+  tasks:
+    - name: 'Fail if {{ host }} is NOT in the {{ playbook_group }} group'
+      fail:
+        msg: 'This playbook only applies to hosts in the ''{{ playbook_group }}'' group'
+      when: playbook_group not in group_names
+
+- name: Test that Ansible will work on {{ host }} tasks run iif tags ping and/or hostvars is specified
+  hosts: '{{ host }}'
+  tags: never
+
+  tasks:
+    - name: ping
+      ansible.builtin.ping:
+      register: ping_out
+      tags: ping
+
+    - name: show the ping result (pong)
+      ansible.builtin.debug:
+        var: ping_out
+      tags: ping
+
+    - name: show variables and facts (very long)
+      ansible.builtin.debug:
+        var: hostvars
+      tags: hostvars
+
+- name: Set up Raspberry Pi to be a wireguard VPN server
+  hosts: '{{ host }}'
+
+  vars_files:
+    - ./vars/wg-vault.yml
+    - ./vars/wg-vars.yml
+
+  vars:
+    username: mjl
+    server: may
+    server_cidr: '{{ wg_peers[server].ip }}/{{ wg_servers[server].ip_subnet_bits }}'
+    server_cidr6: '' # WG IPv6 sub/net (set IPv6 CIDR)
+    vpn_if: wg0 # name to give to the wireguard vpn interface
+
+    # For the firewall scripts setting up NAT
+    public_if: wlan0 # Public network interface name (find w/ "ip route show")
+    public_if_port: 51194 # udp port on the public interface which is wireguard's listen port
+
+    # this ip/port is really only needed for the client wireguard configuration (EndPoint value of the server peer)
+    public_ipv4: '52.15.91.206' # The public IPv4 address which leads to the public interface/port
+    public_ipv4_port: 51194 # udp port on the external IPv4 address which leads to the public interface/port
+
+    apt_pkgs_server:
+      - wireguard
+      - wireguard-tools
+      - iptables
+      - libnss-resolve # installs systemd-resolved
+
+    apt_pkgs_optional:
+      - curl
+      - vim
+      - tcpdump
+      - ethtool
+
+    apt_pkgs_client:
+      - dnsmasq
+      - libnss-resolve
+      - iptables
+      - iptables-persistent
+
+  tasks:
+    - name: Update and Upgrade all current packages
+      when: inventory_hostname != 'localhost'
+      become: yes
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: full
+      register: apt_upgrade
+
+    - name: Reboot to ensure all upgrades take effect
+      when:
+        - inventory_hostname != 'localhost'
+        - apt_upgrade.changed
+      become: yes
+      ansible.builtin.reboot:
+        post_reboot_delay: 30
+
+    - name: Install apt packages needed for a wireguard server
+      become: yes
+      ansible.builtin.apt:
+        name: '{{ apt_pkgs_server }}'
+        state: latest
+        update_cache: yes
+
+    - name: Set up /usr/local/bin/resolvconf to use systemd resolver
+      become: yes
+      ansible.builtin.file:
+        path: /usr/local/bin/resolvconf
+        src: /usr/bin/resolvectl
+        state: link
+        force: yes
+
+    - name: Set up the server wireguard configuration file /etc/wireguard/{{ vpn_if }}.conf
+      become: yes
+      ansible.builtin.template:
+        src: wg-server.conf.j2
+        dest: /etc/wireguard/{{ vpn_if }}.conf
+
+    - name: Create scripts directory in /etc/wireguard
+      become: yes
+      ansible.builtin.file:
+        path: /etc/wireguard/scripts
+        mode: a=x,u+rw
+        state: directory
+
+    - name: Set up the wireguard configuration supporting scripts
+      become: yes
+      ansible.builtin.template:
+        src: 'wg-{{ item }}.j2'
+        dest: /etc/wireguard/scripts/{{ vpn_if }}.{{ item }}
+        mode: a=rx,u+w
+      loop:
+        - firewall-up.sh # WG firewall script when starting VPN
+        - firewall-down.sh # WG firewall script when stopping VPN
+
+    - name: Enable ip forwarding (to forward vpn interface traffic to/from other interfaces)
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/sysctl.conf
+        regexp: '^#+ *net.ipv4.ip_forward *= *1'
+        line: 'net.ipv4.ip_forward = 1'
+      notify:
+        - Reload sysctl
+
+    - name: Autostart the vpn by enabling the systemd wg-quick service
+      become: yes
+      ansible.builtin.systemd_service:
+        daemon_reload: yes
+        name: 'wg-quick@{{ vpn_if }}'
+        enabled: yes
+
+  handlers:
+    - name: Reload sysctl
+      become: yes
+      ansible.builtin.command:
+        cmd: sysctl -p
+

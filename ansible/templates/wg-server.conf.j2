@@ -1,0 +1,16 @@
+# Server {{ server }} configuration
+[Interface]
+Address = {{ wg_peers[server].ip }}/32
+SaveConfig = false
+PostUp = /etc/wireguard/scripts/{{ vpn_if }}.firewall-up.sh
+PostDown = /etc/wireguard/scripts/{{ vpn_if }}.firewall-down.sh
+ListenPort = {{ public_if_port }}
+PrivateKey = {{ wg_peers[server].private_key }}
+{% for client in wg_servers[server].clients %}
+
+[Peer]
+# client {{ wg_peers[client].name }}
+PublicKey = {{ wg_peers[client].public_key }}
+PresharedKey = {{ wg_servers_preshared_keys[server][client] }}
+AllowedIPs = {{ wg_peers[client].ip }}/32
+{% endfor %}

@@ -1,0 +1,18 @@
+#!/bin/bash
+# Tear down the NAT routing that was setup when the WG VPN was started
+
+IPT="/sbin/iptables"
+IPT6="/sbin/ip6tables"
+
+## IPv4 ##
+$IPT --table nat --delete POSTROUTING --source {{ server_cidr }} --out-interface {{ public_if }} --jump MASQUERADE
+$IPT --delete INPUT --in-interface {{ vpn_if }} -j ACCEPT
+$IPT --delete FORWARD --in-interface {{ public_if }} --out-interface {{ vpn_if }} --jump ACCEPT
+$IPT --delete FORWARD --in-interface {{ vpn_if }} --out-interface {{ public_if }} --jump ACCEPT
+$IPT --delete INPUT --in-interface {{ public_if }} --protocol udp --dport {{ public_if_port }} --jump ACCEPT
+
+## IPv6 (Uncomment) and set SUB_NET_6 ##
+## $IPT6 -t nat -D POSTROUTING -s  -o {{ server_cidr }} -j MASQUERADE
+## $IPT6 -D INPUT -i {{ vpn_if }} -j ACCEPT
+## $IPT6 -D FORWARD -i {{ server_cidr }} -o {{ vpn_if }} -j ACCEPT
+## $IPT6 -D FORWARD -i {{ vpn_if }} -o {{ server_cidr }} -j ACCEPT

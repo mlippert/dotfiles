@@ -1,0 +1,18 @@
+#!/bin/bash
+# Setup NAT routing when starting the WG VPN
+
+IPT="/sbin/iptables"
+IPT6="/sbin/ip6tables"
+
+## IPv4 ##
+$IPT --table nat --insert POSTROUTING 1 --source {{ server_cidr }} --out-interface {{ public_if }} --jump MASQUERADE
+$IPT --insert INPUT 1 --in-interface {{ vpn_if }} --jump ACCEPT
+$IPT --insert FORWARD 1 --in-interface {{ public_if }} --out-interface {{ vpn_if }} --jump ACCEPT
+$IPT --insert FORWARD 1 --in-interface {{ vpn_if }} --out-interface {{ public_if }} --jump ACCEPT
+$IPT --insert INPUT 1 --in-interface {{ public_if }} --protocol udp --dport {{ public_if_port }} --jump ACCEPT
+
+## IPv6 (Uncomment) and set SUB_NET_6 ##
+## $IPT6 -t nat -I POSTROUTING 1 -s  -o {{ public_if }} -j MASQUERADE
+## $IPT6 -I INPUT 1 -i {{ vpn_if }} -j ACCEPT
+## $IPT6 -I FORWARD 1 -i {{ public_if }} -o {{ vpn_if }} -j ACCEPT
+## $IPT6 -I FORWARD 1 -i {{ vpn_if }} -o {{ public_if }} -j ACCEPT

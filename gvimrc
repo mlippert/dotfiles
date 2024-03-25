@@ -3,6 +3,10 @@ set nowrap
 set guioptions+=b
 set guioptions-=T
 
+" Override keeping 3 lines below and above the cursor from vimrc because
+" having the lines jump when selecting w/ the mouse is disconcerting
+set scrolloff=0
+
 " Set how special chars are shown when list is on and set the prefix for
 " wrapped lines when wrap is on.
 " set listchars=tab:»·,trail:·

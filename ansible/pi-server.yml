@@ -8,6 +8,10 @@
 # - additional users (in addtion to mjl/uid=1000,gid=1000)
 #   - vbilski
 #   - eliza (check w/ her vs ekds)
+# - additional wifi SSID/Passwords. NetworkManager is managing the wlan0 interface and connections
+#   it uses profile configuration files in /etc/NetworkManager/system-connections/
+#   you can manually add a profile w/ `nmcli`, and you can get the psk hash if you want using `wpa_passphrase <SSID> <PASSPHRASE>`
+#   see https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/assembly_networkmanager-connection-profiles-in-keyfile-format_configuring-and-managing-networking#proc_using-nmcli-to-create-keyfile-connection-profiles-in-offline-mode_assembly_networkmanager-connection-profiles-in-keyfile-format
 # - wireguard things (should any be configurable or all defined in wg config files?)
 - hosts: localhost
   gather_facts: no

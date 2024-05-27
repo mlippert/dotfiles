@@ -1,0 +1,16 @@
+# Client {{ client }} connecting to server {{ server }} configuration
+[Interface]
+PrivateKey = {{ wg_peers[client].private_key }}
+Address = {{ wg_peers[client].ip }}/32
+DNS = 1.1.1.1
+PostUp = /etc/wireguard/scripts/{{ vpn_if }}.firewall-up.sh
+PostDown = /etc/wireguard/scripts/{{ vpn_if }}.firewall-down.sh
+
+[Peer]
+# {{ server }}'s publickey
+PublicKey = {{ wg_peers[server].public_key }}
+AllowedIPs = 0.0.0.0/0
+# {{ server }}'s public IP4 and port
+Endpoint = {{ public_ipv4 }}:{{ public_ipv4_port }}
+PersistentKeepalive = 44
+PresharedKey = {{ wg_servers_preshared_keys[server][client] }}

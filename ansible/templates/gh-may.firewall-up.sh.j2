@@ -1,0 +1,21 @@
+#!/bin/bash
+# Setup NAT routing when starting the WG VPN
+# Note: eth0 is the wired interface, wlan0 is the wireless interface, gh-may is the wireguard interface
+
+IPT="/sbin/iptables"
+IPT6="/sbin/ip6tables"
+
+## IPv4 ##
+#$IPT --table nat --insert POSTROUTING 1 --source 172.20.20.20/28 --out-interface eth0 -jump MASQUERADE
+$IPT --table nat --insert POSTROUTING 1 --source 10.1.10.0/28 --out-interface gh-may --jump MASQUERADE
+$IPT --insert INPUT 1 --in-interface gh-may --jump ACCEPT
+$IPT --insert FORWARD 1 --in-interface eth0 --out-interface gh-may --jump ACCEPT
+$IPT --insert FORWARD 1 --in-interface gh-may --out-interface eth0 --jump ACCEPT
+# this is the gh client, it doesn't expect incoming wg connections!
+#$IPT --insert INPUT 1 --in-interface wlan0 --protocol udp --dport 51194 --jump ACCEPT
+
+## IPv6 (Uncomment) and set SUB_NET_6 ##
+## $IPT6 -t nat -I POSTROUTING 1 -s  -o wlan0 -j MASQUERADE
+## $IPT6 -I INPUT 1 -i gh-may -j ACCEPT
+## $IPT6 -I FORWARD 1 -i wlan0 -o gh-may -j ACCEPT
+## $IPT6 -I FORWARD 1 -i gh-may -o wlan0 -j ACCEPT

@@ -5,12 +5,12 @@
 apt_sources:
   - flatpak-ppa
   - deadsnakes-ppa
-  - jonathonf-vim-ppa
   - phoerious-keepassxc-ppa
   - mozillateam-ppa
   - libreoffice-ppa
   - kubuntu-backports-ppa
   - kubuntu-backports-extra-ppa
+  - mozilla
   - virtualbox
   - docker
 
@@ -34,13 +34,15 @@ apt_source_config:
     suite: jammy # lsb_release -cs
     component: main
 
-  jonathonf-vim-ppa:
-    descr: JonathonF vim PPA
-    name: jonathonf-vim-ppa
-    key: 4AB0F789CBA31744CC7DA76A8CF63AD3F06FC659
-    uri: https://ppa.launchpadcontent.net/jonathonf/vim/ubuntu
-    suite: jammy
-    component: main
+  # On Saturday 07 January 2023, Jonathon Fernyhough, or Jonathon as we in the Linux community knew him, unfortunately passed away.
+  # https://forum.endeavouros.com/t/jonathon-passed-away/35814
+  #jonathonf-vim-ppa:
+  #  descr: JonathonF vim PPA
+  #  name: jonathonf-vim-ppa
+  #  key: 4AB0F789CBA31744CC7DA76A8CF63AD3F06FC659
+  #  uri: https://ppa.launchpadcontent.net/jonathonf/vim/ubuntu
+  #  suite: jammy
+  #  component: main
 
   phoerious-keepassxc-ppa:
     descr: Phoerious KeePassXC PPA
@@ -80,6 +82,14 @@ apt_source_config:
     key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
     uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu
     suite: jammy
+    component: main
+
+  mozilla:
+    descr: Mozilla (firefox)
+    name: mozilla
+    key: 35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3
+    uri: https://packages.mozilla.org/apt
+    suite: mozilla
     component: main
 
   virtualbox:

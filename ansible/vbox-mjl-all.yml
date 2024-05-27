@@ -18,9 +18,6 @@
       # latest python
       - ppa:deadsnakes/ppa
 
-      # latest vim
-      - ppa:jonathonf/vim
-
       # KeePassXC
       - ppa:phoerious/keepassxc
 

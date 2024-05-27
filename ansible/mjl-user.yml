@@ -78,12 +78,10 @@
           - flatpak-ppa
           # latest python
           - deadsnakes-ppa
-          # latest vim
-          - jonathonf-vim-ppa
           # KeePassXC
           - phoerious-keepassxc-ppa
-          # packaged firefox (not snap)
-          - mozillateam-ppa
+          # official packaged firefox (not snap)
+          - mozilla
           # nodejs from nodesource (see role for ver# installed)
           - nodesource
           # latest virtualbox VM

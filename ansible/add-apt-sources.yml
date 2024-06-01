@@ -1,12 +1,14 @@
 ---
 # This playbook manually adds apt sources
 # Invoke it with a list of space separated apt source names, or none to see the list of known names
+# If no host variable is provided, it will default to localhost
 # ex:
 #  ansible-playbook add-apt-sources.yml
 #  ansible-playbook add-apt-sources.yml --ask-become-pass -e "sources=docker"
 #  ansible-playbook add-apt-sources.yml --ask-become-pass -e "sources='virtualbox docker jonathonf-vim-ppa'"
+#  ansible-playbook add-apt-sources.yml --ask-become-pass -e "host=lidiapoet.275cpw sources='flatpak-ppa mozilla libreoffice-ppa'"
 - name: Add apt sources
-  hosts: localhost
+  hosts: '{{ host | default("localhost") }}'
 
   vars:
     sources: ''

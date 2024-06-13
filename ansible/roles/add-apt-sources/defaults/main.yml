@@ -8,6 +8,7 @@ apt_sources:
   - phoerious-keepassxc-ppa
   - mozillateam-ppa
   - libreoffice-ppa
+  - solaar-unifying-ppa
   - kubuntu-backports-ppa
   - kubuntu-backports-extra-ppa
   - mozilla
@@ -65,6 +66,14 @@ apt_source_config:
     name: libreoffice-ppa
     key: 36E81C9267FD1383FCC4490983FBA1751378B444
     uri: https://ppa.launchpadcontent.net/libreoffice/libreoffice-still/ubuntu
+    suite: jammy
+    component: main
+
+  solaar-unifying-ppa:
+    descr: Solaar Logitech Unifying Device Manager PPA
+    name: solaar-unifying-ppa
+    key: 643FF34AF9151DC814DD3A1B2303D595EE907473
+    uri: https://ppa.launchpadcontent.net/solaar-unifying/stable/ubuntu
     suite: jammy
     component: main
 

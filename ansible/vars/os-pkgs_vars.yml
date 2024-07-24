@@ -107,6 +107,9 @@ app_pkgs:
   # fixed width fonts for text editing
   - fonts-inconsolata
 
+  # Character Map so that any unicode char can be selected and pasted
+  - kcharselect
+
   # markdown editing support
   - retext
   # recommended for retext
@@ -295,6 +298,19 @@ game_pkgs:
   - picmi
   # classical Mah Jongg game
   - kajongg
+
+# Packages to install on a virtualbox minimal kubuntu (24.04) install for doing p2p
+p2p_pkgs:
+  # To build kernel modules (ie virtualbox guest additions)
+  - gcc
+  - make
+  - perl
+
+  - ssh
+  - partitionmanager
+  - vim
+#  - vim-gtk3
+  - ktorrent
 
 
 standard_pkgs: "{{ system_pkgs|union(cmd_utility_pkgs)|union(app_pkgs)|union(dev_related_pkgs)|union(game_pkgs)|unique }}"

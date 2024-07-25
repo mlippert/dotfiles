@@ -28,12 +28,6 @@
 [submodule "vim/pack/mjl-plugins/start/vim-markdown"]
 	path = vim/pack/mjl-plugins/start/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
-[submodule "vim/pack/mjl-plugins/start/vim-session"]
-	path = vim/pack/mjl-plugins/start/vim-session
-	url = https://github.com/xolox/vim-session.git
-[submodule "vim/pack/mjl-plugins/start/xolox-misc"]
-	path = vim/pack/mjl-plugins/start/xolox-misc
-	url = https://github.com/xolox/vim-misc.git
 [submodule "vim/pack/mjl-plugins/start/vim-snippets"]
 	path = vim/pack/mjl-plugins/start/vim-snippets
 	url = https://github.com/honza/vim-snippets.git

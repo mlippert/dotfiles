@@ -200,15 +200,22 @@ dev_related_pkgs:
 
   # for building vim (this list may be missing some, and have some unneeded as
   # I only got partway towards getting vim built) -mjl 2020-06-16
+  - make
+  - clang
+  - libtool-bin
+  - libxt-dev
+  - libncurses-dev
+  - libgtk-3-dev
+  - libpython3-dev
+  - libgpm-dev
+  - libcanberra-gtk3-dev
+
+  ## These additional packages were added by me in my previous attempt to build vim. So far I'm
+  ## building ok w/o them.
   # ncurses-term
-  # libgtk-3-dev
-  # libncurses5-dev
   # xserver-xorg-dev
   # xorg-dev
   # libtool
-  # libtool-bin
-  # libgpm-dev
-  # libcanberra-gtk3-dev
 
   # recommended by something above
   - python3-docutils

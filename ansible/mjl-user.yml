@@ -106,7 +106,7 @@
       ansible.builtin.reboot:
         post_reboot_delay: 30
 
-    - name: Lower priority of Ubuntu apt repo package for firefox, so ppa takes precedence
+    - name: Lower priority of Ubuntu apt repo package for firefox, so official mozilla repo or ppa takes precedence
       become: yes
       ansible.builtin.copy:
         dest: /etc/apt/preferences.d/firefox-no-snap.pref
@@ -114,6 +114,10 @@
           Package: firefox*
           Pin: release o=Ubuntu*
           Pin-Priority: -1
+
+          Package: firefox*
+          Pin: release o=LP-PPA-mozillateam
+          Pin-Priority: 100
 
     - name: Remove the firefox snap (other snaps may want to be removed manually)
       become: yes

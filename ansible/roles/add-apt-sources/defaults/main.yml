@@ -69,6 +69,14 @@ apt_source_config:
     suite: jammy
     component: main
 
+  sayonara-ppa:
+    descr: Sayonara Music Player PPA
+    name: sayonara-ppa
+    key: 632F20B5F41629ABE690F63DE053BE02F4F00812
+    uri: https://ppa.launchpadcontent.net/lucioc/sayonara/ubuntu
+    suite: jammy
+    component: main
+
   solaar-unifying-ppa:
     descr: Solaar Logitech Unifying Device Manager PPA
     name: solaar-unifying-ppa

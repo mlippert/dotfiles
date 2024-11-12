@@ -24,7 +24,7 @@
       - org.chromium.Chromium
 
       # Postman - development UI tool for sending http requests
-      - com.getpostman.Postman
+      #- com.getpostman.Postman
 
       # MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files
       - net.mediaarea.MediaInfo
@@ -56,18 +56,27 @@
         # Smartgit (https://syntevo.com)
         - bin/smartgit
 
+        # Calibre (https://calibre-ebook.com) (cmd as of 2024-10-20)
+        - 'sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin'
+
     # Entries to add to hosts file
     lan_hosts: |
-      192.168.111.50	marcie.local    marcie
-      192.168.111.51	patty.local     patty
-      192.168.111.52	sally.local     sally
-      192.168.111.99	snoopy.local    snoopy
-      192.168.111.98	thor.local      thor
-      192.168.111.97	minecraft.local minecraft
-      192.168.111.96	woodstock.local woodstock
-      192.168.111.95	redbaron.local  redbaron
-      192.168.111.94	pigpen.local    pigpen
-      192.168.111.93	fenris.local    fenris
+      192.168.111.50	marcie.54hardypond    marcie
+      192.168.111.51	patty.54hardypond     patty
+      192.168.111.52	sally.54hardypond     sally
+      192.168.111.99	snoopy.54hardypond    snoopy
+      192.168.111.98	thor.54hardypond      thor
+      192.168.111.97	minecraft.54hardypond minecraft
+      192.168.111.96	woodstock.54hardypond woodstock
+      192.168.111.95	redbaron.54hardypond  redbaron
+      192.168.111.94	pigpen.54hardypond    pigpen
+      192.168.111.93	fenris.54hardypond    fenris
+      192.168.1.61	dean.275cpw
+      192.168.1.62	may.275cpw
+      192.168.1.63	pi-275.275cpw
+      192.168.1.71	lidiapoet.275cpw
+      192.168.1.92	daisy.275cpw
+      192.168.1.96	woodstock.275cpw
 
 
   roles:
@@ -205,6 +214,13 @@
         group: '{{ username }}'
         mode: a=r,u+w,g+w
 
+    - name: Use os-prober when building grub menu to find and add partions w/ other bootable OSs
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        search_string: GRUB_DISABLE_OS_PROBER=
+        line: GRUB_DISABLE_OS_PROBER=false
+
     - name: Change grub menu to display distribution description (-d) instead of distributor ID (-i)
       become: yes
       ansible.builtin.lineinfile:
@@ -248,6 +264,8 @@
       loop:
         - option: CloseTabButton
           value: None
+        - option: TabBarPosition
+          value: Bottom
         - option: TabBarVisibility
           value: AlwaysShowTabBar
 

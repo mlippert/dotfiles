@@ -17,14 +17,14 @@ apt_sources:
 
 # known apt sources configuration values for retrieving the signing key and creating the .sources file
 # ALL entries in `apt_sources` must be found in this dictionary
-# NOTE: ALL apt sources config values are currently for suite jammy (kubuntu 22.04.x)
+# NOTE: ALL apt sources config values are currently for suite noble (kubuntu 24.04.x)
 apt_source_config:
   flatpak-ppa:
     descr: Flatpak PPA
     name: flatpak-ppa
     key: 5C6D153A17C02C337EF6C663B8B9D41229DFA5F5
     uri: https://ppa.launchpadcontent.net/flatpak/stable/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   deadsnakes-ppa:
@@ -32,7 +32,7 @@ apt_source_config:
     name: deadsnakes-ppa
     key: F23C5A6CF475977595C89F51BA6932366A755776
     uri: https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu
-    suite: jammy # lsb_release -cs
+    suite: noble # lsb_release -cs
     component: main
 
   # On Saturday 07 January 2023, Jonathon Fernyhough, or Jonathon as we in the Linux community knew him, unfortunately passed away.
@@ -50,7 +50,7 @@ apt_source_config:
     name: phoerious-keepassxc-ppa
     key: D89C66D0E31FEA2874EBD20561922AB60068FCD6
     uri: https://ppa.launchpadcontent.net/phoerious/keepassxc/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   mozillateam-ppa:
@@ -58,7 +58,7 @@ apt_source_config:
     name: mozillateam-ppa
     key: 0AB215679C571D1C8325275B9BDB3D89CE49EC21
     uri: https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   libreoffice-ppa:
@@ -66,7 +66,7 @@ apt_source_config:
     name: libreoffice-ppa
     key: 36E81C9267FD1383FCC4490983FBA1751378B444
     uri: https://ppa.launchpadcontent.net/libreoffice/libreoffice-still/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   sayonara-ppa:
@@ -82,7 +82,7 @@ apt_source_config:
     name: solaar-unifying-ppa
     key: 643FF34AF9151DC814DD3A1B2303D595EE907473
     uri: https://ppa.launchpadcontent.net/solaar-unifying/stable/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   kubuntu-backports-ppa:
@@ -90,7 +90,7 @@ apt_source_config:
     name: kubuntu-backports-ppa
     key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
     uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   kubuntu-backports-extra-ppa:
@@ -98,7 +98,7 @@ apt_source_config:
     name: kubuntu-backports-extra-ppa
     key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
     uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   mozilla:
@@ -116,7 +116,7 @@ apt_source_config:
     key_cmd: wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /etc/apt/keyrings/virtualbox.gpg
     uri: https://download.virtualbox.org/virtualbox/debian
     architectures: amd64
-    suite: jammy
+    suite: noble
     component: contrib
 
   docker:
@@ -126,7 +126,7 @@ apt_source_config:
     key_cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     uri: https://download.docker.com/linux/ubuntu
     architectures: amd64 # dpkg --print-architecture
-    suite: jammy
+    suite: noble
     component: stable
 
   nodesource:

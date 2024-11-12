@@ -1,7 +1,9 @@
 ---
 system_pkgs:
   # GUI Package Manager I like better than Muon because it shows the log of what's being installed
+  # and pkg to support quick filter search on toolbar
   - synaptic
+  - apt-xapian-index
   
   # KDiskFree graphical display of space used on mounted partitions
   - kdf
@@ -163,8 +165,8 @@ dev_related_pkgs:
   #- mercurial
 
   # Latest Python and Python virtual environments so different sources can use different python versions
-  - python3.10
-  - python3.10-venv
+  - python3.12
+  - python3.12-venv
   - python3-venv
   
   # Ansible check mode requires

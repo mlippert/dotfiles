@@ -28,10 +28,14 @@ Some of these may be easier to set up because they are already partially there o
     make install VER=3.10
     ```
 
-5. Currently the bin/hookup_userdata_links.sh is not integrated into ansible so it should be run now.
- 
-6. Create `~/tmp` directory
+5. Create `~/tmp` directory
 
+6. Currently the bin/hookup_userdata_links.sh is not integrated into ansible so it should be run now.
+
+    ```
+    /userdata/mjl/dotfiles/bin/hookup_userdata_links.sh 2>&1 | tee ~/tmp/hookup_userdata_links.log
+    ```
+ 
 7. Manually install from the list of `software_other_install_methods` in the playbook
 
 8. Run the `mjl-user.yml` ansible playbook
@@ -64,8 +68,8 @@ Some of these may be easier to set up because they are already partially there o
    7. add to places _Root_ with icon set to folder-root-symbolic
    8. turn off for the home folder "Limit to Home Directory"
 2. konsole
-   1. create a new profile _KDE Initial_ w/ no changes
-   2. create a new profile _MJL`
+   1. create a new profile: _KDE Initial_ w/ no changes
+   2. create a new profile: _MJL_
       - set initial terminal size to 140 col 30 rows
       - set Appearance to _Solarized MJL_
       - set font to Hack 10pt (+1 from default)
@@ -161,6 +165,34 @@ for how to export from the apt trusted keyring rather than re-downloading the ke
   - System Services | Plasma Workspace Configure
     - Login enable sound
     - Logout enable sound
+
+### From 24.04 on my Laptop
+
+- Appearance
+  - Global Theme: _Kubuntu_ (unchanged)
+    - Application Style: _Oxygen_
+      - GTK theme: _Adwaita_ (`apt install adwaita-qt gnome-themes-extra adwaita-icon-theme-full`)
+    - Plasma Style: _Oxygen_
+    - Colors: _Oxygen Cold_
+    - Window Decorations: _Breeze_ (unchanged)
+      - Window border size: _Normal_
+    - Fonts: On my laptop I bumped up the System Settings Font sizes by 1 point, from 10, 10, 8, 10, 10 10 to 11, 11, 9, 11, 11, 11
+    - Icons: _Oxygen_
+    - Cursors: _Breeze_ (unchanged)
+- Workspace Behavior
+  - Screen Edges
+    - turn off maximize and tile
+    - set top left corner to no action
+  - Virtual Desktops (3) 1 rows
+    - Desktop 1
+    - Desktop 2
+    - VM
+- Notifications
+  - Application-specific settings Configure... button
+    - System Services
+      - Plasma Workspace Configure Events... button
+        - Login enable sound
+        - Logout enable sound
 
 ### GPG
 

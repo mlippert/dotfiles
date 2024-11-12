@@ -1,5 +1,5 @@
 # Ansible python virtual environment
-ansible/venv/
+ansible/venv*/
 ansible/activate
 
 # Ansible log files

@@ -24,7 +24,7 @@ if has("gui_running")
 "      switched from Inconsolata to IntelOne Mono 2023-06-09, it uses more vertical space but seems easier to read -mjl
 "      get IntelOne Mono from https://github.com/intel/intel-one-mono/releases
 "      set guifont=Inconsolata\ 11
-      set guifont=IntelOne\ Mono\ 9
+      set guifont=IntelOne\ Mono\ 10
     endif
   elseif has("gui_win32")
     set guifont=Consolas:h8:cDEFAULT

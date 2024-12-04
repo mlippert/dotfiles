@@ -91,6 +91,8 @@
           - phoerious-keepassxc-ppa
           # official packaged firefox (not snap)
           - mozilla
+          # packaged thunderbird (not snap)
+          - mozillateam-ppa
           # nodejs from nodesource (see role for ver# installed)
           - nodesource
           # latest virtualbox VM
@@ -128,11 +130,23 @@
           Pin: release o=LP-PPA-mozillateam
           Pin-Priority: 100
 
-    - name: Remove the firefox snap (other snaps may want to be removed manually)
+    - name: Lower priority of Ubuntu apt repo package for thunderbird, so official mozilla repo or ppa takes precedence
+      become: yes
+      ansible.builtin.copy:
+        dest: /etc/apt/preferences.d/thunderbird-no-snap.pref
+        content: |
+          Package: thunderbird*
+          Pin: release o=Ubuntu*
+          Pin-Priority: -1
+
+    - name: Remove the firefox and thunderbird snaps (other snaps may want to be removed manually)
       become: yes
       community.general.snap:
-        name: firefox
+        name: '{{ item }}'
         state: absent
+      loop:
+        - firefox
+        - thunderbird
 
     - name: Install standard packages
       become: yes

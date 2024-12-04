@@ -56,7 +56,7 @@ apt_source_config:
   mozillateam-ppa:
     descr: MozillaTeam PPA (firefox)
     name: mozillateam-ppa
-    key: 0AB215679C571D1C8325275B9BDB3D89CE49EC21
+    key: 738BEB9321D1AAEC13EA9391AEBDF4819BE21867
     uri: https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu
     suite: noble
     component: main
@@ -64,7 +64,7 @@ apt_source_config:
   libreoffice-ppa:
     descr: LibreOffice PPA
     name: libreoffice-ppa
-    key: 36E81C9267FD1383FCC4490983FBA1751378B444
+    key: CDDE43BA4DE3F09D7CE7016673AEE920AD55F5A0
     uri: https://ppa.launchpadcontent.net/libreoffice/libreoffice-still/ubuntu
     suite: noble
     component: main
@@ -74,7 +74,7 @@ apt_source_config:
     name: sayonara-ppa
     key: 632F20B5F41629ABE690F63DE053BE02F4F00812
     uri: https://ppa.launchpadcontent.net/lucioc/sayonara/ubuntu
-    suite: jammy
+    suite: noble
     component: main
 
   solaar-unifying-ppa:
@@ -90,7 +90,7 @@ apt_source_config:
     name: kubuntu-backports-ppa
     key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
     uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu
-    suite: noble
+    suite: jammy
     component: main
 
   kubuntu-backports-extra-ppa:
@@ -98,7 +98,7 @@ apt_source_config:
     name: kubuntu-backports-extra-ppa
     key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
     uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu
-    suite: noble
+    suite: jammy
     component: main
 
   mozilla:
@@ -130,11 +130,11 @@ apt_source_config:
     component: stable
 
   nodesource:
-    descr: Nodejs ver 20
+    descr: Nodejs ver 22
     name: nodesource
     key: 6F71F525282841EEDAF851B42F59B5F99B1BE0B4
     key_cmd: curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-    uri: https://deb.nodesource.com/node_20.x
+    uri: https://deb.nodesource.com/node_22.x
     architectures: amd64
     suite: nodistro
     component: main

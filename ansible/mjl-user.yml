@@ -93,6 +93,8 @@
           - mozilla
           # packaged thunderbird (not snap)
           - mozillateam-ppa
+          # latest libreoffice
+          - libreoffice-ppa
           # nodejs from nodesource (see role for ver# installed)
           - nodesource
           # latest virtualbox VM

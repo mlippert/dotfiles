@@ -88,6 +88,7 @@ declare -A USERDIRS=(\
 	)
 
 # link to the configuration directories in userdata that are not in dotfiles (too large or too sensitive for github)
+# Currently linking .var which is ALL of the config/data for flatpaks (may want to break that out in the future)
 declare -A USERCONFIGFILES=(\
 		[.aws]=${USERDATADIR}.aws\
 		[.config/Atlassian]=${USERDATADIR}.config/Atlassian\
@@ -117,6 +118,7 @@ declare -A USERCONFIGFILES=(\
 		[.npmrc]=${USERDATADIR}.npmrc\
 		[.purple]=${USERDATADIR}.purple\
 		[.ssh]=${USERDATADIR}.ssh\
+		[.var]=${USERDATADIR}.var\
 		[.wine]=${USERDATADIR}.wine\
 	)
 

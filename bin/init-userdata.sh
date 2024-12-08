@@ -13,7 +13,7 @@ fi
 
 # TODO: We really need to create all of these as the user $USER so they have the correct permissions
 
-mkdir .aws .beyondcompare .dia .docker .gnupg .gramps .minecraft .mozilla .purple .smartgit .ssh .wine
+mkdir .aws .beyondcompare .dia .docker .gnupg .gramps .minecraft .mozilla .purple .smartgit .ssh .var .wine
 mkdir Documents Downloads Music Pictures Videos bin
 touch .netrc .npmrc
 chmod go= .gnupg

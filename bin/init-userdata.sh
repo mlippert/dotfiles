@@ -26,7 +26,7 @@ popd
 
 mkdir -p .local/share
 pushd .local/share
-mkdir icons wallpapers
+mkdir icons task wallpapers
 popd
 
 popd

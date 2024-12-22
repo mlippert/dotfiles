@@ -67,21 +67,21 @@
       192.168.111.52	sally.54hardypond      sally
       192.168.111.99	snoopy.54hardypond     snoopy
       192.168.111.98	thor.54hardypond       thor
-      192.168.111.97	minecraft.54hardypond  minecraft
+      192.168.111.97	tweetybird.54hardypond tweetybird
       192.168.111.96	woodstock.54hardypond  woodstock
       192.168.111.95	redbaron.54hardypond   redbaron
       192.168.111.94	pigpen.54hardypond     pigpen
       192.168.111.93	fenris.54hardypond     fenris
       192.168.111.92	daisy.54hardypond      daisy
-      192.168.111.91	tweetybird.54hardypond tweetybird
+      192.168.111.90	minecraft.54hardypond  minecraft
       # 275 CPW LAN host IPs
       192.168.1.61	dean.275cpw
       192.168.1.62	may.275cpw
       192.168.1.63	pi-275.275cpw
       192.168.1.71	lidiapoet.275cpw
+      192.168.1.97	tweetybird.275cpw
       192.168.1.96	woodstock.275cpw
       192.168.1.92	daisy.275cpw
-      192.168.1.91	tweetybird.275cpw
 
 
   roles:

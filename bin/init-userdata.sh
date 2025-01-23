@@ -13,20 +13,20 @@ fi
 
 # TODO: We really need to create all of these as the user $USER so they have the correct permissions
 
-mkdir .aws .beyondcompare .dia .docker .gnupg .gramps .minecraft .mozilla .purple .smartgit .ssh .var .wine
+mkdir .aws .beyondcompare .dia .docker .gnupg .gramps .minecraft .mozilla .purple .smartgit .ssh .thunderbird .var .wine
 mkdir Documents Downloads Music Pictures Videos bin
 touch .netrc .npmrc
 chmod go= .gnupg
 
 mkdir .config
 pushd .config
-mkdir Atlassian 'ReText project' Signal Slack bcompare calibre chromium discord keepassxc libreoffice smartgit teamviewer ukuu
+mkdir 'ReText project' bcompare bcompare5 calibre discord keepassxc libreoffice smartgit teamviewer ukuu
 touch KeePassXCrc
 popd
 
 mkdir -p .local/share
 pushd .local/share
-mkdir icons task wallpapers
+mkdir icons smartgit task wallpapers
 popd
 
 popd

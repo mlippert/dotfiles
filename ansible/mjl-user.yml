@@ -1,5 +1,5 @@
 ---
-- name: Setup newly install Kubuntu 22.04 for {{ username }}
+- name: Setup newly install Kubuntu 24.04 for {{ username }}
   hosts: localhost
 
   vars_files:

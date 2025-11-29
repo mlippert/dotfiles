@@ -1,0 +1,25 @@
+# A pi-client's job is to provide a dhcp server to the wired ethernet interface
+# and route traffic to/from that interface's subnet through the wireguard VPN
+# connected to the public network interface (wifi) to a pi-server which provides
+# internet access.
+#
+# These dnsmasq configuration settings
+
+# disable DNS by setting port to 0 (NOTE will conflict w/ port set in ANY other conf file)
+port=0
+
+# Only listen for DHCP and DNS requests on the wired ethernet interface ({{ wired_if }})
+interface={{ wired_if }}
+
+# enable the integrated DHCP server for the IP range we want to provide on the
+# wired ethernet interface
+# specify the range and netmask of IP addresses available for lease and # a lease time.
+dhcp-range={{ wired_dhcp_start }},{{ wired_dhcp_end }},{{ wired_dhcp_netmask }},{{ wired_dhcp_lease_time }}
+
+# set the dns-server provided to DHCP clients to cloudflare (1.1.1.1)
+# and this host ({{ wired_ip_static }})
+dhcp-option=option:dns-server,1.1.1.1,{{ wired_ip_static }}
+
+# NOTE May want to enable this for debugging
+# Log lots of extra information about DHCP transactions.
+#log-dhcp

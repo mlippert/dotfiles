@@ -1,0 +1,4 @@
+auto {{ wired_if }}
+allow-hotplug {{ wired_if }}
+iface {{ wired_if }} inet static
+    address {{ wired_ip_static }}/{{ wired_ip_subnet_bits }}

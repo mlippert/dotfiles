@@ -14,6 +14,22 @@
 #   - vbilski
 #   - eliza (check w/ her vs ekds)
 #   - gilli
+# TODO: VERIFY THE FOLLOWING
+# - The wired ethernet interface (eth0) with IPv4 
+#   it should have a static IPv4 address/cidr of 10.1.10.1/28
+#   dnsmasq should be configured to provide a dhcp server for that eth0 interface
+#   the dns provided by the dhcp server should be this device (10.1.10.1) with
+#   the dns resolver using the one given to the wifi interface
+#   set the dnsmasq configuration in /etc/dnsmasq.d/pi-client.conf
+#   the eth0 interface is configured in /etc/network/interfaces.d/eth0  (ifup/ifdown)
+#
+#   This stackexchange question/answer does a good job explaining /etc/network/interfaces syntax
+#   see https://unix.stackexchange.com/questions/128439/good-detailed-explanation-of-etc-network-interfaces-syntax
+#
+#   This stackexchange question/answers is informative as to what network process is controlling
+#   what interface.
+#   see https://unix.stackexchange.com/questions/475146/how-exactly-are-networkmanager-networkd-netplan-ifupdown2-and-iproute2-inter
+#
 # - additional wifi SSID/Passwords. NetworkManager is managing the wlan0 interface and connections
 #   it uses profile configuration files in /etc/NetworkManager/system-connections/
 #   you can manually add a profile w/ `nmcli`, and you can get the psk hash if you want using `wpa_passphrase <SSID> <PASSPHRASE>`
@@ -68,18 +84,29 @@
   vars:
     username: mjl
     server: may
+    server_endpoint: '{{ wg_servers[server].public_ipv4 }}:{{ wg_servers[server].public_ipv4_port }}'
     server_cidr: '{{ wg_peers[server].ip }}/{{ wg_servers[server].ip_subnet_bits }}'
     server_cidr6: '' # WG IPv6 sub/net (set IPv6 CIDR)
     client: gh
     vpn_if: '{{ client }}-{{ server }}' # name to give to the wireguard vpn interface
 
+    wired_if: eth0 # Wired network interface name
+    wired_ip_prefix: '10.1.10.' # wired subnet IPv4 prefix
+    wired_ip_suffix: 1 # pi's suffix for static address on wired subnet
+    wired_ip_static: '{{ wired_ip_prefix ~ wired_ip_suffix }}'
+    wired_ip_subnet_bits: 28 # s/b >= 24 as the suffix is the last part of the ipv4 dotted address
+    wired_cidr: '{{ wired_ip_static }}/{{ wired_ip_subnet_bits }}'
+    wired_dhcp_start_suffix: 3
+    wired_dhcp_end_suffix: 14
+    wired_dhcp_netmask: '255.255.255.240' # should match ip_subnet_bits until I can derive this in code
+    wired_dhcp_lease_time: '6h'
+
+    wired_dhcp_start: '{{ wired_ip_prefix ~ wired_dhcp_start_suffix }}'
+    wired_dhcp_end: '{{ wired_ip_prefix ~ wired_dhcp_end_suffix }}'
+
     # For the firewall scripts setting up NAT
     public_if: wlan0 # Public network interface name (find w/ "ip route show")
     public_if_port: 51194 # udp port on the public interface which is wireguard's listen port
-
-    # this ip/port is really only needed for the client wireguard configuration (EndPoint value of the server peer)
-    public_ipv4: '100.12.236.116' # The public IPv4 address which leads to the public interface/port
-    public_ipv4_port: 51194 # udp port on the external IPv4 address which leads to the public interface/port
 
     apt_pkgs_wireguard:
       - wireguard
@@ -123,6 +150,26 @@
         state: latest
         update_cache: yes
 
+    # The wired interface will be its own subnet, with this pi providing a dhcp server
+    # to devices connected to it, and routing that subnet traffic through wireguard
+    # to the internet. So a roku hardwired to this pi will have all of its traffic
+    # forwarded through the wg vpn.
+    # We use the ifupdown utilities and configuration to manage the wired interface
+
+    # NOTE: for this conf file to be used the network/interfaces file must have the following line:
+    # source /etc/network/interfaces.d/*
+    - name: Create configuration (w/ static ip {{ wired_ip_static }}) for the wired ({{ wired_if }}) interface 
+      become: yes
+      ansible.builtin.template:
+        src: pi-wired-interface.conf.j2
+        dest: /etc/network/interfaces.d/{{ wired_if }}
+
+    - name: Set up dhcp server on the wired ({{ vpn_if }}) interface
+      become: yes
+      ansible.builtin.template:
+        src: dnsmasq-pi-client.conf.j2
+        dest: /etc/dnsmasq.d/pi-client.conf
+
     - name: Set up /usr/local/bin/resolvconf to use systemd resolver
       become: yes
       ansible.builtin.file:
@@ -131,10 +178,10 @@
         state: link
         force: yes
 
-    - name: Set up the server wireguard configuration file /etc/wireguard/{{ vpn_if }}.conf
+    - name: Set up the client wireguard configuration file /etc/wireguard/{{ vpn_if }}.conf
       become: yes
       ansible.builtin.template:
-        src: wg-server.conf.j2
+        src: wg-client.conf.j2
         dest: /etc/wireguard/{{ vpn_if }}.conf
 
     - name: Create scripts directory in /etc/wireguard
@@ -147,7 +194,7 @@
     - name: Set up the wireguard configuration supporting scripts
       become: yes
       ansible.builtin.template:
-        src: 'wg-{{ item }}.j2'
+        src: 'wg-client-{{ item }}.j2'
         dest: /etc/wireguard/scripts/{{ vpn_if }}.{{ item }}
         mode: a=rx,u+w
       loop:

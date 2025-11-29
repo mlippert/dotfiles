@@ -140,7 +140,7 @@
     - name: Set up the wireguard configuration supporting scripts
       become: yes
       ansible.builtin.template:
-        src: 'wg-{{ item }}.j2'
+        src: 'wg-server-{{ item }}.j2'
         dest: /etc/wireguard/scripts/{{ vpn_if }}.{{ item }}
         mode: a=rx,u+w
       loop:

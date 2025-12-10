@@ -44,8 +44,12 @@
       when: host is not defined
       run_once: true
 
+
 - hosts: '{{ host }}'
   gather_facts: no
+  vars_files:
+    - ./vars/wg-vault.yml
+    - ./vars/wg-vars.yml
   vars:
     playbook_group: pi_wg_client
   tasks:
@@ -53,6 +57,14 @@
       fail:
         msg: 'This playbook only applies to hosts in the ''{{ playbook_group }}'' group'
       when: playbook_group not in group_names
+
+    - name: When playbook is invoked w/ no client, list the known clients and fail run
+      fail:
+        msg:
+          - 'You must specify a vpn client name with -e "client=<clientname>"'
+          - 'The known client names that can be set up are: {{ wg_peers|list }}'
+      when: client is not defined
+
 
 - name: Test that Ansible will work on {{ host }} tasks run iif tags ping and/or hostvars is specified
   hosts: '{{ host }}'
@@ -83,11 +95,11 @@
 
   vars:
     username: mjl
+    client: es # expected to be overridden on commandline w/ -e "client=<clientname>"
     server: may
     server_endpoint: '{{ wg_servers[server].public_ipv4 }}:{{ wg_servers[server].public_ipv4_port }}'
     server_cidr: '{{ wg_peers[server].ip }}/{{ wg_servers[server].ip_subnet_bits }}'
     server_cidr6: '' # WG IPv6 sub/net (set IPv6 CIDR)
-    client: es
     vpn_if: '{{ client }}-{{ server }}' # name to give to the wireguard vpn interface
 
     wired_if: eth0 # Wired network interface name
@@ -96,11 +108,11 @@
     wired_ip_static: '{{ wired_ip_prefix ~ wired_ip_suffix }}'
     wired_ip_subnet_bits: 28 # s/b >= 24 as the suffix is the last part of the ipv4 dotted address
     wired_cidr: '{{ wired_ip_static }}/{{ wired_ip_subnet_bits }}'
+
     wired_dhcp_start_suffix: 3
     wired_dhcp_end_suffix: 14
     wired_dhcp_netmask: '255.255.255.240' # should match ip_subnet_bits until I can derive this in code
     wired_dhcp_lease_time: '6h'
-
     wired_dhcp_start: '{{ wired_ip_prefix ~ wired_dhcp_start_suffix }}'
     wired_dhcp_end: '{{ wired_ip_prefix ~ wired_dhcp_end_suffix }}'
 
@@ -227,6 +239,19 @@
         line: 'net.ipv4.ip_forward = 1'
       notify:
         - Reload sysctl
+
+    # Don't do this if the iptables nat rule is already in the rules.v4 file
+    # TODO: figure how how to test for this condition!
+    #       meantime you must manually delete /etc/iptables/rules.v4 to re-run
+    #       this task. ALSO be sure that the wg-quick service is not active as we do
+    #       NOT want to save its iptables rules.
+    - name: Set up NAT from the wired ({{ wired_if }}) interface to the public ({{ public_if }}) interface (when VPN is down)
+      become: yes
+      ansible.builtin.shell: |
+        iptables --table nat --append POSTROUTING --source {{ wired_cidr|quote }} --out-interface {{ public_if|quote }} --jump MASQUERADE
+        /sbin/iptables-save > /etc/iptables/rules.v4
+      args:
+        creates: /etc/iptables/rules.v4
 
     - name: Autostart the vpn by enabling the systemd wg-quick service
       become: yes

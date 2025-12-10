@@ -11,8 +11,8 @@ wg_servers_preshared_keys: '{{ vault_wg_servers_preshared_keys }}'
 wg_servers:
   may:
     # this public_ip/port is needed for the client wireguard configuration (EndPoint value of the server peer)
-    public_ipv4: '100.12.236.116' # The public IPv4 address which leads to the public interface/port of the WG werver
-    public_ipv4_port: 51194 # udp port on the external IPv4 address which leads to the public interface/port
+    public_ipv4: '100.12.236.116' # The public ISP router IPv4 address which port forwards to the public interface/port of the wg server
+    public_ipv4_port: 51194 # udp port on the ISP router which is port forwarded to the server's public interface
     ip_prefix: '172.20.20.' # WG server's private IPv4 prefix
     ip_suffix: 20 # WG server's private IPv4 suffix, all clients should increment from this
     ip_subnet_bits: 28 # s/b >= 24 as the suffix is the last part of the ipv4 dotted address
@@ -27,36 +27,36 @@ wg_servers:
 wg_peers:
   may:
     name: may
-    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix }}'
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix }}' # .20
     public_key: '7enfE5ZegjO5ZRdm8E0DVclA46JcWDcZGamkOpdy0iI='
     private_key: '{{ wg_private_keys["may"] }}'
 
   mh:
     name: mike-home
-    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix + wg_servers["may"].clients.index("mh") + 1 }}'
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix + wg_servers["may"].clients.index("mh") + 1 }}' # .21
     public_key: 'zgHhMG9sB2fz3aHx75SMCy+UHOrYM9LLaaxNm3atOzU='
     private_key: '{{ wg_private_keys["mh"] }}'
 
   rh:
     name: robin-home
-    ip: '172.20.20.22'
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix + wg_servers["may"].clients.index("rh") + 1 }}' # .22
     public_key: 'sBw9Zw24227aQSbd4j9GDu2XqAbiP9ApwAtAei8quWw='
     private_key: '{{ wg_private_keys["rh"] }}'
 
   gh:
     name: gilli-home
-    ip: '172.20.20.23'
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix + wg_servers["may"].clients.index("gh") + 1 }}' # .23
     public_key: 'OUNqUIIFsoj2NnGdebSihh2+/15V0g6RCf3yN7v+9S0='
     private_key: '{{ wg_private_keys["gh"] }}'
 
   es:
     name: eliza-school
-    ip: '172.20.20.24'
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix + wg_servers["may"].clients.index("es") + 1 }}' # .24
     public_key: 'BiSdTkXRrJgVgu0xGMOs3E46GhSU8y1AlgpmNJr/QjY='
     private_key: '{{ wg_private_keys["es"] }}'
 
   mt:
     name: mike-travel
-    ip: '172.20.20.25'
+    ip: '{{ wg_servers["may"].ip_prefix }}{{ wg_servers["may"].ip_suffix + wg_servers["may"].clients.index("mt") + 1 }}' # .25
     public_key: 'cIWApJ7O/euxPr6f9yikTjobZJkCdx42HGkLTVHfvyo='
     private_key: '{{ wg_private_keys["mt"] }}'

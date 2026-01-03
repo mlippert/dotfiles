@@ -1,0 +1,7 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# NOTE: use source instead of source-directory because source-directory
+#       only includes files whose filenames consist of letters, numbers,
+#       dashes and underscores. In particular NOT dots, so x.conf would
+#       not be included.
+# Include files from /etc/network/interfaces.d:
+source /etc/network/interfaces.d/*

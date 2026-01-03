@@ -87,7 +87,7 @@
     server_endpoint: '{{ wg_servers[server].public_ipv4 }}:{{ wg_servers[server].public_ipv4_port }}'
     server_cidr: '{{ wg_peers[server].ip }}/{{ wg_servers[server].ip_subnet_bits }}'
     server_cidr6: '' # WG IPv6 sub/net (set IPv6 CIDR)
-    client: gh
+    client: es
     vpn_if: '{{ client }}-{{ server }}' # name to give to the wireguard vpn interface
 
     wired_if: eth0 # Wired network interface name
@@ -117,10 +117,12 @@
     apt_pkgs_optional:
       - curl
       - vim
+      - traceroute
       - tcpdump
       - ethtool
 
     apt_pkgs_router:
+      - ifupdown
       - dnsmasq
       - libnss-resolve
       - iptables
@@ -155,6 +157,21 @@
     # to the internet. So a roku hardwired to this pi will have all of its traffic
     # forwarded through the wg vpn.
     # We use the ifupdown utilities and configuration to manage the wired interface
+
+    - name: Create interfaces.d directory in /etc/network
+      become: yes
+      ansible.builtin.file:
+        path: /etc/network/interfaces.d
+        mode: a=x,u+rw
+        state: directory
+
+    - name: Create /etc/network/interfaces if it doesn't exist
+      become: yes
+      ansible.builtin.copy:
+        src: wg-client-interfaces
+        dest: /etc/network/interfaces
+        mode: a=r,u+rw
+        force: no
 
     # NOTE: for this conf file to be used the network/interfaces file must have the following line:
     # source /etc/network/interfaces.d/*
@@ -205,6 +222,7 @@
       become: yes
       ansible.builtin.lineinfile:
         path: /etc/sysctl.conf
+        create: yes
         regexp: '^#+ *net.ipv4.ip_forward *= *1'
         line: 'net.ipv4.ip_forward = 1'
       notify:

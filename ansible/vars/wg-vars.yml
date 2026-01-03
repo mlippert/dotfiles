@@ -10,6 +10,9 @@ wg_servers_preshared_keys: '{{ vault_wg_servers_preshared_keys }}'
 #       so traffic to those peer addresses get to the vpnif interface and the target peer
 wg_servers:
   may:
+    # this public_ip/port is needed for the client wireguard configuration (EndPoint value of the server peer)
+    public_ipv4: '100.12.236.116' # The public IPv4 address which leads to the public interface/port of the WG werver
+    public_ipv4_port: 51194 # udp port on the external IPv4 address which leads to the public interface/port
     ip_prefix: '172.20.20.' # WG server's private IPv4 prefix
     ip_suffix: 20 # WG server's private IPv4 suffix, all clients should increment from this
     ip_subnet_bits: 28 # s/b >= 24 as the suffix is the last part of the ipv4 dotted address

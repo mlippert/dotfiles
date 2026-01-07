@@ -17,8 +17,8 @@ interface={{ wired_if }}
 dhcp-range={{ wired_dhcp_start }},{{ wired_dhcp_end }},{{ wired_dhcp_netmask }},{{ wired_dhcp_lease_time }}
 
 # set the dns-server provided to DHCP clients to cloudflare (1.1.1.1)
-# and this host ({{ wired_ip_static }})
-dhcp-option=option:dns-server,1.1.1.1,{{ wired_ip_static }}
+# and the cloudflare backup (1.0.0.1)
+dhcp-option=option:dns-server,1.1.1.1,1.0.0.1
 
 # NOTE May want to enable this for debugging
 # Log lots of extra information about DHCP transactions.

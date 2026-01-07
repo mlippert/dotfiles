@@ -230,10 +230,13 @@
         - firewall-up.sh # WG firewall script when starting VPN
         - firewall-down.sh # WG firewall script when stopping VPN
 
+    # NOTE: loading sysctl conf files is being done by systemd-sysctl which ONLY
+    # loads the files in /etc/sysctl.d and NOT /etc/sysctl.conf which is why forwarding is
+    # set in a file in /etc/sysctl.d
     - name: Enable ip forwarding (to forward vpn interface traffic to/from other interfaces)
       become: yes
       ansible.builtin.lineinfile:
-        path: /etc/sysctl.conf
+        path: /etc/sysctl.d/90-ip-forwarding.conf
         create: yes
         regexp: '^#+ *net.ipv4.ip_forward *= *1'
         line: 'net.ipv4.ip_forward = 1'
@@ -245,6 +248,7 @@
     #       meantime you must manually delete /etc/iptables/rules.v4 to re-run
     #       this task. ALSO be sure that the wg-quick service is not active as we do
     #       NOT want to save its iptables rules.
+    #       ALSO an empty rules.v4 (size 0) is created when iptables-persistent is installed.
     - name: Set up NAT from the wired ({{ wired_if }}) interface to the public ({{ public_if }}) interface (when VPN is down)
       become: yes
       ansible.builtin.shell: |
@@ -263,6 +267,6 @@
   handlers:
     - name: Reload sysctl
       become: yes
-      ansible.builtin.command:
-        cmd: sysctl -p
-
+      ansible.builtin.systemd_service:
+        name: systemd-sysctl
+        state: restarted

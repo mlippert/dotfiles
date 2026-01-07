@@ -1,0 +1,23 @@
+[connection]
+id=terminus2_5G
+uuid=bc61467d-a480-3b42-8d91-ff2e921c5753
+type=wifi
+
+[wifi]
+mode=infrastructure
+ssid=terminus2_5G
+
+[wifi-security]
+auth-alg=open
+key-mgmt=wpa-psk
+psk=RavenBuffet
+psk={{ nm_connections.wifi["terminus2_5G"].psk }}
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]

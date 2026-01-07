@@ -1,0 +1,22 @@
+[connection]
+id=bb3
+uuid=8290cb61-d230-4bed-92bf-7afc296aefb3
+type=wifi
+
+[wifi]
+mode=infrastructure
+ssid=bb3
+
+[wifi-security]
+auth-alg=open
+key-mgmt=wpa-psk
+psk={{ nm_connections.wifi["bb3"].psk }}
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]

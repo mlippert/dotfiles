@@ -1,0 +1,22 @@
+[connection]
+id=beebs5
+uuid=5e131818-9304-406d-a881-a4d0e8921e8c
+type=wifi
+
+[wifi]
+mode=infrastructure
+ssid=beebs5
+
+[wifi-security]
+auth-alg=open
+key-mgmt=wpa-psk
+psk={{ nm_connections.wifi["beebs5"].psk }}
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]

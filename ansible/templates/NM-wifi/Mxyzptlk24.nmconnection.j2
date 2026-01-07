@@ -1,0 +1,21 @@
+[connection]
+id=Mxyzptlk24
+uuid=0b4ebdb0-ddbe-460d-a493-75edb3b079a5
+type=wifi
+
+[wifi]
+mode=infrastructure
+ssid=Mxyzptlk24
+
+[wifi-security]
+key-mgmt=wpa-psk
+psk={{ nm_connections.wifi["Mxyzptlk24"].psk }}
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+method=auto
+
+[proxy]

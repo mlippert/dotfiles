@@ -1,0 +1,4 @@
+---
+# NetworkManager preshared keys (psk) for wifi ssid connections
+# structure: nm_connections.wifi["<SSID>"].psk
+nm_connections: {{ vault_nm_connections }}

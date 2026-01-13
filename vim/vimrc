@@ -6,19 +6,32 @@ source $VIMRUNTIME/defaults.vim
 " defaults sets up an autocmd to restore last position, which I don't like so revert it
 augroup vimStartup | au! | augroup END
 
+" XDG Base Directory support (vim 9.1.0327 supports XDG config, I just want to
+" use XDG directories for state (backup, swap etc) also
+" from https://jorenar.com/blog/vim-xdg
+
+if empty($MYVIMRC) | let $MYVIMRC = expand('<sfile>:p') | endif
+
+if empty($XDG_CACHE_HOME)  | let $XDG_CACHE_HOME  = $HOME."/.cache"       | endif
+if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME = $HOME."/.config"      | endif
+if empty($XDG_DATA_HOME)   | let $XDG_DATA_HOME   = $HOME."/.local/share" | endif
+if empty($XDG_STATE_HOME)  | let $XDG_STATE_HOME  = $HOME."/.local/state" | endif
+
+" put all backup and swap files in the xdg state directory and include the path
+" (trailing double slash) so duplicate names don't clash
+" NOTE: I used to check gui_win32 to set this differently on windows, but I
+"       don't use vim on windows anymore so it's not worth the bother.
+set backupdir=$XDG_STATE_HOME/vim/backup// | call mkdir(&backupdir, 'p', 0700)
+set directory=$XDG_STATE_HOME/vim/swap//   | call mkdir(&directory, 'p', 0700)
+set undodir=$XDG_STATE_HOME/vim/undo       | call mkdir(&undodir,   'p', 0700)
+set viewdir=$XDG_STATE_HOME/vim/view       | call mkdir(&viewdir,   'p', 0700)
+set viminfofile=$XDG_STATE_HOME/vim/viminfo
+
+" set the MRU plugin state file location
+let g:MRU_File = '$XDG_STATE_HOME/vim/vim_mru_files'
+
 " let mapleader = ","
 let mapleader = "\\"
-
-" put all backup and swap files in the tmp directory and include the path
-" (trailing double slash) so duplicate names don't clash
-set backup
-if has("gui_win32")
-    set backupdir=~/vimfiles/tmp//
-    set directory=~/vimfiles/tmp//
-else
-    set backupdir=~/.vim/tmp//
-    set directory=~/.vim/tmp//
-endif
 
 " Allow windowless unsaved buffers
 set hidden

@@ -11,6 +11,7 @@ apt_sources:
   - solaar-unifying-ppa
   - kubuntu-backports-ppa
   - kubuntu-backports-extra-ppa
+  - vlc-ppa
   - mozilla
   - virtualbox
   - docker
@@ -99,6 +100,14 @@ apt_source_config:
     key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
     uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu
     suite: jammy
+    component: main
+
+  vlc-ppa:
+    descr: VLC PPA
+    name: vlc-ppa
+    key: F4E48910A020E77056748B745738AE8480447DDF
+    uri: https://ppa.launchpadcontent.net/ubuntuhandbook1/vlc/ubuntu
+    suite: noble
     component: main
 
   mozilla:

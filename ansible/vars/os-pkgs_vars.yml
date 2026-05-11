@@ -50,6 +50,9 @@ system_pkgs:
   # utility to mount samba share when you browse to it in dolphin to make it more accessible
   #- smb4k
 
+  # utilities for avahi (aka zeroconf aka mDNS) browsing, publishing and discovery
+  - avahi-utils
+
   # nfs
   - nfs-kernel-server
 

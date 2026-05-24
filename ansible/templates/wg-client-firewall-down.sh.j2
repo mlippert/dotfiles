@@ -4,11 +4,18 @@
 IPT="/sbin/iptables"
 IPT6="/sbin/ip6tables"
 
+$IPT --table mangle --delete OUTPUT --jump MARK --set-mark 1
+ip -4 rule delete fwmark 1 table main
+$IPT --table mangle --delete PREROUTING --in-interface {{ wired_if }} --jump MARK --set-mark 2
+
 ## IPv4 ##
 $IPT --table nat --delete POSTROUTING --source {{ wired_cidr }} --out-interface {{ vpn_if }} --jump MASQUERADE
 $IPT --delete INPUT --in-interface {{ vpn_if }} --jump ACCEPT
 $IPT --delete FORWARD --in-interface {{ wired_if }} --out-interface {{ vpn_if }} --jump ACCEPT
 $IPT --delete FORWARD --in-interface {{ vpn_if }} --out-interface {{ wired_if }} --jump ACCEPT
+
+$IPT --delete INPUT --in-interface {{ public_if }} --protocol udp --dport {{ public_if_port }} --jump ACCEPT
+$IPT --table nat --delete POSTROUTING --source {{ server_cidr }} --out-interface {{ public_if }} --jump MASQUERADE
 
 ## IPv6 (Uncomment) and set SUB_NET_6 ##
 ## $IPT6 -t nat -D POSTROUTING -s  -o {{ server_cidr }} -j MASQUERADE

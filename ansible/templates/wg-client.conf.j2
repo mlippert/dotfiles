@@ -14,3 +14,9 @@ AllowedIPs = 0.0.0.0/0
 Endpoint = {{ server_endpoint }}
 PersistentKeepalive = 44
 PresharedKey = {{ wg_servers_preshared_keys[server][client] }}
+
+[Peer]
+# client mt's publickey to allow mike-travel to connect to provide remote support
+PublicKey = {{ wg_peers['mt'].public_key }}
+PresharedKey = {{ wg_servers_preshared_keys[server]['mt'] }}
+AllowedIPs = {{ wg_peers['mt'].ip }}/32

@@ -4,14 +4,23 @@
 IPT="/sbin/iptables"
 IPT6="/sbin/ip6tables"
 
+# Mark all local outgoing packets with a FWMARK of 1 so they go to the main routing table
+$IPT --table mangle --insert OUTPUT 1 --jump MARK --set-mark 1
+ip -4 rule add fwmark 1 table main
+
+# Mark all packets coming from the wired interface with a FWMARK of 2
+$IPT --table mangle --insert PREROUTING 1 --in-interface {{ wired_if }} --jump MARK --set-mark 2
+
 ## IPv4 ##
 $IPT --table nat --insert POSTROUTING 1 --source {{ wired_cidr }} --out-interface {{ vpn_if }} --jump MASQUERADE
 $IPT --insert INPUT 1 --in-interface {{ vpn_if }} --jump ACCEPT
 $IPT --insert FORWARD 1 --in-interface {{ wired_if }} --out-interface {{ vpn_if }} --jump ACCEPT
 $IPT --insert FORWARD 1 --in-interface {{ vpn_if }} --out-interface {{ wired_if }} --jump ACCEPT
-# this is the gh client, it doesn't expect incoming wg connections!
-#$IPT --insert INPUT 1 --in-interface {{ public_if }} --protocol udp --dport {{ public_if_port }} --jump ACCEPT
-#$IPT --table nat --insert POSTROUTING 1 --source {{ server_cidr }} --out-interface {{ public_if }} --jump MASQUERADE
+
+# this is the vpn client, it doesn't expect incoming wg connections!
+# however, accept incoming connections on the wg listen port, solely for support by mjl
+$IPT --insert INPUT 1 --in-interface {{ public_if }} --protocol udp --dport {{ public_if_port }} --jump ACCEPT
+$IPT --table nat --insert POSTROUTING 1 --source {{ server_cidr }} --out-interface {{ public_if }} --jump MASQUERADE
 
 ## IPv6 (Uncomment) and set SUB_NET_6 ##
 ## $IPT6 -t nat -I POSTROUTING 1 -s  -o {{ public_if }} -j MASQUERADE

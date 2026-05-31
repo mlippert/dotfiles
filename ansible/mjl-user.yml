@@ -81,6 +81,7 @@
       192.168.1.71	lidiapoet.275cpw
       192.168.1.97	tweetybird.275cpw
       192.168.1.96	woodstock.275cpw
+      192.168.1.95	redbaron.275cpw
       192.168.1.92	daisy.275cpw
 
 
@@ -89,7 +90,7 @@
       vars:
         apt_sources:
           # latest flatpak
-          - flatpak-ppa
+          # flatpak-ppa
           # latest python
           - deadsnakes-ppa
           # KeePassXC
@@ -99,7 +100,7 @@
           # packaged thunderbird (not snap)
           - mozillateam-ppa
           # latest libreoffice
-          - libreoffice-ppa
+          # libreoffice-ppa
           # nodejs from nodesource (see role for ver# installed)
           - nodesource
           # latest virtualbox VM

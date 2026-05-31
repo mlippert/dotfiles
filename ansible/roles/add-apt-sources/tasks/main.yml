@@ -24,14 +24,27 @@
         dest: /etc/apt/sources.list.d/{{ item.name }}.sources
       loop: '{{ apt_sources | map("extract", apt_source_config) }}'
 
-    - name: Add the key files for the new apt sources in /etc/apt/keyrings/
+    - name: Get the keys for the new apt sources in /etc/apt/keyrings/ in keyring keybox format files
       ansible.builtin.command:
         argv:
           - /usr/bin/gpg
           - --no-default-keyring
-          - --keyring=./{{ item.name }}.gpg
+          - --keyring=./{{ item.name }}.kbx
           - --keyserver=hkps://keyserver.ubuntu.com
           - --recv-keys
+          - '{{ item.key }}'
+        chdir: /etc/apt/keyrings/
+        creates: '{{ item.name }}.kbx'
+      loop: '{{ apt_sources | map("extract", apt_source_config) }}'
+
+    - name: Export the key files from the keybox files for the new apt sources in /etc/apt/keyrings/
+      ansible.builtin.command:
+        argv:
+          - /usr/bin/gpg
+          - --no-default-keyring
+          - --keyring=./{{ item.name }}.kbx
+          - --export
+          - --output=./{{ item.name }}.gpg
           - '{{ item.key }}'
         chdir: /etc/apt/keyrings/
         creates: '{{ item.name }}.gpg'
@@ -39,6 +52,6 @@
 
     - name: Remove backup key files
       ansible.builtin.file:
-        path: /etc/apt/keyrings/{{ item.name }}.gpg~
+        path: /etc/apt/keyrings/{{ item.name }}.kbx~
         state: absent
       loop: '{{ apt_sources | map("extract", apt_source_config) }}'

@@ -47,7 +47,10 @@ system_pkgs:
   #- fonts-liberation
 
   # Convert audio files (ie flac -> ogg) There's also a SoundConverter which is gnome based
-  - soundkonverter
+  #- soundkonverter No QT6 port for 26.04
+  # Alternatives I've seen suggested:
+  #- soundconverter gnome version
+  #- FFaudioConverter may have a flatpak
 
   # utilities for mounting and unmounting cifs network file systems
   - cifs-utils
@@ -179,8 +182,8 @@ dev_related_pkgs:
   #- mercurial
 
   # Latest Python and Python virtual environments so different sources can use different python versions
-  - python3.12
-  - python3.12-venv
+  - python3.14
+  - python3.14-venv
   - python3-venv
   
   # Ansible check mode requires

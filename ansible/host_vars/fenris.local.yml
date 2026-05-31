@@ -1,0 +1,6 @@
+# fenris.local host specific variables
+
+# Network interface device names for wireguard configuration
+wired_if: enp1s0 # Wired network interface name
+public_if: wlp0s20f3 # Public network interface name (find w/ "ip route show")
+public_if_port: 51194 # udp port on the public interface which is wireguard's listen port

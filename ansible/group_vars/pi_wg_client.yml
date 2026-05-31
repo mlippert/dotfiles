@@ -1,0 +1,6 @@
+# Inventory group pi_wg_client hosts specific variables
+
+# Network interface device names for wireguard configuration
+wired_if: eth0 # Wired network interface name
+public_if: wlan0 # Public network interface name (find w/ "ip route show")
+public_if_port: 51194 # udp port on the public interface which is wireguard's listen port

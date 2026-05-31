@@ -25,7 +25,7 @@
 - hosts: '{{ host }}'
   gather_facts: no
   vars:
-    playbook_group: pi_wg_server
+    playbook_group: wg_server
   tasks:
     - name: 'Fail if {{ host }} is NOT in the {{ playbook_group }} group'
       fail:

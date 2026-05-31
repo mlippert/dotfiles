@@ -51,7 +51,7 @@
     - ./vars/wg-vault.yml
     - ./vars/wg-vars.yml
   vars:
-    playbook_group: pi_wg_client
+    playbook_group: wg_client
   tasks:
     - name: 'Fail if {{ host }} is NOT in the {{ playbook_group }} group'
       fail:
@@ -102,7 +102,7 @@
     server_cidr6: '' # WG IPv6 sub/net (set IPv6 CIDR)
     vpn_if: '{{ client }}-{{ server }}' # name to give to the wireguard vpn interface
 
-    wired_if: eth0 # Wired network interface name
+    #wired_if: eth0 # Wired network interface name s/b defined in inventory hosts or group variable
     wired_ip_prefix: '10.1.10.' # wired subnet IPv4 prefix
     wired_ip_suffix: 1 # pi's suffix for static address on wired subnet
     wired_ip_static: '{{ wired_ip_prefix ~ wired_ip_suffix }}'
@@ -117,7 +117,7 @@
     wired_dhcp_end: '{{ wired_ip_prefix ~ wired_dhcp_end_suffix }}'
 
     # For the firewall scripts setting up NAT
-    public_if: wlan0 # Public network interface name (find w/ "ip route show")
+    #public_if: wlan0 # Public network interface name s/b defined in inventory hosts or group variable
     public_if_port: 51194 # udp port on the public interface which is wireguard's listen port
 
     apt_pkgs_wireguard:
@@ -193,7 +193,7 @@
         src: pi-wired-interface.conf.j2
         dest: /etc/network/interfaces.d/{{ wired_if }}
 
-    - name: Set up dhcp server on the wired ({{ vpn_if }}) interface
+    - name: Set up dhcp server on the wired ({{ wired_if }}) interface
       become: yes
       ansible.builtin.template:
         src: dnsmasq-pi-client.conf.j2
@@ -253,7 +253,7 @@
       become: yes
       ansible.builtin.shell: |
         iptables --table nat --append POSTROUTING --source {{ wired_cidr|quote }} --out-interface {{ public_if|quote }} --jump MASQUERADE
-        /sbin/iptables-save > /etc/iptables/rules.v4
+        /usr/sbin/iptables-save > /etc/iptables/rules.v4
       args:
         creates: /etc/iptables/rules.v4
 

@@ -3,37 +3,39 @@
 
 ### variables that may be overridden, ie by host vars
 apt_sources:
-  - flatpak-ppa
+#  - flatpak-ppa
   - deadsnakes-ppa
   - phoerious-keepassxc-ppa
   - mozillateam-ppa
-  - libreoffice-ppa
+#  - libreoffice-ppa
+  - sayonara-ppa
   - solaar-unifying-ppa
   - kubuntu-backports-ppa
-  - kubuntu-backports-extra-ppa
-  - vlc-ppa
+#  - kubuntu-backports-extra-ppa
+#  - vlc-ppa
   - mozilla
   - virtualbox
   - docker
 
 # known apt sources configuration values for retrieving the signing key and creating the .sources file
 # ALL entries in `apt_sources` must be found in this dictionary
-# NOTE: ALL apt sources config values are currently for suite noble (kubuntu 24.04.x)
+# NOTE: ALL uncommented apt sources config values are currently for suite resolute (kubuntu 26.04.x) or not distro specific 
 apt_source_config:
-  flatpak-ppa:
-    descr: Flatpak PPA
-    name: flatpak-ppa
-    key: 5C6D153A17C02C337EF6C663B8B9D41229DFA5F5
-    uri: https://ppa.launchpadcontent.net/flatpak/stable/ubuntu
-    suite: noble
-    component: main
+  # from the PPA description: For Ubuntu 26.04 'resolute', please use the version of Flatpak included in Ubuntu instead.
+  #flatpak-ppa:
+  #  descr: Flatpak PPA
+  #  name: flatpak-ppa
+  #  key: 5C6D153A17C02C337EF6C663B8B9D41229DFA5F5
+  #  uri: https://ppa.launchpadcontent.net/flatpak/stable/ubuntu
+  #  suite: noble
+  #  component: main
 
   deadsnakes-ppa:
     descr: Deadsnakes PPA (python)
     name: deadsnakes-ppa
     key: F23C5A6CF475977595C89F51BA6932366A755776
     uri: https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu
-    suite: noble # lsb_release -cs
+    suite: resolute # lsb_release -cs
     component: main
 
   # On Saturday 07 January 2023, Jonathon Fernyhough, or Jonathon as we in the Linux community knew him, unfortunately passed away.
@@ -51,7 +53,7 @@ apt_source_config:
     name: phoerious-keepassxc-ppa
     key: D89C66D0E31FEA2874EBD20561922AB60068FCD6
     uri: https://ppa.launchpadcontent.net/phoerious/keepassxc/ubuntu
-    suite: noble
+    suite: resolute
     component: main
 
   mozillateam-ppa:
@@ -59,23 +61,24 @@ apt_source_config:
     name: mozillateam-ppa
     key: 738BEB9321D1AAEC13EA9391AEBDF4819BE21867
     uri: https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu
-    suite: noble
+    suite: resolute
     component: main
 
-  libreoffice-ppa:
-    descr: LibreOffice PPA
-    name: libreoffice-ppa
-    key: CDDE43BA4DE3F09D7CE7016673AEE920AD55F5A0
-    uri: https://ppa.launchpadcontent.net/libreoffice/libreoffice-still/ubuntu
-    suite: noble
-    component: main
+  # No libreoffice-still resolute ppa release yet (as of 2026-05-30)
+  #libreoffice-ppa:
+  #  descr: LibreOffice PPA
+  #  name: libreoffice-ppa
+  #  key: CDDE43BA4DE3F09D7CE7016673AEE920AD55F5A0
+  #  uri: https://ppa.launchpadcontent.net/libreoffice/libreoffice-still/ubuntu
+  #  suite: noble
+  #  component: main
 
   sayonara-ppa:
     descr: Sayonara Music Player PPA
     name: sayonara-ppa
     key: 632F20B5F41629ABE690F63DE053BE02F4F00812
     uri: https://ppa.launchpadcontent.net/lucioc/sayonara/ubuntu
-    suite: noble
+    suite: resolute
     component: main
 
   solaar-unifying-ppa:
@@ -83,7 +86,7 @@ apt_source_config:
     name: solaar-unifying-ppa
     key: 643FF34AF9151DC814DD3A1B2303D595EE907473
     uri: https://ppa.launchpadcontent.net/solaar-unifying/stable/ubuntu
-    suite: noble
+    suite: resolute
     component: main
 
   kubuntu-backports-ppa:
@@ -91,24 +94,26 @@ apt_source_config:
     name: kubuntu-backports-ppa
     key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
     uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu
-    suite: jammy
+    suite: resolute
     component: main
 
-  kubuntu-backports-extra-ppa:
-    descr: Kubuntu Backports Extra PPA (for Plasma 5.27 for jammy)
-    name: kubuntu-backports-extra-ppa
-    key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
-    uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu
-    suite: jammy
-    component: main
+  # No releases since jammy
+  #kubuntu-backports-extra-ppa:
+  #  descr: Kubuntu Backports Extra PPA (for Plasma 5.27 for jammy)
+  #  name: kubuntu-backports-extra-ppa
+  #  key: E4DFEC907DEDA4B8A670E8042836CB0A8AC93F7A
+  #  uri: https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu
+  #  suite: jammy
+  #  component: main
 
-  vlc-ppa:
-    descr: VLC PPA
-    name: vlc-ppa
-    key: F4E48910A020E77056748B745738AE8480447DDF
-    uri: https://ppa.launchpadcontent.net/ubuntuhandbook1/vlc/ubuntu
-    suite: noble
-    component: main
+  # No vlc resolute ppa release yet (as of 2026-05-30)
+  #vlc-ppa:
+  #  descr: VLC PPA
+  #  name: vlc-ppa
+  #  key: F4E48910A020E77056748B745738AE8480447DDF
+  #  uri: https://ppa.launchpadcontent.net/ubuntuhandbook1/vlc/ubuntu
+  #  suite: noble
+  #  component: main
 
   mozilla:
     descr: Mozilla (firefox)
@@ -125,7 +130,7 @@ apt_source_config:
     key_cmd: wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /etc/apt/keyrings/virtualbox.gpg
     uri: https://download.virtualbox.org/virtualbox/debian
     architectures: amd64
-    suite: noble
+    suite: resolute
     component: contrib
 
   docker:
@@ -135,15 +140,15 @@ apt_source_config:
     key_cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     uri: https://download.docker.com/linux/ubuntu
     architectures: amd64 # dpkg --print-architecture
-    suite: noble
+    suite: resolute
     component: stable
 
   nodesource:
-    descr: Nodejs ver 22
+    descr: Nodejs ver 24
     name: nodesource
     key: 6F71F525282841EEDAF851B42F59B5F99B1BE0B4
     key_cmd: curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-    uri: https://deb.nodesource.com/node_22.x
+    uri: https://deb.nodesource.com/node_24.x
     architectures: amd64
     suite: nodistro
     component: main

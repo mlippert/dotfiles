@@ -1,12 +1,14 @@
 #!/bin/bash
 # Setup NAT routing when starting the WG VPN
 
-IPT="/sbin/iptables"
-IPT6="/sbin/ip6tables"
+# raspbian and ubuntu have merged /sbin into /usr/sbin
+IPT="/usr/sbin/iptables"
+IPT6="/usr/sbin/ip6tables"
+IP="/usr/sbin/ip"
 
 # Mark all local outgoing packets with a FWMARK of 1 so they go to the main routing table
 $IPT --table mangle --insert OUTPUT 1 --jump MARK --set-mark 1
-ip -4 rule add fwmark 1 table main
+$IP -4 rule add fwmark 1 table main
 
 # Mark all packets coming from the wired interface with a FWMARK of 2
 $IPT --table mangle --insert PREROUTING 1 --in-interface {{ wired_if }} --jump MARK --set-mark 2

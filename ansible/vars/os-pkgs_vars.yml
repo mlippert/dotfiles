@@ -5,6 +5,10 @@ system_pkgs:
   - synaptic
   - apt-xapian-index
   
+  # new virtual console, alt-ctrl F1-F7, which has scrollback, colors and mouse support
+  # see https://github.com/kmscon/kmscon and https://en.wikipedia.org/wiki/Kmscon
+  - kmscon
+
   # KDiskFree graphical display of space used on mounted partitions
   - kdf
 
@@ -50,8 +54,12 @@ system_pkgs:
   # utility to mount samba share when you browse to it in dolphin to make it more accessible
   #- smb4k
 
+  # avahi (aka zeroconf aka mDNS) browsing, publishing and discovery
+  - avahi-daemon
+
   # utilities for avahi (aka zeroconf aka mDNS) browsing, publishing and discovery
   - avahi-utils
+  - avahi-discover
 
   # nfs
   - nfs-kernel-server

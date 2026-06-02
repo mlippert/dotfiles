@@ -1,5 +1,9 @@
 # fenris.local host specific variables
 
+# Fenris is running Ubuntu 26.04 Resolute Raccoon which switched to the rust sudo which has issues.
+# So we tell ansible to use the "old" sudo when becoming superuser
+ansible_become_exe: /usr/bin/sudo.ws
+
 # Network interface device names for wireguard configuration
 wired_if: enp1s0 # Wired network interface name
 public_if: wlp0s20f3 # Public network interface name (find w/ "ip route show")

@@ -199,13 +199,14 @@
         src: dnsmasq-pi-client.conf.j2
         dest: /etc/dnsmasq.d/pi-client.conf
 
-    - name: Set up /usr/local/bin/resolvconf to use systemd resolver
-      become: yes
-      ansible.builtin.file:
-        path: /usr/local/bin/resolvconf
-        src: /usr/bin/resolvectl
-        state: link
-        force: yes
+    # Ubuntu 26.04 has a /usr/sbin/resolvconf alias to resolvectl already defined, so commenting out this task
+    #- name: Set up /usr/local/bin/resolvconf to use systemd resolver
+    #  become: yes
+    #  ansible.builtin.file:
+    #    path: /usr/local/bin/resolvconf
+    #    src: /usr/bin/resolvectl
+    #    state: link
+    #    force: yes
 
     - name: Set up the client wireguard configuration file /etc/wireguard/{{ vpn_if }}.conf
       become: yes

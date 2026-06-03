@@ -1,11 +1,13 @@
-#!/bin/bash
+#!/usr/bin/bash
 # Tear down the NAT routing that was setup when the WG VPN was started
 
-IPT="/sbin/iptables"
-IPT6="/sbin/ip6tables"
+# raspbian and ubuntu have merged /sbin into /usr/sbin
+IPT="/usr/sbin/iptables"
+IPT6="/usr/sbin/ip6tables"
+IP="/usr/sbin/ip"
 
 $IPT --table mangle --delete OUTPUT --jump MARK --set-mark 1
-ip -4 rule delete fwmark 1 table main
+$IP -4 rule delete fwmark 1 table main
 $IPT --table mangle --delete PREROUTING --in-interface {{ wired_if }} --jump MARK --set-mark 2
 
 ## IPv4 ##

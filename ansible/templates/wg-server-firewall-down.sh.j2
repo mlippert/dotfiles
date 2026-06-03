@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/usr/bin/bash
 # Tear down the NAT routing that was setup when the WG VPN was started
 
-IPT="/sbin/iptables"
-IPT6="/sbin/ip6tables"
+# raspbian and ubuntu have merged /sbin into /usr/sbin
+IPT="/usr/sbin/iptables"
+IPT6="/usr/sbin/ip6tables"
+IP="/usr/sbin/ip"
 
 ## IPv4 ##
 $IPT --table nat --delete POSTROUTING --source {{ server_cidr }} --out-interface {{ public_if }} --jump MASQUERADE

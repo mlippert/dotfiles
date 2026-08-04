@@ -1,7 +1,7 @@
 ---
 # This playbook installs/updates a Raspberry Pi 4 wireguard VPN client
 # It is set up to run only on a specified host invoked by e.g.:
-# ansible-playbook pi-client.yml -e "host=pi-gilli.local"
+# ansible-playbook pi-client.yml -e "host=pi-gilli.local client=gh"
 #
 # A pi-client's job is to provide a dhcp server to the wired ethernet interface
 # and route traffic to/from that interface's subnet through the wireguard VPN

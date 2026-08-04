@@ -196,6 +196,9 @@ dev_related_pkgs:
   #- nodejs
 
   # for building git (see INSTALL file in Projects/public/git or progit.pdf doc)
+  # as of 2.55 unless explicitly disabled also requires rust toolchain, best installed w/ rustup
+  # see guide at: https://linuxcapable.com/install-rust-on-ubuntu-linux/
+  # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   - dh-autoreconf
   - libcurl4-gnutls-dev
   - libexpat1-dev

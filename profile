@@ -16,6 +16,11 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+# source the script to add Rust cargo/rustup bin path to the PATH
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"

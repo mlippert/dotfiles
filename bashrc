@@ -81,6 +81,10 @@ export CDPATH=~/Projects/riff
 # possibly ignoring non alphabetic characters and sorting upper and lowercase together...
 export LC_COLLATE=C
 
+# I prefer entering the ssh password in the terminal when I'm running ssh or ssh-add from
+# the terminal, not in a GUI window. So I'm overriding the value of prefer to never
+SSH_ASKPASS_REQUIRE=never
+
 # Setting the PYTHONPATH is required by the mercurial install.
 # (see http://mercurial.selenic.com/wiki/UnixInstall)
 # shouldn't be needed anymore, python packages should install
@@ -108,9 +112,11 @@ export BRIX_JSDOC_BUILD=node
 # export GPG_TTY=$(tty)
 
 # Set the Rust build chain environment variables
-if [ -f ~/.cargo/env ]; then
-	. ~/.cargo/env
-fi
+# This is done in the .profile so that the  Rust cargo/rustup bin path is prepended
+# to the PATH before we prepend ~/bin
+# if [ -f ~/.cargo/env ]; then
+# 	. ~/.cargo/env
+# fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
